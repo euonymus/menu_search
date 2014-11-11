@@ -1,0 +1,6 @@
+[submodule "app/Plugin/DebugKit"]
+	path = app/Plugin/DebugKit
+	url = https://github.com/cakephp/debug_kit.git
+[submodule "app/Plugin/Phpunit"]
+	path = app/Plugin/Phpunit
+	url = https://github.com/dereuromark/cakephp-phpunit

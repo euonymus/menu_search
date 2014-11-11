@@ -1,0 +1,1 @@
+<p class="copyright">Copyright 2014 © euonymus productions. All Rights Reserved.</p>
