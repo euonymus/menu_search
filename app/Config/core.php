@@ -151,6 +151,7 @@
  *
  */
 	//Configure::write('Routing.prefixes', array('admin'));
+Configure::write('Routing.prefixes', array('admin', 'api'));
 
 /**
  * Turn off all caching application-wide.
