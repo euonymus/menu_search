@@ -9,6 +9,7 @@ echo $this->Form->create('Menu', $formOption); ?>
 		<legend>料理を登録する</legend>
 
         <div class="form-group">
+  <div><?= $this->Html->link('レストランを新しく登録', '/restaurants/add') ?></div>
              <? echo $this->Form->input('restaurant_id',
 					   array('class' => 'form-control',
 						 'options' => $restaurantList,

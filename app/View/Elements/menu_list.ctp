@@ -23,7 +23,7 @@
 	<tr>
 		<td>
 <?php
-$anchor = $this->element('menu/menu_cell', compact('menu'));
+$anchor = $this->element('menu_cell', compact('menu'));
 $link = array('controller' => 'menus', 'action' => 'view', $menu['Menu']['id']);
 $options = array('escape' => false,
 		 'style' => 'display:block;width:100%;height:100%');

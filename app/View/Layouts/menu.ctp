@@ -33,7 +33,7 @@
     ?>
 </head>
 <body>
-    <?= $this->element('menu/header') ?>
+    <?= $this->element('header') ?>
     <?//= $this->element('breadcrumb') ?>
     <div id="bodyMiddle" class="row">
         <div id="mainContent" class="container">
@@ -41,12 +41,12 @@
               <?= $this->fetch('content') ?>
 　　    </div> <!-- /container -->
 
-       <?= $this->element('menu/sidebar') ?>
+       <?= $this->element('sidebar') ?>
     </div>
     <!-- /.row -->
 
     <div id="footerContainer">
-        <?= $this->element('menu/footer') ?>
+        <?= $this->element('footer') ?>
     </div> <!-- /container -->
 
 
