@@ -1,14 +1,5 @@
-<div ng-controller="listCtrl">
-    <p>AngularJSのテスト</p>
-    <ul>
-        <li ng-repeat="list in lists">{{list.Menu}}</li>
-    </ul>
+<div class="well bs-component">
+    <h2>メニュー検索 - <?= $tags ?></h2>
+    <p><? $tagList = explode(',',$tags); foreach ($tagList as $tag){ echo '「'.$tag.'」';} ?>でレストランのメニューを検索した結果</p>
+    <?= $this->element('menu_list') ?>
 </div>
-
-<script type="text/javascript">
-<!--
-var listCtrl = function($scope){
-   $scope.lists = <?= json_encode(array('menus'=>$menus)) ?>.menus;
-}
--->
-</script>

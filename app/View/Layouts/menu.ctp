@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en" ng-app>
 <head>
     <?//= $this->Html->charset(); ?>
     <meta charset="utf-8">
@@ -62,6 +62,7 @@
     <?= $this->Html->script('//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js') ?>
     <?= $this->Html->script('ripples.min') ?>
     <?= $this->Html->script('material.min') ?>
+    <?= $this->Html->script('//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js') ?>
     <?= $this->Js->writeBuffer();?>
 
     <?= $this->element('materialInit'); ?>

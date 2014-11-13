@@ -38,7 +38,6 @@ class MenusController extends AppController {
   }
 
   public function hoge() {
-    $this->layout = 'menu_angular';
     $this->_loadComponent('MenuTool');
     $this->set('menus', $this->MenuTool->search(true));
   }
