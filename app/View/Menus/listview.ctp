@@ -6,5 +6,5 @@
 		<li><?php echo $this->Html->link(__('New Menu'), array('action' => 'add')); ?></li>
 	</ul>
     </div>
-    <?= $this->element('menu_list') ?>
+    <?= $this->element('js_menu_list') ?>
 </div>
