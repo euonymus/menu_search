@@ -11,7 +11,7 @@
 </div>
 
 <div class="well bs-component">
- <?= $this->element('menu/menu_list') ?>
+ <?= $this->element('menu_list') ?>
 </div>
 
 </div>
