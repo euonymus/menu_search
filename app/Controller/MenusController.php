@@ -38,8 +38,7 @@ class MenusController extends AppController {
   }
 
   public function hoge() {
-    $this->_loadComponent('MenuTool');
-    $this->set('menus', $this->MenuTool->search(true));
+    $this->layout = 'sencha';
   }
 
   public function api_search() {

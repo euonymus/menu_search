@@ -1,0 +1,13 @@
+.menu-large-category {
+  display:block;
+  max-width:100%;
+  height:auto;
+  border-bottom:1px solid #000000;
+}
+.menu-large-category img {
+  max-width:100%;
+  height:auto;
+}
+.menu-small-category {
+  display:none;
+}
