@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app>
+<html lang="ja" ng-app>
 <head>
     <?//= $this->Html->charset(); ?>
     <meta charset="utf-8">
@@ -7,7 +7,7 @@
     <meta name="author" content="euonymus productions">
 
     <title>
-        <?php /*echo $cakeDescription */?>:
+        <?php //echo $cakeDescription ?>:
         <?php echo $title_for_layout; ?>
     </title>
 
@@ -50,7 +50,7 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <? /* removed for DebugKit.    echo $this->element('sql_dump');*/ ?>
+    <? // removed for DebugKit.    echo $this->element('sql_dump'); ?>
 
 
 

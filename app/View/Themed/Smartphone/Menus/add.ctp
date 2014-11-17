@@ -76,7 +76,8 @@ echo $this->Form->create('Menu', $formOption); ?>
 <? if(isset($this->data['Menu']['image'])): ?>
              <img src="<?= $this->data['Menu']['image'] ?>" class="img-thumbnail"/>
 <? endif; ?>
-                 <?= $this->Form->input('NoModel.image_file', array('type' => 'file', 'label'=>'','class'=>'btn btn-info')) ?>
+                 <?= $this->Form->input('NoModel.image_file', array('type' => 'file', 'accept' => 'image/*',
+							    'capture' => 'camera', 'label'=>'','class'=>'btn btn-info')) ?>
                  <?= $this->Form->radio('NoModel.cropType', 
 			  array('1' => '中央寄せ寄せ', '0' => '0,0ポイントから'),
 			  array('label' => false, 'default' => '1', 'legend'=> false)) ?>

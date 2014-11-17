@@ -38,7 +38,7 @@ class MenusController extends AppController {
   }
 
   public function hoge() {
-    $this->layout = 'sencha';
+    $this->layout = 'html5test';
   }
 
   public function api_search() {

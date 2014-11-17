@@ -1,7 +1,7 @@
 <? $this->Html->scriptStart(array('inline'=>false)); ?>
 $('.menu-large-category').click(function(){
     if ($(this).next().css('display') == 'none') {
-        $(this).next().slideDown('slow');
+        $(this).next().slideDown('fast');
     } else {
         $(this).next().slideUp('fast');
     }
