@@ -8,8 +8,6 @@ App::uses('AppController', 'Controller');
  * @property SessionComponent $Session
  */
 class MenusController extends AppController {
-  public $layout = 'menu';
-
 /**
  * Components
  *
