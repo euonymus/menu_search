@@ -17,6 +17,29 @@ class Restaurant extends AppModel {
   /****************************************************************************/
   /* Model bind settings                                                      */
   /****************************************************************************/
+  public function bindStation($reset = TRUE) {
+       $hasAndBelongsToMany = array(
+		'Station' => array(
+			'className' => 'Station',
+			'joinTable' => 'restaurant_stations',
+			'foreignKey' => 'restaurant_id',
+			'associationForeignKey' => 'station_id',
+			'unique' => 'keepExisting',
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'finderQuery' => '',
+		)
+       );
+       $this->bindModel(array('hasAndBelongsToMany' => $hasAndBelongsToMany), $reset);
+  }
+
+  public function unbindStation($reset = TRUE) {
+    $this->unbindModel(array('hasAndBelongsToMany' => array('Station')), $reset);
+  }
+
   /****************************************************************************/
   /* Validations                                                              */
   /****************************************************************************/

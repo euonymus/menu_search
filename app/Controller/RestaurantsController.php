@@ -72,6 +72,7 @@ class RestaurantsController extends AppController {
 		if (!$this->Restaurant->exists($id)) {
 			throw new NotFoundException(__('Invalid restaurant'));
 		}
+		$this->Restaurant->bindStation(false);
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Restaurant->save($this->request->data)) {
 				$this->Session->setFlash(__('The restaurant has been saved.'));
@@ -83,6 +84,10 @@ class RestaurantsController extends AppController {
 			$options = array('conditions' => array('Restaurant.' . $this->Restaurant->primaryKey => $id));
 			$this->request->data = $this->Restaurant->find('first', $options);
 		}
+
+		$this->loadModel('Station');
+		$stations = $this->Station->find('list');
+		$this->set(compact('stations'));
 	}
 
 /**
