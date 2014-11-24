@@ -35,10 +35,6 @@ class MenusController extends AppController {
     $this->set('menus', $this->MenuTool->search(true));
   }
 
-  public function hoge() {
-    $this->layout = 'html5test';
-  }
-
   public function api_search() {
     $this->_loadComponent('MenuTool');
     $this->set('menus', $this->MenuTool->search(true));
