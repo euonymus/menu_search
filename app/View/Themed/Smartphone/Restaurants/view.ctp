@@ -1,13 +1,19 @@
 <div class="bs-docs-section">
 <div class="well bs-component">
 <h2><?php echo h($restaurant['Restaurant']['name']); ?></h2>
-<dl>
+    <dl>
 	<dt>レストランの説明</dt>
 	<dd>
 		<?php echo h($restaurant['Restaurant']['description']); ?>
 		&nbsp;
 	</dd>
-</dl>
+    </dl>
+    <div>
+ <? foreach ($restaurant['Station'] as $station): ?>
+        <span class="label label-default"><?= $station['name'] ?></span>
+ <? endforeach; ?>
+    </div>
+
 </div>
 
 <div class="well bs-component">
