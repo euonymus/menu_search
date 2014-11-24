@@ -60,4 +60,12 @@ class Restaurant extends AppModel {
 			),
 		),
 	);
+
+  /****************************************************************************/
+  /* conditions                                                               */
+  /****************************************************************************/
+  public static function conditionById($id) {
+    return array(__CLASS__.'.id' => $id);
+  }
+
 }

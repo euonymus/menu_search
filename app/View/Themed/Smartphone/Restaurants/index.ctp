@@ -1,10 +1,6 @@
 <div class="well bs-component">
     <h2>レストラン一覧</h2>
-    <div class="actions">
-	<ul>
-		<li><?php echo $this->Html->link('レストランを新しく登録する', array('action' => 'add')); ?></li>
-	</ul>
-    </div>
+   <span class="label label-success"><?= $station ?></span>
 <br>
 <br>
     <table class="table table-striped table-hover">

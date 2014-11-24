@@ -15,12 +15,25 @@ class RestaurantsController extends AppController {
  */
 	public $components = array('Paginator', 'Session');
 
+
+
+  public function region() {
+    $this->loadModel('Station');
+    $this->set('stations', $this->Station->find('list'));
+  }
+
+
 /**
  * index method
  *
  * @return void
  */
 	public function index() {
+
+	  $this->_loadComponent('RestaurantTool');
+	  $this->set('restaurants', $this->RestaurantTool->listByStation(true));
+
+
 		$this->Restaurant->recursive = 0;
 		$this->set('restaurants', $this->Paginator->paginate());
 	}

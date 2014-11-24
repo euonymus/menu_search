@@ -14,11 +14,10 @@
         </form>
 */ ?>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="/menus"><i class="mdi-maps-local-restaurant" style="font-size: 20pt;"></i>メニューカテゴリ</a></li>
-            <li class="active"><a href="/menus/region"><i class="mdi-maps-place" style="font-size: 20pt;"></i>メニュー地域</a></li>
-            <li class="active"><a href="/restaurants/region"><i class="mdi-action-home" style="font-size: 20pt;"></i>レストラン地域</a></li>
-            <li class="active"><a href="/menus/add"><i class="mdi-av-playlist-add" style="font-size: 20pt;"></i>メニュー登録</a></li>
-            <li class="active"><a href="/restaurants/add"><i class="mdi-action-settings" style="font-size: 20pt;"></i>レストラン登録</a></li>
+            <li class="active"><a href="/menus/region"><?= UHelper::pictRestaurant() ?>メニューを探す</a></li>
+            <li class="active"><a href="/restaurants/region"><?= UHelper::pictHome() ?></i>レストランを探す</a></li>
+            <li class="active"><a href="/menus/add"><?= UHelper::pictAddList() ?>メニュー登録</a></li>
+            <li class="active"><a href="/restaurants/add"><?= UHelper::pictSettings() ?>レストラン登録</a></li>
         </ul>
     </div>
 </div>

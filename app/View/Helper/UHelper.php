@@ -13,7 +13,7 @@ class UHelper extends AppHelper {
     parent::__construct($View, $settings);
   }
 
-  public function adActive($qualifieds) {
+  public function addActive($qualifieds) {
     return self::active($qualifieds) ? ' active' : '';
   }
   public function active($qualifieds) {
@@ -33,5 +33,57 @@ class UHelper extends AppHelper {
   public static function rate($molecule, $denominator) {
     if (!$denominator) return '-';
     return round(($molecule / $denominator) * 100, 2) . '%';
+  }
+
+  /*****************************************************************************/
+  /* Pict gram                                                                 */
+  /*****************************************************************************/
+  public static function pictgram($type, $font_size = '20pt') {
+    return '<i class="' . $type . '" style="font-size: '. $font_size .';"></i>';
+  }
+  public static function pictHome($font_size = '20pt') {
+    return self::pictgram("mdi-action-home", $font_size);
+  }
+  public static function pictRestaurant($font_size = '20pt') {
+    return self::pictgram("mdi-maps-local-restaurant", $font_size);
+  }
+  public static function pictPlace($font_size = '20pt') {
+    return self::pictgram("mdi-maps-place", $font_size);
+  }
+  public static function pictCompany($font_size = '20pt') {
+    return self::pictgram("mdi-communication-business", $font_size);
+  }
+  public static function pictList($font_size = '20pt') {
+    return self::pictgram("mdi-navigation-menu", $font_size);
+  }
+  public static function pictAddList($font_size = '20pt') {
+    return self::pictgram("mdi-av-playlist-add", $font_size);
+  }
+  public static function pictSettings($font_size = '20pt') {
+    return self::pictgram("mdi-action-settings", $font_size);
+  }
+  public static function pictContentSort($font_size = '20pt') {
+    return self::pictgram("mdi-content-sort", $font_size);
+  }
+  public static function pictGlobe($font_size = '20pt') {
+    return self::pictgram("mdi-social-public", $font_size);
+  }
+  public static function pictMoney($font_size = '20pt') {
+    return self::pictgram("mdi-editor-attach-money", $font_size);
+  }
+  public static function pictSector($font_size = '20pt') {
+    return self::pictgram("mdi-navigation-apps", $font_size);
+  }
+  public static function pictTrendingUp($font_size = '20pt') {
+    return self::pictgram("mdi-action-trending-up", $font_size);
+  }
+  public static function pictPeople($font_size = '20pt') {
+    return self::pictgram("mdi-social-people", $font_size);
+  }
+  public static function pictStockType($font_size = '20pt') {
+    return self::pictgram("mdi-action-credit-card", $font_size);
+  }
+  public static function pictStar($font_size = '20pt') {
+    return self::pictgram("mdi-action-grade", $font_size);
   }
 }

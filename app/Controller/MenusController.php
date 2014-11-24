@@ -23,6 +23,9 @@ class MenusController extends AppController {
   const FULLTEXT_MIN_SCORE = 50;
 
   public function index() {
+    $this->helpers[] = 'Menu';
+    $this->_loadComponent('StationTool');
+    $this->StationTool->setStationName();
   }
 
   public function listview() {
@@ -33,12 +36,8 @@ class MenusController extends AppController {
   public function search() {
     $this->_loadComponent('MenuTool');
     $this->set('menus', $this->MenuTool->search(true));
-  }
-
-  public function api_search() {
-    $this->_loadComponent('MenuTool');
-    $this->set('menus', $this->MenuTool->search(true));
-    $this->set('_serialize', array('menus'));
+    $this->_loadComponent('StationTool');
+    $this->StationTool->setStationName();
   }
 
 /**
@@ -55,6 +54,30 @@ class MenusController extends AppController {
     $options = array('conditions' => array('Menu.' . $this->Menu->primaryKey => $id));
     $this->Menu->bindRestaurant(false);
     $this->set('menu', $this->Menu->find('first', $options));
+  }
+
+  public function region() {
+    $this->loadModel('Station');
+    $this->set('stations', $this->Station->find('list'));
+  }
+
+  public function region_filter() {
+    $this->helpers[] = 'Menu';
+    $this->loadModel('Station');
+    $this->set('stations', $this->Station->find('list'));
+
+    $this->_loadComponent('ParamTool');
+    $tags = $this->ParamTool->query_init('tags');
+    $this->set(compact('tags'));
+  }
+
+  /******************************************************************/
+  /* API                                                            */
+  /******************************************************************/
+  public function api_search() {
+    $this->_loadComponent('MenuTool');
+    $this->set('menus', $this->MenuTool->search(true));
+    $this->set('_serialize', array('menus'));
   }
 
 /**

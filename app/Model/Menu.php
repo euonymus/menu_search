@@ -140,6 +140,6 @@ class Menu extends AppModel {
       $modifier = 'IN BOOLEAN MODE';
       $min_score = '';
     }
-    return "MATCH(Menu.tags) AGAINST('".$expr."' ".$modifier.")".$min_score;
+    return array("MATCH(Menu.tags) AGAINST('".$expr."' ".$modifier.")".$min_score);
   }
 }

@@ -13,7 +13,7 @@
    <? /*if ($this->User->isLogin()): ?>
         <ul class="nav navbar-nav">
           <? foreach(UHelper::$nav as $key => $val): ?>
-          <li class="<?= $this->U->adActive($val['qualifieds']) ?>"><?= $this->Html->link($val['show'],$val['path']) ?></li>
+          <li class="<?= $this->U->addActive($val['qualifieds']) ?>"><?= $this->Html->link($val['show'],$val['path']) ?></li>
           <? endforeach; ?>
         </ul>
    <? endif;*/ ?>
