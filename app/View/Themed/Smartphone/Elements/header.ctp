@@ -5,7 +5,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="javascript:void(0)">メニューを探そう</a>
+        <a class="navbar-brand" href="/">メニューを探そう</a>
     </div>
     <div class="navbar-collapse collapse navbar-responsive-collapse">
 <? /*

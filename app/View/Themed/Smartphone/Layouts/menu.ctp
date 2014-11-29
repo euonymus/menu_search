@@ -31,7 +31,7 @@
 	echo $this->fetch('css');
     ?>
 </head>
-<body>
+<body<?= ($this->name == 'Pages') ? ' class="home"' : '' ?>>
     <?= $this->element('header') ?>
     <?//= $this->element('breadcrumb') ?>
     <div id="bodyMiddle" class="row">
@@ -42,9 +42,8 @@
     </div>
     <!-- /.row -->
 
-    <div id="footerContainer">
-        <?= $this->element('footer') ?>
-    </div> <!-- /container -->
+
+    <?= $this->element('footer') ?>
 
 
     <!-- Bootstrap core JavaScript
