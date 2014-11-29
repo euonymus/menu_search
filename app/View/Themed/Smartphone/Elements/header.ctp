@@ -5,7 +5,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">メニューを探そう</a>
+        <a class="navbar-brand" href="/">おしながき</a>
     </div>
     <div class="navbar-collapse collapse navbar-responsive-collapse">
 <? /*

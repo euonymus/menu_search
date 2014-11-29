@@ -34,7 +34,7 @@ class MenuToolComponent extends Component {
       	$restaurant_ids = Set::extract('{n}/Restaurant/id', $restaurants);
       	$options['conditions'][] = Menu::conditionByRestaurantId($restaurant_ids);
       }
-      $this->Controller->set(compact('tags'));
+      $this->Controller->set(compact('tags','station_id'));
     }
     return $this->getList($options, $isPaging);
   }
