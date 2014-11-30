@@ -35,9 +35,18 @@ class AppController extends Controller {
   public $components = array('DebugKit.Toolbar');
   public $helpers = array('U');
 
+  const TITLE_SITE_NAME = 'あれ食べ隊';
+  static $title_for_layout = self::TITLE_SITE_NAME;
+
   public function beforeFilter() {
     $this->isSmartphone = $this->_isSmartphone();
     if ($this->isSmartphone) $this->theme = 'Smartphone';
+  }
+
+  public function beforeRender() {
+    $site_name = self::TITLE_SITE_NAME;
+    $title_for_layout = self::$title_for_layout;
+    $this->set(compact('site_name', 'title_for_layout'));
   }
 
   /**************************************************************************************/

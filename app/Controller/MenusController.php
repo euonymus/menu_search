@@ -8,30 +8,36 @@ App::uses('AppController', 'Controller');
  * @property SessionComponent $Session
  */
 class MenusController extends AppController {
-/**
- * Components
- *
- * @var array
- */
   public $components = array('Paginator', 'Session', 'RequestHandler');
+  public $helpers = array('Menu');
 
-/**
- * index method
- *
- * @return void
- */
   const FULLTEXT_MIN_SCORE = 50;
 
+
+
   public function index() {
-    $this->helpers[] = 'Menu';
+    $this->_loadComponent('MenuTool');
+    $this->set('menus', $this->MenuTool->getList(array(),true));
+  }
+
+
+
+  public function categories() {
+    self::$title_for_layout = '検索メニュー選択:'.self::$title_for_layout;
     $this->_loadComponent('StationTool');
     $this->StationTool->setStationName();
   }
 
-  public function listview() {
-    $this->_loadComponent('MenuTool');
-    $this->set('menus', $this->MenuTool->getList(array(),true));
+  public function region() {
+    $this->loadModel('Station');
+    $this->set('stations', $this->Station->find('list'));
+
+    $this->_loadComponent('ParamTool');
+    $tags = $this->ParamTool->query_init('tags');
+    $this->set(compact('tags'));
   }
+
+
 
   public function search() {
     $this->_loadComponent('MenuTool');
@@ -40,13 +46,6 @@ class MenusController extends AppController {
     $this->StationTool->setStationName();
   }
 
-/**
- * view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
   public function view($id = null) {
     if (!$this->Menu->exists($id)) {
       throw new NotFoundException(__('Invalid menu'));
@@ -54,21 +53,6 @@ class MenusController extends AppController {
     $options = array('conditions' => array('Menu.' . $this->Menu->primaryKey => $id));
     $this->Menu->bindRestaurant(false);
     $this->set('menu', $this->Menu->find('first', $options));
-  }
-
-  public function region() {
-    $this->loadModel('Station');
-    $this->set('stations', $this->Station->find('list'));
-  }
-
-  public function region_filter() {
-    $this->helpers[] = 'Menu';
-    $this->loadModel('Station');
-    $this->set('stations', $this->Station->find('list'));
-
-    $this->_loadComponent('ParamTool');
-    $tags = $this->ParamTool->query_init('tags');
-    $this->set(compact('tags'));
   }
 
   /******************************************************************/

@@ -17,9 +17,26 @@ class MenuHelper extends AppHelper {
     return $this->Html->link($label, '/menus/search/?tags='. $tagList . $query_station);
   }
 
-  public function menuByStation($station_id, $label, $options = false) {
+  public function linkStation($station_id, $label, $options = array()) {
+    if (array_key_exists('isRestaurant', $options)) $isRestaurant = $options['isRestaurant'];
+    else $isRestaurant = false;
+
     $querys = $this->params['url'];
-    $query_tags = array_key_exists('tags', $querys) ? 'tags=' . $querys['tags'] . '&' : '';
-    return $this->Html->link($label, '/menus/search/?'.$query_tags.'station='. $station_id, $options);
+    $tags = array_key_exists('tags', $querys) ? $querys['tags'] : false;
+    $skip_tags = array_key_exists('skip_tags', $querys) ? $querys['skip_tags'] : false;
+
+    $query_tags = '';
+    if ($isRestaurant) {
+      $path = '/restaurants/';
+    } elseif ($tags || $skip_tags) {
+      $path = '/menus/search/';
+      $query_tags = $tags ? 'tags=' . $tags . '&' : '';
+    } else {
+      $path = '/menus/categories/';
+    }
+    $query_station = 'station=' . $station_id;
+    $linkAction = $path . '?' . $query_tags . $query_station;
+
+    return $this->Html->link($label, $linkAction, $options);
   }
 }

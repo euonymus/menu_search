@@ -17,7 +17,7 @@ body.home div.lead {
   font: 36pt cursive;
   margin: 5pt;
 }
-body.home h2 {
+body.home p.description {
   color:white;
   font: 18pt serif;
   margin: 5pt;

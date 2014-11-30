@@ -7,7 +7,6 @@
     <meta name="author" content="euonymus productions">
 
     <title>
-        <?php //echo $cakeDescription ?>:
         <?php echo $title_for_layout; ?>
     </title>
 
