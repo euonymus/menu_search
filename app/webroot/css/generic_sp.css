@@ -1,4 +1,13 @@
 /** original parts **/
+/* common */
+body {
+  position:relative; top:30pt;
+}
+body > div.navbar {
+  position:fixed;
+  width:100%;
+  z-index:100;
+}
 /* home */
 body.home {
   background-image: url("/img/home_bg.png");
@@ -25,6 +34,8 @@ body.home p.description {
 /* footer */
 body.home .footer {
   position: absolute;
+  background-color: rgba( 255, 255, 255, 0 );
+  margin-bottom:-50pt;
 }
 .footer {
   display:block;

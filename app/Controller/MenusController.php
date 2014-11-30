@@ -13,14 +13,10 @@ class MenusController extends AppController {
 
   const FULLTEXT_MIN_SCORE = 50;
 
-
-
   public function index() {
     $this->_loadComponent('MenuTool');
     $this->set('menus', $this->MenuTool->getList(array(),true));
   }
-
-
 
   public function categories() {
     self::$title_for_layout = '検索メニュー選択:'.self::$title_for_layout;
@@ -36,8 +32,6 @@ class MenusController extends AppController {
     $tags = $this->ParamTool->query_init('tags');
     $this->set(compact('tags'));
   }
-
-
 
   public function search() {
     $this->_loadComponent('MenuTool');
