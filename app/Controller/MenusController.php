@@ -15,7 +15,9 @@ class MenusController extends AppController {
 
   public function index() {
     $this->_loadComponent('MenuTool');
-    $this->set('menus', $this->MenuTool->getList(array(),true));
+    $this->set('menus', $this->MenuTool->search(true));
+    $this->_loadComponent('StationTool');
+    $this->StationTool->setStationName();
   }
 
   public function categories() {
@@ -31,13 +33,6 @@ class MenusController extends AppController {
     $this->_loadComponent('ParamTool');
     $tags = $this->ParamTool->query_init('tags');
     $this->set(compact('tags'));
-  }
-
-  public function search() {
-    $this->_loadComponent('MenuTool');
-    $this->set('menus', $this->MenuTool->search(true));
-    $this->_loadComponent('StationTool');
-    $this->StationTool->setStationName();
   }
 
   public function view($id = null) {

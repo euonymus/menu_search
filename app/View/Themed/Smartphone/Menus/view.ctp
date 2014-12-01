@@ -30,7 +30,7 @@ echo $this->Html->link($menu['Restaurant']['name'], '/restaurants/view/'.$menu['
    $tags = explode(',',$menu['Menu']['tags']);
 foreach($tags as $tag):
 ?>
-  <?= $this->Html->link($tag,'/menus/search/?tags='.$tag, array('class'=> 'btn btn-primary btn-xs')) ?>
+  <?= $this->Html->link($tag,'/menus/?tags='.$tag, array('class'=> 'btn btn-primary btn-xs')) ?>
 <? endforeach; ?>
 </h4>
 

@@ -1,10 +1,17 @@
 <div class="well bs-component">
-    <h2>メニュー一覧</h2>
-    <div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('New Menu'), array('action' => 'add')); ?></li>
-	</ul>
+    <h2><?= $station ?> - <?= $tags ?></h2>
+    <p><? $tagList = explode(',',$tags); foreach ($tagList as $tag){ echo '「'.$tag.'」';} ?>でレストランのメニューを検索した結果</p>
+
+    <ul class="nav nav-pills">
+      <li class="active"><?= $this->Html->link('別のメニュー', '/menus/categories/' . (!empty($station_id) ? '?station='. $station_id : ''), array()) ?></li>
+      <li class="active"><?= $this->Html->link('別の地域', '/menus/region/?tags='. $tags, array()) ?></li>
+    </ul>
+
+<? /*
+    <div>
+      <?= $this->Html->link('別の地域で検索', '/menus/region_filter/?tags='. $t
     </div>
+*/ ?>
+    <br>
     <?= $this->element('js_menu_list') ?>
 </div>
