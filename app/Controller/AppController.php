@@ -44,7 +44,7 @@ class AppController extends Controller {
 
   public $helpers = array('U');
 
-  const TITLE_SITE_NAME = 'あれ食べ隊';
+  const TITLE_SITE_NAME = 'ディッシュクロス';
   static $title_for_layout = self::TITLE_SITE_NAME;
 
   public function beforeFilter() {
