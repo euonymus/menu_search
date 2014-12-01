@@ -9,10 +9,17 @@
     </div>
 </div>
     <div class="navbar-collapse collapse navbar-responsive-collapse">
-
-        <form class="navbar-form navbar-left">
-            <input type="text" class="form-control col-lg-8" placeholder="Search">
-        </form>
+<?
+   // TODO: Helperに持って行く。
+   // TODO: station_idでの絞り検索にも対応する。（現在のPathにstation_id絞り込みがあるかどうかで判断。
+   $formOption = array('class' => 'navbar-form navbar-left','type' => 'get', 'url' => '/menus/search/');
+   echo $this->Form->create('Menu', $formOption);
+   echo $this->Form->input('tags', array('class' => 'form-control col-lg-8',
+					 'div' => false,
+					 'label' => false,
+					 'placeholder' => '検索'));
+   echo $this->Form->end();
+?>
         <ul class="nav navbar-nav">
             <li class="active"><a href="/menus/region"><?= UHelper::pictRestaurantMenu() ?>メニューを探す</a></li>
             <li class="active"><a href="/restaurants/region"><?= UHelper::pictRestaurant() ?></i>レストランを探す</a></li>

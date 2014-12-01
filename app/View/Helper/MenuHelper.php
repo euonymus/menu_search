@@ -6,7 +6,7 @@ class MenuHelper extends AppHelper {
     parent::__construct($View, $settings);
   }
 
-  public function menuByTags($tags, $label = false) {
+  public function linkTags($tags, $label = false) {
     if (!$label) $label = $tags;
     $tagList = explode(',', $tags);
     $tagList = implode(',', array_map('urlencode', $tagList));

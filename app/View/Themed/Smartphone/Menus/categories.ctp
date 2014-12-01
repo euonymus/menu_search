@@ -15,24 +15,24 @@ $('.menu-large-category').click(function(){
    </div>
    <div class="menu-small-category">
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('カレー') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('カレーライス') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('スープカレー') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('カレー') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('カレーライス') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('スープカレー') ?></div>
       </div>
 
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('タイカレー') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('グリーンカレー') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('イエローカレー') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('レッドカレー') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('タイカレー') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('グリーンカレー') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('イエローカレー') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('レッドカレー') ?></div>
       </div>
 
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('インドカレー') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('マトンカレー') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('キーマカレー') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('バターチキンカレー') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('サグカレー') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('インドカレー') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('マトンカレー') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('キーマカレー') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('バターチキンカレー') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('サグカレー') ?></div>
       </div>
    </div>
 </div>
@@ -42,34 +42,34 @@ $('.menu-large-category').click(function(){
    </div>
    <div class="menu-small-category">
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('醤油ラーメン') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('味噌ラーメン') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('塩ラーメン') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('豚骨ラーメン') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('醤油ラーメン') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('味噌ラーメン') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('塩ラーメン') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('豚骨ラーメン') ?></div>
       </div>
 
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('魚介ラーメン') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('トマトラーメン') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('豚骨醤油ラーメン') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('魚介ラーメン') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('トマトラーメン') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('豚骨醤油ラーメン') ?></div>
       </div>
 
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('担々麺') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('麻婆麺') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('刃削麺') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('担々麺') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('麻婆麺') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('刃削麺') ?></div>
       </div>
 
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('支那そば') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('タンメン') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('ワンタン麺') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('ワンタン') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('支那そば') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('タンメン') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('ワンタン麺') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('ワンタン') ?></div>
       </div>
 
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('つけ麺') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('油そば') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('つけ麺') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('油そば') ?></div>
       </div>
    </div>
 </div>
@@ -80,23 +80,23 @@ $('.menu-large-category').click(function(){
    </div>
    <div class="menu-small-category">
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('アラビアータ') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('ジェノベーゼ') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('ペペロンチーノ') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('カルボナーラ') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('アラビアータ') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('ジェノベーゼ') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('ペペロンチーノ') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('カルボナーラ') ?></div>
       </div>
 
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('ボンゴレ・ロッソ') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('ペスカトーレ') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('ボロネーゼ') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('ボンゴレ・ロッソ') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('ペスカトーレ') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('ボロネーゼ') ?></div>
       </div>
 
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('和風パスタ') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('スパゲッティー') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('ナポリタン') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('ミートソースパスタ') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('和風パスタ') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('スパゲッティー') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('ナポリタン') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('ミートソースパスタ') ?></div>
       </div>
    </div>
 </div>
@@ -106,22 +106,22 @@ $('.menu-large-category').click(function(){
    </div>
    <div class="menu-small-category">
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('うどん') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('讃岐うどん') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('煮込みうどん') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('カレーうどん') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('うどん') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('讃岐うどん') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('煮込みうどん') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('カレーうどん') ?></div>
       </div>
 
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('そば') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('きしめん') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('ちゃんぽん') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('そば') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('きしめん') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('ちゃんぽん') ?></div>
       </div>
 
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('焼きそば') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('焼うどん') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('冷やし中華') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('焼きそば') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('焼うどん') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('冷やし中華') ?></div>
       </div>
    </div>
 </div>
@@ -131,37 +131,37 @@ $('.menu-large-category').click(function(){
    </div>
    <div class="menu-small-category">
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('寿司') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('とんかつ') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('天ぷら') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('焼き魚') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('寿司') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('とんかつ') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('天ぷら') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('焼き魚') ?></div>
       </div>
 
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('からあげ') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('フライ魚') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('エビフライ') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('牡蠣フライ') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('からあげ') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('フライ魚') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('エビフライ') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('牡蠣フライ') ?></div>
       </div>
 
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('焼肉') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('生姜焼き') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('野菜炒め') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('コロッケ') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('焼肉') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('生姜焼き') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('野菜炒め') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('コロッケ') ?></div>
       </div>
 
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('すき焼き') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('しゃぶしゃぶ') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('おでん') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('焼き鳥') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('すき焼き') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('しゃぶしゃぶ') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('おでん') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('焼き鳥') ?></div>
       </div>
 
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('お好み焼き') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('もんじゃ焼き') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('たこ焼き') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('お好み焼き') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('もんじゃ焼き') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('たこ焼き') ?></div>
       </div>
    </div>
 </div>
@@ -171,28 +171,28 @@ $('.menu-large-category').click(function(){
    </div>
    <div class="menu-small-category">
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('ステーキ') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('ハンバーグ') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('鉄板焼き') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('ステーキ') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('ハンバーグ') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('鉄板焼き') ?></div>
       </div>
 
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('グリルチキン') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('チキン南蛮') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('オムライス') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('ハヤシライス') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('グリルチキン') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('チキン南蛮') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('オムライス') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('ハヤシライス') ?></div>
       </div>
 
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('シチュー') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('ビーフシチュー') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('クリームシチュー') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('シチュー') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('ビーフシチュー') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('クリームシチュー') ?></div>
       </div>
 
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('ハンバーガー') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('ピザ') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('サンドウィッチ') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('ハンバーガー') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('ピザ') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('サンドウィッチ') ?></div>
       </div>
    </div>
 </div>
@@ -202,23 +202,23 @@ $('.menu-large-category').click(function(){
    </div>
    <div class="menu-small-category">
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('天丼') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('カツ丼') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('親子丼') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('牛丼') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('天丼') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('カツ丼') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('親子丼') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('牛丼') ?></div>
       </div>
 
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('鰻重') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('麻婆丼') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('高菜丼') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('釜飯') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('鰻重') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('麻婆丼') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('高菜丼') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('釜飯') ?></div>
       </div>
 
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('ネギトロ丼') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('いくら丼') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('海鮮丼') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('ネギトロ丼') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('いくら丼') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('海鮮丼') ?></div>
       </div>
    </div>
 </div>
@@ -228,10 +228,10 @@ $('.menu-large-category').click(function(){
    </div>
    <div class="menu-small-category">
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('沖縄そば') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('ゴーヤーチャンプルー') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('フーチャンプルー') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('ソーメンチャンプルー') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('沖縄そば') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('ゴーヤーチャンプルー') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('フーチャンプルー') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('ソーメンチャンプルー') ?></div>
       </div>
    </div>
 </div>
@@ -241,22 +241,22 @@ $('.menu-large-category').click(function(){
    </div>
    <div class="menu-small-category">
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('餃子') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('飲茶') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('麻婆豆腐') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('餃子') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('飲茶') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('麻婆豆腐') ?></div>
       </div>
 
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('チャーハン') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('天津飯') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('中華飯') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('チャーハン') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('天津飯') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('中華飯') ?></div>
       </div>
 
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('回鍋肉') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('酢豚') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('エビチリ') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('レバニラ') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('回鍋肉') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('酢豚') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('エビチリ') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('レバニラ') ?></div>
       </div>
    </div>
 </div>
@@ -266,22 +266,22 @@ $('.menu-large-category').click(function(){
    </div>
    <div class="menu-small-category">
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('プルコギ') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('カルビ') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('チヂミ') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('ビビンバ') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('プルコギ') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('カルビ') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('チヂミ') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('ビビンバ') ?></div>
       </div>
 
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('スンドゥブ') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('キムチチゲ') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('サムゲタン') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('ユッケジャン') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('スンドゥブ') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('キムチチゲ') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('サムゲタン') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('ユッケジャン') ?></div>
       </div>
 
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('チャプチェ') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('冷麺') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('チャプチェ') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('冷麺') ?></div>
       </div>
    </div>
 </div>
@@ -291,14 +291,14 @@ $('.menu-large-category').click(function(){
    </div>
    <div class="menu-small-category">
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('トムヤムクン') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('トムヤムラーメン') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('トムヤムクン') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('トムヤムラーメン') ?></div>
       </div>
 
       <div class="row">
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('ガパオ') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('カオマンガイ') ?></div>
-          <div class="col-lg-3"><?= $this->Menu->menuByTags('パッタイ') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('ガパオ') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('カオマンガイ') ?></div>
+          <div class="col-lg-3"><?= $this->Menu->linkTags('パッタイ') ?></div>
       </div>
    </div>
 </div>
