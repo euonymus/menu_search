@@ -5,9 +5,9 @@
 # http://www.sequelpro.com/
 # http://code.google.com/p/sequel-pro/
 #
-# ホスト: 127.0.0.1 (MySQL 5.5.28)
+# ホスト: 127.0.0.1 (MySQL 5.5.29)
 # データベース: restaurant_menu
-# 作成時刻: 2014-11-29 07:47:07 +0000
+# 作成時刻: 2014-12-01 13:12:02 +0000
 # ************************************************************
 
 
@@ -18,6 +18,37 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+# テーブルのダンプ fbusers
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `fbusers`;
+
+CREATE TABLE `fbusers` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(36) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  `link` varchar(255) DEFAULT NULL,
+  `hometown_id` bigint(20) unsigned DEFAULT NULL,
+  `hometown_name` varchar(255) DEFAULT NULL,
+  `gender` varchar(10) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `timezone` tinyint(3) unsigned DEFAULT NULL,
+  `locale` varchar(10) DEFAULT NULL,
+  `verified` tinyint(1) unsigned DEFAULT NULL,
+  `updated_time` datetime DEFAULT NULL,
+  `token` varchar(255) DEFAULT NULL,
+  `token_expires` datetime DEFAULT NULL,
+  `status` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
 # テーブルのダンプ menu_tags
@@ -181,7 +212,7 @@ VALUES
 	(5,'海老と玉子のチリソース',1,'',NULL,'ごはんおかわり無料',1,1,0,900,'エビチリ,中国',0,'2014-11-03 12:03:21','2014-11-03 12:03:21'),
 	(6,'豚の角煮',1,'',NULL,'ごはんおかわり無料',1,1,0,900,'肉料理,中国',0,'2014-11-03 12:04:21','2014-11-03 12:04:29'),
 	(7,'豚肉と茄子の黒味噌炒め',1,'',NULL,'ごはんおかわり無料',1,1,0,900,'肉料理,中国',0,'2014-11-03 12:05:20','2014-11-03 12:05:30'),
-	(8,'木耳玉子炒め',1,'',NULL,'ごはんおかわり無料',1,1,0,900,'野菜炒め,日本',0,'2014-11-03 12:06:14','2014-11-03 12:06:14'),
+	(8,'木耳玉子炒め',1,'','/img/uploaded/20141201/tengu1417413651877.jpg','ごはんおかわり無料',1,1,0,900,'野菜炒め,日本',0,'2014-11-03 12:06:14','2014-12-01 15:00:51'),
 	(9,'回鍋肉',1,'',NULL,'ごはんおかわり無料',1,1,0,900,'回鍋肉,肉料理,中国',0,'2014-11-03 12:06:49','2014-11-03 12:06:49'),
 	(10,'レバニラ',1,'',NULL,'ごはんおかわり無料',1,1,0,900,'レバニラ,中国',0,'2014-11-03 12:07:23','2014-11-03 12:07:23'),
 	(11,'豚焼肉定食',1,'',NULL,'ごはんおかわり無料',1,1,0,650,'焼肉定食,洋食,肉料理,日本',0,'2014-11-03 12:07:53','2014-11-03 12:07:53'),
@@ -658,6 +689,85 @@ VALUES
 
 /*!40000 ALTER TABLE `stations` ENABLE KEYS */;
 UNLOCK TABLES;
+
+
+# テーブルのダンプ twusers
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `twusers`;
+
+CREATE TABLE `twusers` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(36) DEFAULT '',
+  `screen_name` varchar(15) NOT NULL DEFAULT '',
+  `name` varchar(20) NOT NULL DEFAULT '',
+  `description` text,
+  `profile_image_url` varchar(255) DEFAULT NULL,
+  `profile_image_url_https` varchar(255) DEFAULT NULL,
+  `profile_background_image_url` varchar(255) DEFAULT NULL,
+  `profile_background_image_url_https` varchar(255) DEFAULT NULL,
+  `profile_use_background_image` tinyint(1) DEFAULT NULL,
+  `profile_text_color` varchar(6) DEFAULT NULL,
+  `profile_link_color` varchar(6) DEFAULT NULL,
+  `profile_background_color` varchar(6) DEFAULT NULL,
+  `profile_sidebar_border_color` varchar(6) DEFAULT NULL,
+  `profile_sidebar_fill_color` varchar(6) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `profile_banner_url` varchar(255) DEFAULT NULL,
+  `protected` tinyint(1) unsigned DEFAULT NULL,
+  `is_translator` tinyint(1) unsigned DEFAULT NULL,
+  `verified` tinyint(1) unsigned DEFAULT NULL,
+  `contributors_enabled` tinyint(1) unsigned DEFAULT NULL,
+  `geo_enabled` tinyint(1) unsigned DEFAULT NULL,
+  `follow_request_sent` tinyint(1) unsigned DEFAULT NULL,
+  `profile_background_tile` tinyint(1) unsigned DEFAULT NULL,
+  `location` varchar(255) DEFAULT NULL,
+  `lang` varchar(5) DEFAULT NULL,
+  `utc_offset` int(11) unsigned DEFAULT NULL,
+  `time_zone` varchar(15) DEFAULT NULL,
+  `followers_count` int(11) unsigned DEFAULT NULL,
+  `friends_count` int(11) unsigned DEFAULT NULL,
+  `listed_count` int(11) unsigned DEFAULT NULL,
+  `favourites_count` int(11) unsigned DEFAULT NULL,
+  `statuses_count` int(11) unsigned DEFAULT NULL,
+  `default_profile` tinyint(1) unsigned DEFAULT NULL,
+  `default_profile_image` tinyint(1) unsigned DEFAULT NULL,
+  `notifications` tinyint(1) unsigned DEFAULT NULL,
+  `following` tinyint(1) unsigned DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `token` varchar(255) DEFAULT NULL,
+  `secret` varchar(255) DEFAULT NULL,
+  `status` int(3) unsigned NOT NULL DEFAULT '1',
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ users
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `users`;
+
+CREATE TABLE `users` (
+  `id` varchar(36) NOT NULL DEFAULT '',
+  `username` varchar(255) NOT NULL DEFAULT '',
+  `password` varchar(50) NOT NULL DEFAULT '',
+  `name` varchar(255) DEFAULT NULL,
+  `nickname` varchar(255) DEFAULT NULL,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `description` text,
+  `status` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `spam` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '0:normal,1:candidate,2:spam',
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
 
