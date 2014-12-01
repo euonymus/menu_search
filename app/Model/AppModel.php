@@ -31,9 +31,10 @@ App::uses('Model', 'Model');
  */
 class AppModel extends Model {
   /*************************************************************************/
-  /* Upload Image Config                                                   */
+  /* Reserved functions                                                    */
   /*************************************************************************/
   public function beforeValidate($options = array()) {
+    // Exec only if $this->image_upload on the Model has been set to TRUE.
     if ($this->image_upload) {
       // $this->data[__CLASS__]['image_file']を優先する。['image']が入力されてても上書き更新する。
       if($this->hasUploadedImage()) {
@@ -44,6 +45,7 @@ class AppModel extends Model {
   }
 
   public function beforeSave($options = array()) {
+    // Exec only if $this->image_upload on the Model has been set to TRUE.
     if ($this->image_upload) {
       // Only if it's updating, delete image files
       if(!empty($this->data[$this->name]['id'])) $this->id = $this->data[$this->name]['id'];
@@ -59,6 +61,58 @@ class AppModel extends Model {
       }
     }
     return TRUE;
+  }
+
+  public function afterFind($results, $primary = false) {
+    // Exec only if $this->image_upload on the Model has been set to TRUE.
+    if ($this->image_upload) {
+      // Add thumbnail field if image field exists.
+      if (array_key_exists($this->name, $results)) {
+	$results = $this->addThumbField($result);
+      } else {
+	foreach($results as $key => $result) {
+	  $results[$key] = $this->addThumbField($result);
+	}
+      }
+    }
+    return $results;
+  }
+
+  /*************************************************************************/
+  /* Image Config                                                          */
+  /*************************************************************************/
+  // Transform original path to thumbnail path
+  public static function toThumbPath($path) {
+    $reg="/(.*)(?:\.([^.]+$))/";
+    preg_match($reg,$path,$retArr);
+    //echo "$retArr[0]"."\n<br/>";// /hoge/hoge.jpg
+    //echo "$retArr[1]"."\n<br/>";// /hoge/hoge
+    //echo "$retArr[2]"."\n<br/>";// jpg
+    return $retArr[1].'_thumb.'.$retArr[2];
+  }
+
+  public function addThumbField($data) {
+    if (array_key_exists($this->name, $data)) {
+      $withModel = true;
+      $work = $data[$this->name];
+    } else {
+      $withModel = false;
+      $work = $data;
+    }
+    $imgPath = $this->imageField($work);
+    if (!empty($imgPath)) $work['thumbnail'] = self::toThumbPath($imgPath);
+
+    if ($withModel) {
+      $data[$this->name] = $work;
+    } else {
+      $data = $work;
+    }
+    return $data;
+  }
+  public function imageField($data) {
+    if (array_key_exists($this->name, $data)) $data = $data[$this->name];
+    if (!array_key_exists('image', $data)) return NULL;
+    return $data['image'];
   }
 
   /*************************************************************************/
@@ -114,9 +168,11 @@ class AppModel extends Model {
     if (isset($this->data['NoModel']['cropType'])) $fromCenter = !!($this->data['NoModel']['cropType']);
     else $fromCenter = true;
 
-    // TODO: thumbnail crop
+    // Memo: Build thumbnail
+    $thumb = self::toThumbPath($this->getImageFilePath());
+    copy($this->getImageFilePath(), $thumb);
     // Generate thumbnail file
-    if (!$this->cropImage($this->getImageFilePath(), $fromCenter, $this->image_width, $this->image_height)) return FALSE;
+    if (!$this->cropImage($thumb, $fromCenter, $this->image_width, $this->image_height)) return FALSE;
     return TRUE;
   }
 
@@ -141,7 +197,9 @@ class AppModel extends Model {
     // care for image field
     if (!$asUpdate ||
     	(isset($this->data[$this->name]['image']) && ($oldimage[$this->name]['image'] !== $this->data[$this->name]['image']))) {
-      self::deleteImg($oldimage[$this->name]['image']);
+      $imgPath = $oldimage[$this->name]['image'];
+      self::deleteImg($imgPath);
+      self::deleteImg(self::toThumbPath($imgPath));
     }
     return TRUE;
   }
