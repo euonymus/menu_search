@@ -45,7 +45,10 @@ class UHelper extends AppHelper {
     return self::pictgram("mdi-action-home", $font_size);
   }
   public static function pictRestaurant($font_size = '20pt') {
-    return self::pictgram("mdi-maps-local-restaurant", $font_size);
+    return self::pictgram("mdi-maps-store-mall-directory", $font_size);
+  }
+  public static function pictRestaurantMenu($font_size = '20pt') {
+    return self::pictgram("mdi-maps-restaurant-menu", $font_size);
   }
   public static function pictPlace($font_size = '20pt') {
     return self::pictgram("mdi-maps-place", $font_size);
@@ -85,5 +88,17 @@ class UHelper extends AppHelper {
   }
   public static function pictStar($font_size = '20pt') {
     return self::pictgram("mdi-action-grade", $font_size);
+  }
+  public static function pictMypage($font_size = '20pt') {
+    return self::pictgram("mdi-action-account-circle", $font_size);
+  }
+  public static function pictAssignment($font_size = '20pt') {
+    return self::pictgram("mdi-action-assignment", $font_size);
+  }
+  public static function pictLockOpen($font_size = '20pt') {
+    return self::pictgram("mdi-action-lock-open", $font_size);
+  }
+  public static function pictKey($font_size = '20pt') {
+    return self::pictgram("mdi-communication-vpn-key", $font_size);
   }
 }
