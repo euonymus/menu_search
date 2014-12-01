@@ -12,7 +12,7 @@
 <?
    // TODO: Helperに持って行く。
    // TODO: station_idでの絞り検索にも対応する。（現在のPathにstation_id絞り込みがあるかどうかで判断。
-   $formOption = array('class' => 'navbar-form navbar-left','type' => 'get', 'url' => '/menus/search/');
+   $formOption = array('class' => 'navbar-form navbar-left','type' => 'get', 'url' => '/menus/');
    echo $this->Form->create('Menu', $formOption);
    echo $this->Form->input('tags', array('class' => 'form-control col-lg-8',
 					 'div' => false,
