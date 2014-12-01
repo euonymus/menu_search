@@ -25,15 +25,23 @@
             <li class="active"><a href="/restaurants/region"><?= UHelper::pictRestaurant() ?></i>レストランを探す</a></li>
         </ul>
 
-   <? /* If not logged in */ ?>
+
         <ul class="nav navbar-nav">
-            <li class="active"><a href="/users/login"><?= UHelper::pictLockOpen() ?>サインイン</a></li>
-            <li class="active"><a href="/users/add"><?= UHelper::pictAssignment() ?>サインアップ</a></li>
-        </ul>
-   <? /* If logged in */ ?>
-        <ul class="nav navbar-nav">
+<? if ($user = $this->Session->read('Auth.User')): ?>
             <li class="active"><a href="/users"><?= UHelper::pictMypage() ?>マイページ</a></li>
-            <li class="active"><a href="/users/logout"><?= UHelper::pictKey() ?>サインアウト</a></li>
+            <li class="active"><?= $this->Html->link(UHelper::pictKey().'サインアウト', array('controller' => 'users', 'action' => 'logout'), array('escape'=>false)); ?></li>
+<? else: ?>
+<?
+if ($user = $this->Session->read('Auth.User')) { $ancLetter = 'と関連付ける'; } else {$ancLetter = 'でサインイン';}
+$callbackUrl = (isset($callbackUrl) ? $callbackUrl : Router::reverse(Router::getRequest()));
+?>
+            <li class="active"><?= $this->Html->link('Facebook' . $ancLetter, array('controller' => 'users', 'action' => 'oplogin', 'facebook', '?' => array('location' => $callbackUrl))); ?></li>
+            <li class="active"><?= $this->Html->link('Twitter' . $ancLetter, array('controller' => 'users', 'action' => 'oplogin', 'twitter', '?' => array('location' => $callbackUrl))); ?></li>
+        </ul>
+        <ul class="nav navbar-nav">
+            <li class="active"><?= $this->Html->link(UHelper::pictLockOpen().'サインイン', array('controller' => 'users', 'action' => 'login'), array('escape'=>false)); ?>
+            <li class="active"><?= $this->Html->link(UHelper::pictAssignment().'サインアップ', array('controller' => 'users', 'action' => 'add'), array('escape'=>false)); ?>
+<? endif; ?>
         </ul>
    <? /* If logged in as admin */ ?>
         <ul class="nav navbar-nav">

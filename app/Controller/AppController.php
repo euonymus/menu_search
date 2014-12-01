@@ -32,16 +32,32 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
   public $layout = 'menu';
-  public $components = array('DebugKit.Toolbar');
+  public $components = array(
+      'DebugKit.Toolbar',
+      'Session',
+      // If no 'Auth.redirect' session, redirect to the following urls.
+      'Auth' => array(
+          'loginRedirect' => array('controller' => 'users', 'action' => 'index'),
+          'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home')
+      )
+  );
+
   public $helpers = array('U');
 
   const TITLE_SITE_NAME = 'あれ食べ隊';
   static $title_for_layout = self::TITLE_SITE_NAME;
 
   public function beforeFilter() {
+    $this->Auth->allow();  // Empty allows all actions
+    if ($this->Auth->loggedIn()) {
+      $this->currentUser = AuthComponent::user();
+      $this->set(array('currentUser' => $this->currentUser,));
+    }
+
     $this->isSmartphone = $this->_isSmartphone();
     if ($this->isSmartphone) $this->theme = 'Smartphone';
   }
+
 
   public function beforeRender() {
     $site_name = self::TITLE_SITE_NAME;

@@ -32,6 +32,11 @@
         Router::connect('/img/*', array('controller' => 'img', 'action' => 'fetch'));
         Router::connect('/:controller/list/*', array('action' => 'listview'));
 
+Router::connect(
+   '/opauth-complete/*', 
+   array('controller' => 'users', 'action' => 'opauth_complete')
+);
+
 /**
  * Load all plugin routes. See the CakePlugin documentation on
  * how to customize the loading of plugin routes.
