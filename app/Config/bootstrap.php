@@ -108,20 +108,7 @@ CakeLog::config('error', array(
 ));
 CakePlugin::load('DebugKit');
 CakePlugin::load('Phpunit');
-CakePlugin::load('Opauth', array('routes' => true, 'bootstrap' => true));
-Configure::write('Opauth.Strategy.Twitter', array(
-   'key'           => '<%= @twitter_key %>',
-   'secret'        => '<%= @twitter_secret %>',
-   'authorize_url' => 'https://api.twitter.com/oauth/authorize',
-));
-Configure::write('Opauth.Strategy.Facebook', array(
-   'app_id'        => '<%= @facebook_id %>',
-   'app_secret'    => '<%= @facebook_secret %>'
-));
-
+config('opauth');
 
 App::uses('U', 'Lib');
 App::uses('LogTool','Lib');
-
-
-/* 超重要！！もしこのファイルに変更を加えたら、vagrant/chef/site-cookbook/test_site/templates/default/cake_bootstrap.erb も修正する事 */
