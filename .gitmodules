@@ -4,3 +4,6 @@
 [submodule "app/Plugin/Phpunit"]
 	path = app/Plugin/Phpunit
 	url = https://github.com/dereuromark/cakephp-phpunit
+[submodule "app/Plugin/Opauth"]
+	path = app/Plugin/Opauth
+	url = git@github.com:euonymus/my_cakephp-opauth.git
