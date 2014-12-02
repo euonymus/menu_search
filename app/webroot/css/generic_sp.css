@@ -14,7 +14,7 @@ body > div.navbar-collapse {
 /* home */
 body.home {
   background-image: url("/img/home_bg.png");
-  background-position: center center;
+  background-position: center 50px;
   /* 画像をタイル状に繰り返し表示しない */
   background-repeat: no-repeat;
   /* コンテンツの高さが画像の高さより大きい時、動かないように固定 */
@@ -26,8 +26,8 @@ body.home {
 }
 body.home div.lead {
   color:white;
-  font: 36pt cursive;
-  margin: 5pt;
+  font: 250% cursive;
+  margin: 30pt 5pt 5pt 5pt;
 }
 body.home p.description {
   color:white;
