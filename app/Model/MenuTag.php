@@ -39,7 +39,7 @@ class MenuTag extends AppModel {
     if (array_key_exists(__CLASS__, $data)) $data = $data[__CLASS__];
 
     $list = array($data['name']);
-    if (!U::isEmpty('accessories', $data)) {
+    if (U::notEmpty('accessories', $data)) {
       $accessories = explode(',',$data['accessories']);
       $list = am($list, $accessories);
     }

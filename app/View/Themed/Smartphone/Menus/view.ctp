@@ -21,7 +21,7 @@ echo $this->Html->link($menu['Restaurant']['name'], '/restaurants/view/'.$menu['
 
    <p><?php echo h($menu['Menu']['description']); ?></p>
 
-<? if (!U::isEmpty('remarks',$menu['Menu'])): ?>
+<? if (U::notEmpty('remarks',$menu['Menu'])): ?>
    <p>備考：<?php echo h($menu['Menu']['remarks']); ?></p>
 <? endif; ?>
 

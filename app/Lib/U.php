@@ -3,8 +3,18 @@
  *  General library. It's usable anywhere.
  */
 class U extends Object {
+  //public static function isEmpty($needle, $data) {
+  //  return (!isset($data[$needle]) || (($data[$needle] !== 0) && empty($data[$needle])));
+  //}
+  // return: emptyの時return true.  not emptyかexceptionの時return false.
   public static function isEmpty($needle, $data) {
-    return (!isset($data[$needle]) || (($data[$needle] !== 0) && empty($data[$needle])));
+    //return (!is_array($data) || !isset($data[$needle]) || (($data[$needle] !== 0) && empty($data[$needle])));
+    return (is_array($data) && array_key_exists($needle, $data) && ($data[$needle] !== 0) && empty($data[$needle]));
+  }
+  // return: not emptyの時return true.  emptyかexceptionの時return false.
+  public static function notEmpty($needle, $data) {
+    // MEMO: Should not be like this -> return !self::isEmpty($needle,$data);
+    return (is_array($data) && array_key_exists($needle, $data) && (($data[$needle] === 0) || !empty($data[$needle])));
   }
 
   public static function trimSpace($str) {

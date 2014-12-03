@@ -6,7 +6,7 @@
         <div class="row-content">
    <h4 class="list-group-item-heading"><?= h($menu['Menu']['name']) ?>&nbsp;<small><i class="mdi-action-home" style="font-size: 20pt;"></i><?= h($menu['Restaurant']['name']) ?></small></h4>
             <small class="list-group-item-text"><?= h($menu['Menu']['description']) ?></small>
-            <? if (!U::isEmpty('remarks',$menu['Menu'])): ?>
+            <? if (U::notEmpty('remarks',$menu['Menu'])): ?>
             <p><small class="list-group-item-text">備考：<?= h($menu['Menu']['remarks']) ?></small></p>
             <? endif; ?>
             <p class="list-group-item-text">
