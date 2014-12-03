@@ -9,12 +9,19 @@ class U extends Object {
   // return: emptyの時return true.  not emptyかexceptionの時return false.
   public static function isEmpty($needle, $data) {
     //return (!is_array($data) || !isset($data[$needle]) || (($data[$needle] !== 0) && empty($data[$needle])));
-    return (is_array($data) && array_key_exists($needle, $data) && ($data[$needle] !== 0) && empty($data[$needle]));
+    return (is_array($data) 
+	    && (!array_key_exists($needle, $data) || (($data[$needle] !== 0) && empty($data[$needle]))));
   }
   // return: not emptyの時return true.  emptyかexceptionの時return false.
   public static function notEmpty($needle, $data) {
     // MEMO: Should not be like this -> return !self::isEmpty($needle,$data);
     return (is_array($data) && array_key_exists($needle, $data) && (($data[$needle] === 0) || !empty($data[$needle])));
+  }
+  // return: emptyかexceptionの時return true.  not emptyの時return false.
+  public static function notPrepared($needle, $data) {
+    // MEMO: Should not be like this -> return !self::notEmpty($needle, $data);
+    return (!is_array($data) || !array_key_exists($needle, $data)
+	    || (($data[$needle] !== 0) && ($data[$needle] !== false) && empty($data[$needle])));
   }
 
   public static function trimSpace($str) {
