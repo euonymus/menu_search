@@ -1,7 +1,8 @@
 /** original parts **/
 /* common */
 body {
-  position:relative; top:30pt;
+  position:relative !important;
+  top:30pt;
 }
 body > div.navbar {
   position:fixed;
