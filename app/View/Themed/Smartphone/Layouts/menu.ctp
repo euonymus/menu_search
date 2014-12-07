@@ -18,7 +18,7 @@
     <link rel="apple-touch-icon-precomposed" href="/webclip.png" />
 
     <?php
-        echo $this->Html->meta('description', 'ここに何か説明を書き込む');
+        echo $this->Html->meta('description', $description_for_layout);
         echo $this->Html->meta('icon');
 
         echo $this->Html->css('//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css');

@@ -44,8 +44,9 @@ class AppController extends Controller {
 
   public $helpers = array('U');
 
-  const TITLE_SITE_NAME = 'ディッシュクロス';
+  const TITLE_SITE_NAME = 'Coozo';
   static $title_for_layout = self::TITLE_SITE_NAME;
+  static $description_for_layout = 'Coozoはこれまでに無い次世代型ランチ検索サービス。ここは大きなフードコート。食べたいメニューを選んでお店にGo！';
 
   public function beforeFilter() {
     $this->Auth->allow();  // Empty allows all actions
@@ -56,13 +57,16 @@ class AppController extends Controller {
 
     $this->isSmartphone = $this->_isSmartphone();
     if ($this->isSmartphone) $this->theme = 'Smartphone';
-  }
 
+    // TODO: スマホファーストで作っているので、今はPCで壊れない様にいつもSmartphoneテーマを使っておく。後で下は消す事。
+    $this->theme = 'Smartphone';
+  }
 
   public function beforeRender() {
     $site_name = self::TITLE_SITE_NAME;
     $title_for_layout = self::$title_for_layout;
-    $this->set(compact('site_name', 'title_for_layout'));
+    $description_for_layout = self::$description_for_layout;
+    $this->set(compact('site_name', 'title_for_layout', 'description_for_layout'));
   }
 
   /**************************************************************************************/

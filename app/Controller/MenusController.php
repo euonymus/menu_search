@@ -22,6 +22,7 @@ class MenusController extends AppController {
 
   public function categories() {
     self::$title_for_layout = '検索メニュー選択:'.self::$title_for_layout;
+    self::$description_for_layout = '料理の名前を選んでお店毎のメニューを比較！一番好みの食べたい料理を見つけてお店へGo！';
     $this->_loadComponent('StationTool');
     $this->StationTool->setStationName();
   }
