@@ -5,9 +5,9 @@
 # http://www.sequelpro.com/
 # http://code.google.com/p/sequel-pro/
 #
-# ホスト: 127.0.0.1 (MySQL 5.5.29)
+# ホスト: 127.0.0.1 (MySQL 5.5.28)
 # データベース: restaurant_menu
-# 作成時刻: 2014-12-01 13:12:02 +0000
+# 作成時刻: 2014-12-07 16:13:42 +0000
 # ************************************************************
 
 
@@ -760,6 +760,7 @@ CREATE TABLE `users` (
   `last_name` varchar(255) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   `description` text,
+  `role` varchar(255) DEFAULT 'author',
   `status` tinyint(3) unsigned NOT NULL DEFAULT '1',
   `spam` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '0:normal,1:candidate,2:spam',
   `created` datetime DEFAULT NULL,
