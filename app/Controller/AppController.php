@@ -116,4 +116,8 @@ class AppController extends Controller {
 	$this->Session->setFlash('<button type="button" class="close" data-dismiss="alert">&times;</button>'.$string,
 				 'default', array('class' => 'alert alert-'. ($error ? 'danger' : 'success'))); 
   }
+
+  protected function _errorRedirect() {
+    $this->redirect('/');
+  }
 }

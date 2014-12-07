@@ -24,8 +24,10 @@ class Fbuser extends AppModel {
   /****************************************************************************/
   public function format_raw($raw) {
     $data = $raw;
-    $data['hometown_id'] = $raw['hometown']['id'];
-    $data['hometown_name'] = $raw['hometown']['name'];
+    if (array_key_exists('hometown_id', $raw)) {
+      $data['hometown_id'] = $raw['hometown']['id'];
+      $data['hometown_name'] = $raw['hometown']['name'];
+    }
     return $data;
   }
 

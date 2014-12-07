@@ -2,7 +2,7 @@
 /* common */
 body {
   position:relative !important;
-  top:30pt;
+  top:45pt;
 }
 body > div.navbar {
   position:fixed;

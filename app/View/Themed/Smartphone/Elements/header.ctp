@@ -28,7 +28,7 @@
 
 
 <? if ($user = $this->Session->read('Auth.User')): ?>
-                <li><a href="/users"><?= UHelper::pictMypage() ?>マイページ</a></li>
+                <li><a href="/mypage"><?= UHelper::pictMypage() ?>マイページ</a></li>
                 <li><?= $this->Html->link(UHelper::pictKey().'サインアウト', array('controller' => 'users', 'action' => 'logout'), array('escape'=>false)); ?></li>
 <? else: ?>
 <?
