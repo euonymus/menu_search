@@ -31,6 +31,8 @@
     ?>
 </head>
 <body<?= ($this->name == 'Pages') ? ' class="home"' : '' ?>>
+
+    <?= $this->element('facebook_sdk') ?>
     <?= $this->element('header') ?>
     <?//= $this->element('breadcrumb') ?>
     <div id="bodyMiddle" class="row">
