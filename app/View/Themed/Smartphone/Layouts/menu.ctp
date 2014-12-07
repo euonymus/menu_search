@@ -15,6 +15,7 @@
       <?= $this->Html->script('html5shiv.js') ?>
       <?= $this->Html->script('respond.min.js') ?>
     <![endif]-->
+    <link rel="apple-touch-icon-precomposed" href="/webclip.png" />
 
     <?php
         echo $this->Html->meta('description', 'ここに何か説明を書き込む');
