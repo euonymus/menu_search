@@ -37,7 +37,7 @@ echo $this->Form->create('User', $formOption); ?>
 
     <div class="social login">
         <h3>他のサービスでログイン</h3>
-        <?php echo $this->element('opauth_login'); ?>
+        <?php echo $this->element('opauth_login', array('callbackUrl'=>$this->Session->read('Auth.redirect'))); ?>
     </div>
     <br>
     <br>

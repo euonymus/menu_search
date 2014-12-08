@@ -15,7 +15,8 @@
 		<!--class名に"active"を指定するとボタンを押した状態を表現できます。-->
 <? if ($user = $this->Session->read('Auth.User')): ?>
 <? else: ?>
-                <li><?= $this->Html->link(UHelper::pictAssignment().'サインアップ', array('controller' => 'users', 'action' => 'add'), array('escape'=>false)); ?>
+                <?php $callbackUrl = (isset($callbackUrl) ? $callbackUrl : Router::reverse(Router::getRequest())); ?>
+                <li><?= $this->Html->link(UHelper::pictAssignment().'サインアップ', array('controller' => 'users', 'action' => 'add', '?' => array('location'=>$callbackUrl)), array('escape'=>false)); ?>
 <? endif; ?>
 		<li><?
    // TODO: Helperに持って行く。
@@ -36,7 +37,7 @@
                 <li><a href="/mypage"><?= UHelper::pictMypage() ?>マイページ</a></li>
                 <li><?= $this->Html->link(UHelper::pictKey().'ログアウト', array('controller' => 'users', 'action' => 'logout'), array('escape'=>false)); ?></li>
 <? else: ?>
-                <li><?= $this->Html->link(UHelper::pictLockOpen().'ログイン', array('controller' => 'users', 'action' => 'login'), array('escape'=>false)); ?>
+                <li><?= $this->Html->link(UHelper::pictLockOpen().'ログイン', array('controller' => 'users', 'action' => 'login', '?' => array('location'=>$callbackUrl)), array('escape'=>false)); ?>
 <? endif; ?>
 	</ul>
 <? if (isset($user['role']) && ($user['role'] == 'admin')): ?>

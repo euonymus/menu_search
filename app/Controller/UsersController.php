@@ -19,6 +19,8 @@ class UsersController extends AppController {
   }
 
   public function add() {
+    if ($this->Auth->loggedIn()) $this->redirect('/');
+
     if ($this->request->is('post')) {
       $this->User->create();
       if ($this->User->save($this->request->data)) {
@@ -27,6 +29,9 @@ class UsersController extends AppController {
       } else {
 	$this->_setFlash(__('アカウント登録に失敗しました。'), TRUE);
       }
+    } else {
+      $callback_path = $this->_callbackPath();
+      $this->Session->write('Auth.redirect', $callback_path);
     }
   }
   
@@ -37,7 +42,7 @@ class UsersController extends AppController {
   }
 
   public function login() {
-    if ($this->Auth->loggedIn()) $this->redirect(array('action' => 'index'));
+    if ($this->Auth->loggedIn()) $this->redirect('/');
 
     if ($this->request->is('post')) {
       if ($this->Auth->login()) {
@@ -45,6 +50,9 @@ class UsersController extends AppController {
       } else {
 	$this->_setFlash(__('ログインに失敗しました。'), TRUE);
       }
+    } else {
+      $callback_path = $this->_callbackPath();
+      $this->Session->write('Auth.redirect', $callback_path);
     }
   }
 
