@@ -1,12 +1,20 @@
 <div class="container">
 
-<ul>
-<?
-if ($user = $this->Session->read('Auth.User')) { $ancLetter = 'と関連付ける'; } else {$ancLetter = 'でログイン';}
-$callbackUrl = (isset($callbackUrl) ? $callbackUrl : Router::reverse(Router::getRequest()));
-?>
-<li><?= $this->Html->link('Facebook' . $ancLetter, array('controller' => 'users', 'action' => 'oplogin', 'facebook', '?' => array('location' => $callbackUrl))); ?></li>
-<li><?= $this->Html->link('Twitter' . $ancLetter, array('controller' => 'users', 'action' => 'oplogin', 'twitter', '?' => array('location' => $callbackUrl))); ?></li>
-</ul>
 
+<div class="sample2">
+  <h2>マイページ</h2>
+  <button class="btn btn-default btn-raised btn-link"><?= $this->Html->link('パスワード変更', '/users/password') ?></button>
+  <button class="btn btn-default btn-raised btn-link"><?= $this->Html->link('アカウント設定', '/users/edit') ?></button>
+  <button class="btn btn-default btn-raised btn-link"><?= $this->Html->link('画像設定', '/users/icon') ?></button>
 </div>
+
+
+
+    <div class="social login">
+        <h3>SNSアカウントを関連付ける</h3>
+        <?php echo $this->element('opauth_login', array('callbackUrl'=>$this->Session->read('Auth.redirect'))); ?>
+    </div>
+</div>
+
+
+
