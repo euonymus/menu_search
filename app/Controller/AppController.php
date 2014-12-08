@@ -38,7 +38,7 @@ class AppController extends Controller {
       'Session',
       // If no 'Auth.redirect' session, redirect to the following urls.
       'Auth' => array(
-          'loginRedirect' => array('controller' => 'users', 'action' => 'index'),
+          'loginRedirect' => array('controller' => 'pages', 'action' => 'display'),
           'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home')
       )
   );

@@ -13,10 +13,12 @@ class UsersController extends AppController {
     $this->Auth->deny('index', 'password', 'unregist');
   }
 
+  /*
   public function index() {
     $this->User->recursive = 0;
     $this->set('users', $this->paginate());
   }
+  */
 
   public function add() {
     if ($this->Auth->loggedIn()) $this->redirect('/');
