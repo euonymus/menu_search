@@ -39,7 +39,7 @@
                 <li><?= $this->Html->link(UHelper::pictLockOpen().'ログイン', array('controller' => 'users', 'action' => 'login'), array('escape'=>false)); ?>
 <? endif; ?>
 	</ul>
-<? if ($user['role'] == 'admin'): ?>
+<? if (isset($user['role']) && ($user['role'] == 'admin')): ?>
         <ul>
             <li><a href="/menus/add"><?= UHelper::pictAddList() ?>メニュー登録</a></li>
             <li><a href="/restaurants/add"><?= UHelper::pictSettings() ?>レストラン登録</a></li>

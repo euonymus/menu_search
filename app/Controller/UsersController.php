@@ -22,10 +22,10 @@ class UsersController extends AppController {
     if ($this->request->is('post')) {
       $this->User->create();
       if ($this->User->save($this->request->data)) {
-	$this->Session->setFlash(__('The user has been saved'));
+	$this->_setFlash(__('アカウントが登録されました。'));
 	$this->login();
       } else {
-	$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+	$this->_setFlash(__('アカウント登録に失敗しました。'), TRUE);
       }
     }
   }
@@ -43,7 +43,7 @@ class UsersController extends AppController {
       if ($this->Auth->login()) {
 	$this->redirect($this->Auth->redirect());
       } else {
-	$this->Session->setFlash(__('Invalid username or password, try again'));
+	$this->_setFlash(__('ログインに失敗しました。'), TRUE);
       }
     }
   }

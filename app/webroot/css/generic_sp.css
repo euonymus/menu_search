@@ -66,4 +66,9 @@ p.copyright {
 .menu-small-category {
   display:none;
 }
+/* form */
+.error-message {
+  display:block;
+  color:red;
+}
 

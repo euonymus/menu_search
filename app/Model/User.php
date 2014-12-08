@@ -29,21 +29,21 @@ class User extends AppModel {
         'username' => array(
             'required' => array(
                 'rule' => array('notEmpty'),
-                /* 'message' => 'The email is required' */
+		'message' => 'メールアドレスを入力してください。',
 	    ),
             'valid' => array(
                 'rule' => array('email'),
-                /* 'message' => 'The email needs to be proper format ' */
+		'message' => '有効なメールアドレスを入力してください。',
 	    ),
             'isUnique' => array(
                 'rule' => array('isUnique'),
-                /* 'message' => 'The email is used by the other' */
+		'message' => 'このメールアドレスは既に登録されています。',
 	    ),
         ),
         'password' => array(
             'required' => array(
                 'rule' => array('notEmpty'),
-                /* 'message' => 'A password is required' */
+		'message' => 'パスワードを入力してください。',
             )
         ),
         'role' => array(
