@@ -1,4 +1,6 @@
+<?/*
 <p class="description">地域を選択してください</p>
+*/ ?>
 <br>
 <? foreach($stations as $id => $station): ?>
     <div class="station-btn text-center">

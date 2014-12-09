@@ -19,7 +19,9 @@ class UsersController extends AppController {
     $this->set('users', $this->paginate());
   }
   */
-
+  /***************************************************************/
+  /* Signup / Login / Logout                                     */
+  /***************************************************************/
   public function add() {
     if ($this->Auth->loggedIn()) $this->redirect('/');
 
@@ -62,10 +64,6 @@ class UsersController extends AppController {
     $this->redirect($this->Auth->logout());
   }
   
-  public function password() {
-    $this->_edit($this->currentUser['id']);
-  }
-
   public function unregist() {
     $this->_delete($this->currentUser['id']);
   }
@@ -94,6 +92,20 @@ class UsersController extends AppController {
     }
   }
 
+  /***************************************************************/
+  /* Edit                                                        */
+  /***************************************************************/
+  public function edit() {
+    $this->_edit($this->currentUser['id']);
+  }
+
+  public function password() {
+    $this->_edit($this->currentUser['id']);
+  }
+
+  /***************************************************************/
+  /* Tools                                                       */
+  /***************************************************************/
   function _loadChildModel() {
     $this->childModel = $this->User->getChildModel($this->request->data['auth']['provider']);
     if (!$this->childModel) $this->_errorRedirect();
@@ -140,10 +152,10 @@ class UsersController extends AppController {
     }
     if ($this->request->is('post') || $this->request->is('put')) {
       if ($this->User->save($this->request->data)) {
-  	$this->Session->setFlash(__('The user has been saved'));
-  	$this->redirect(array('action' => 'index'));
+	$this->_setFlash(__('アカウント情報が更新されました。'));
+  	$this->redirect(array('controller' => 'mypage', 'action' => 'index'));
       } else {
-  	$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+	$this->_setFlash(__('アカウント情報の更新に失敗しました。'), TRUE);
       }
     } else {
       $this->request->data = $this->User->read(null, $id);

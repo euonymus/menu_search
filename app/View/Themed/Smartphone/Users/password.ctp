@@ -1,11 +1,24 @@
+<div class="container">
 <div class="users form">
-<?php echo $this->Session->flash('auth'); ?>
-<?php echo $this->Form->create('User'); ?>
+
+    <h1>パスワード変更</h1>
+
+<?php 
+$formOption = array('class' => 'form-horizontal');
+echo $this->Form->create('User', $formOption); ?>
     <fieldset>
-        <legend><?php echo __('Please enter your username and password'); ?></legend>
-        <?php echo $this->Form->input('password'); ?>
+        <legend>新しいパスワードを入力してください。</legend>
+             <? echo $this->Form->input('password',
+			   array('class' => 'form-control',
+				 'div' => array('class' => 'col-lg-3'),
+				 'label' => 'パスワード')); ?>
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <?php echo $this->Form->submit('送信', array('class'=>'btn btn-success', 'div' => false)); ?>
+            </div>
+        </div>
     </fieldset>
-<?php echo $this->Form->end(__('Login')); ?>
+<?php echo $this->Form->end(); ?>
+
 </div>
-<div class="social login">
 </div>
