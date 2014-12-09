@@ -33,25 +33,8 @@ class Menu extends AppModel {
   }
 
   /****************************************************************************/
-  /* Model bind settings                                                      */
+  /* Validation                                                               */
   /****************************************************************************/
-  public function bindRestaurant($reset = TRUE) {
-    App::import('Model', 'Restaurant');
-    $bind = array(
-      'belongsTo' => array(
-        'Restaurant' => array(
-          'className'  => 'Restaurant',
-          'foreignKey' => 'restaurant_id',
-        )
-      )
-    );
-    $this->bindModel($bind, $reset);
-  }
-
-  public function unbindRestaurant($reset = TRUE) {
-    $this->unbindModel(array('belongsTo' => array('Restaurant')), $reset);
-  }
-
 /**
  * Validation rules
  *
@@ -109,6 +92,42 @@ class Menu extends AppModel {
 			),
 		),
 	);
+
+  /****************************************************************************/
+  /* Model bind settings                                                      */
+  /****************************************************************************/
+  public function bindRestaurant($reset = TRUE) {
+    $bind = array(
+      'belongsTo' => array(
+        'Restaurant' => array(
+          'className'  => 'Restaurant',
+          'foreignKey' => 'restaurant_id',
+        )
+      )
+    );
+    $this->bindModel($bind, $reset);
+  }
+
+  public function unbindRestaurant($reset = TRUE) {
+    $this->unbindModel(array('belongsTo' => array('Restaurant')), $reset);
+  }
+
+  function bindMenuUser($reset = TRUE) {
+    $bind = array(
+      'hasMany' => array(
+        'MenuUser' => array(
+          'className'  => 'MenuUser',
+          'foreignKey' => 'menu_id',
+          'order' => 'created desc',
+        )
+      )
+    );
+    $this->bindModel($bind, $reset);
+  }
+
+  function unbindMenuUser($reset = TRUE) {
+    $this->unbindModel(array('hasMany' => array('MenuUser')), $reset);
+  }
 
   /****************************************************************************/
   /* conditions                                                               */

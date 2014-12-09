@@ -10,7 +10,7 @@ class UsersController extends AppController {
   public function beforeFilter() {
     parent::beforeFilter();
     /* $this->Auth->allow('add', 'oplogin', 'logout', 'opauth_complete'); */
-    $this->Auth->deny('index', 'password', 'unregist');
+    $this->Auth->deny('index', 'edit', 'password', 'unregist');
   }
 
   /*

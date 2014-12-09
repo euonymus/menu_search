@@ -7,7 +7,7 @@
 #
 # ホスト: 127.0.0.1 (MySQL 5.5.28)
 # データベース: restaurant_menu
-# 作成時刻: 2014-12-07 16:13:42 +0000
+# 作成時刻: 2014-12-09 16:06:13 +0000
 # ************************************************************
 
 
@@ -174,6 +174,23 @@ VALUES
 
 /*!40000 ALTER TABLE `menu_tags` ENABLE KEYS */;
 UNLOCK TABLES;
+
+
+# テーブルのダンプ menu_users
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `menu_users`;
+
+CREATE TABLE `menu_users` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `menu_id` int(11) unsigned NOT NULL,
+  `user_id` varchar(36) NOT NULL DEFAULT '',
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `menu_id` (`menu_id`,`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
 # テーブルのダンプ menus

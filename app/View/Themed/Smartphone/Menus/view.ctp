@@ -1,7 +1,8 @@
 <div class="bs-docs-section">
 <div class="well bs-component">
 
-   <h2><?php echo h($menu['Menu']['name']); ?>&nbsp;@&nbsp;<?php
+   <h2><?php echo h($menu['Menu']['name']); ?><br>
+       <?= UHelper::pictRestaurant() ?><?php
 echo $this->Html->link($menu['Restaurant']['name'], '/restaurants/view/'.$menu['Restaurant']['id']);
 ?></h2>
 <h4>
@@ -11,7 +12,9 @@ echo $this->Html->link($menu['Restaurant']['name'], '/restaurants/view/'.$menu['
 <? if ($menu['Menu']['dinner']) echo '<span class="label label-default">ディナー</span>';?>
 </h4>
 
-
+<div>
+   <?= $this->Html->link(UHelper::pictHeart(13, 'pink').'お気に入りに登録！', '/menus/like/'.$menu['Menu']['id'], array('escape'=>false,'class'=>'btn btn-default btn-raised')) ?> 
+</div>
 
         <div class="row-picture">
       <? if (!is_null($menu['Menu']['image'])) echo $this->Html->image($menu['Menu']['image'], array('alt'=>'icon','class'=>'img-thumbnail', 'style'=>'width:180px;height:180px;')); ?>

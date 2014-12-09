@@ -13,6 +13,13 @@ class MenusController extends AppController {
 
   const FULLTEXT_MIN_SCORE = 50;
 
+
+  function beforeFilter() {
+    parent::beforeFilter();
+    //ログインが必要なアクション
+    $this->Auth->deny('like');
+  }
+
   public function index() {
     $this->_loadComponent('MenuTool');
     $this->set('menus', $this->MenuTool->search(true));
@@ -43,6 +50,19 @@ class MenusController extends AppController {
     $options = array('conditions' => array('Menu.' . $this->Menu->primaryKey => $id));
     $this->Menu->bindRestaurant(false);
     $this->set('menu', $this->Menu->find('first', $options));
+  }
+
+  // TODO: likeの取り消し機能も追加
+  public function like($id = false) {
+    if (!$id) return $this->redirect(array('action' => 'index'));
+
+    $this->loadModel('MenuUser');
+    if ($this->MenuUser->saveNew($id, $this->currentUser['id'])) {
+      $this->_setFlash(__('メニューをお気に入り登録しました'));
+    } else {
+      $this->_setFlash(__('お気に入り登録に失敗しました'), TRUE);
+    }
+    return $this->redirect(array('action' => 'view', $id));
   }
 
   /******************************************************************/

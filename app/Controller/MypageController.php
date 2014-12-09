@@ -7,9 +7,13 @@ App::uses('AppController', 'Controller');
  * @property SessionComponent $Session
  */
 class MypageController extends AppController {
-  public $components = array('Paginator', 'Session', 'RequestHandler');
+  public $components = array('Paginator', 'Session');
 
-  const FULLTEXT_MIN_SCORE = 50;
+  function beforeFilter() {
+    parent::beforeFilter();
+    //ログインが必要なアクション
+    $this->Auth->deny();
+  }
 
   public function index() {
   }
