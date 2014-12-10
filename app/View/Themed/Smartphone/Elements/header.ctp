@@ -35,6 +35,13 @@
 
 <? if ($user = $this->Session->read('Auth.User')): ?>
                 <li><a href="/mypage"><?= UHelper::pictMypage() ?>マイページ</a></li>
+                <li><a href="/menus/likes"><?= UHelper::pictHeart() ?>お気に入りメニュー</a></li>
+        </ul>
+        <ul>
+        </ul>
+        <ul>
+        </ul>
+        <ul>
                 <li><?= $this->Html->link(UHelper::pictKey().'ログアウト', array('controller' => 'users', 'action' => 'logout'), array('escape'=>false)); ?></li>
 <? else: ?>
                 <li><?= $this->Html->link(UHelper::pictLockOpen().'ログイン', array('controller' => 'users', 'action' => 'login', '?' => array('location'=>$callbackUrl)), array('escape'=>false)); ?>

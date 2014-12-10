@@ -17,7 +17,7 @@ class MenusController extends AppController {
   function beforeFilter() {
     parent::beforeFilter();
     //ログインが必要なアクション
-    $this->Auth->deny('like');
+    $this->Auth->deny('like', 'likes');
   }
 
   public function index() {
@@ -25,6 +25,11 @@ class MenusController extends AppController {
     $this->set('menus', $this->MenuTool->search(true));
     $this->_loadComponent('StationTool');
     $this->StationTool->setStationName();
+  }
+
+  public function likes() {
+    $this->_loadComponent('MenuTool');
+    $this->set('menus', Set::extract('{n}/Menu', $this->MenuTool->likes(true)));
   }
 
   public function categories() {
@@ -59,7 +64,6 @@ class MenusController extends AppController {
     $this->set('menu', $this->Menu->find('first', $options));
   }
 
-  // TODO: likeの取り消し機能も追加
   public function like($id = false) {
     if (!$id) return $this->redirect(array('action' => 'index'));
 

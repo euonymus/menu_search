@@ -39,6 +39,13 @@ class MenuToolComponent extends Component {
     return $this->getList($options, $isPaging);
   }
 
+  public function likes($isPaging = false) {
+    $this->Controller->loadModel('MenuUser');
+    $this->Controller->MenuUser->bindMenu();
+    $options = array('conditions' => MenuUser::conditionByUserId($this->Controller->currentUser['id']));
+    return $this->Controller->_getModelsList('MenuUser', $options, $isPaging);
+  }
+
   public function listByRestaurant($restaurant_id, $isPaging = false) {
     $this->Controller->loadModel('Menu');
     $options = array('conditions' => Menu::conditionByRestaurantId($restaurant_id));
