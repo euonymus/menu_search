@@ -13,7 +13,15 @@ echo $this->Html->link($menu['Restaurant']['name'], '/restaurants/view/'.$menu['
 </h4>
 
 <div>
-   <?= $this->Html->link(UHelper::pictHeart(13, 'pink').'お気に入りに登録！', '/menus/like/'.$menu['Menu']['id'], array('escape'=>false,'class'=>'btn btn-default btn-raised')) ?> 
+<? if ($liked) {
+    $undo = 'undo:1/';
+    $likeBtnMessage = UHelper::pictClear('13pt', 'pink').'お気に入り解除';
+    echo UHelper::pictHeart('20pt', 'pink');
+} else {
+    $undo = '';
+    $likeBtnMessage = UHelper::pictHeart('13pt', 'pink').'お気に入りに登録！';
+} ?>
+   <?= $this->Html->link($likeBtnMessage, '/menus/like/'.$undo.$menu['Menu']['id'], array('escape'=>false,'class'=>'btn btn-default btn-raised')) ?> 
 </div>
 
         <div class="row-picture">

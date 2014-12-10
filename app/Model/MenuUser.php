@@ -94,6 +94,15 @@ class MenuUser extends AppModel {
     return $this->save($saving);
   }
 
+  public function deleteUnique($menu_id, $user_id) {
+    $options = array('conditions' => self::conditionUnique($menu_id, $user_id));
+    $current = $this->find('first', $options);
+    if (empty($current)) return true; // It doesn't exist
+
+    $this->id = $current[__CLASS__]['id'];
+    return $this->delete();
+  }
+
   /****************************************************************************/
   /* Conditions                                                               */
   /****************************************************************************/

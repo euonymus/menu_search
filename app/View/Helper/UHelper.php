@@ -115,4 +115,7 @@ class UHelper extends AppHelper {
   public static function pictKey($font_size = '20pt', $color = false) {
     return self::pictgram("mdi-communication-vpn-key", $font_size, $color);
   }
+  public static function pictClear($font_size = '20pt', $color = false) {
+    return self::pictgram("mdi-content-clear", $font_size, $color);
+  }
 }

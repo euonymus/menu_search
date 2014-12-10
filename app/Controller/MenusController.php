@@ -47,6 +47,13 @@ class MenusController extends AppController {
     if (!$this->Menu->exists($id)) {
       throw new NotFoundException(__('Invalid menu'));
     }
+
+    $this->loadModel('MenuUser');
+    $menuUser = $this->MenuUser->find('first', array('conditions' => MenuUser::conditionUnique($id, $this->currentUser['id'])));
+    if (empty($menuUser)) $liked = false;
+    else $liked = true;
+    $this->set('liked', $liked);
+
     $options = array('conditions' => array('Menu.' . $this->Menu->primaryKey => $id));
     $this->Menu->bindRestaurant(false);
     $this->set('menu', $this->Menu->find('first', $options));
@@ -56,11 +63,23 @@ class MenusController extends AppController {
   public function like($id = false) {
     if (!$id) return $this->redirect(array('action' => 'index'));
 
+    $this->_loadComponent('ParamTool');
+    $undo = $this->ParamTool->named_init('undo');
+
     $this->loadModel('MenuUser');
-    if ($this->MenuUser->saveNew($id, $this->currentUser['id'])) {
-      $this->_setFlash(__('メニューをお気に入り登録しました'));
+    if ($undo) {
+      $saved = $this->MenuUser->deleteUnique($id, $this->currentUser['id']);
+      $success_message = __('お気に入り解除しました');
+      $failed_message = __('お気に入り解除に失敗しました');
     } else {
-      $this->_setFlash(__('お気に入り登録に失敗しました'), TRUE);
+      $saved = $this->MenuUser->saveNew($id, $this->currentUser['id']);
+      $success_message = __('メニューをお気に入り登録しました');
+      $failed_message = __('お気に入り登録に失敗しました');
+    }
+    if ($saved) {
+      $this->_setFlash($success_message);
+    } else {
+      $this->_setFlash($failed_message, TRUE);
     }
     return $this->redirect(array('action' => 'view', $id));
   }
