@@ -40,6 +40,40 @@ class Restaurant extends AppModel {
     $this->unbindModel(array('hasAndBelongsToMany' => array('Station')), $reset);
   }
 
+  function bindMenu($reset = TRUE) {
+    $bind = array(
+      'hasMany' => array(
+        'Menu' => array(
+          'className'  => 'Menu',
+          'foreignKey' => 'restaurant_id',
+          'order' => 'created desc',
+        )
+      )
+    );
+    $this->bindModel($bind, $reset);
+  }
+
+  function unbindMenu($reset = TRUE) {
+    $this->unbindModel(array('hasMany' => array('Menu')), $reset);
+  }
+
+  function bindRecommendedMenu($reset = TRUE) {
+    $bind = array(
+      'hasOne' => array(
+        'Menu' => array(
+          'className'  => 'Menu',
+          'foreignKey' => 'restaurant_id',
+          'order' => 'Menu.point desc',
+        )
+      )
+    );
+    $this->bindModel($bind, $reset);
+  }
+
+  function unbindRecommendedMenu($reset = TRUE) {
+    $this->unbindModel(array('hasOne' => array('Menu')), $reset);
+  }
+
   /****************************************************************************/
   /* Validations                                                              */
   /****************************************************************************/

@@ -27,6 +27,12 @@ class MenusController extends AppController {
     $this->StationTool->setStationName();
   }
 
+  public function recommended() {
+    $this->_loadComponent('MenuTool');
+    $this->_loadComponent('RestaurantTool');
+    $this->set('menus', $this->RestaurantTool->recommendedMenus(true));
+  }
+
   public function likes() {
     $this->_loadComponent('MenuTool');
     $this->MenuTool->searchInit();

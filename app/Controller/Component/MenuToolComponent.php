@@ -7,6 +7,7 @@ class MenuToolComponent extends Component {
   const SESSION_TAGS      = 'tags';
   const SESSION_STATION   = 'station_id';
   const SESSION_LIKE      = 'like';
+  const SESSION_RECOMMENDED = 'recommended';
 
   public function initialize(Controller $controller) {
     $this->Controller = $controller;
@@ -34,7 +35,9 @@ class MenuToolComponent extends Component {
   }
 
   public function likes($isPaging = false) {
+    // likesである事をセッションに記録。その後の検索フィルターに利用
     $this->Controller->Session->write(self::SESSION_LIKE, true);
+    // データ取得
     $this->Controller->loadModel('MenuUser');
     $menuUsers = $this->Controller->MenuUser->findAllByUserId($this->Controller->currentUser['id'], array('menu_id'));
     $conditions = array('Menu.id' => Set::extract('{n}/MenuUser/menu_id', $menuUsers));
@@ -102,13 +105,16 @@ class MenuToolComponent extends Component {
       $this->Controller->Session->delete(self::SESSION_TAGS);
       $this->Controller->Session->delete(self::SESSION_STATION);
       $this->Controller->Session->delete(self::SESSION_LIKE);
+      $this->Controller->Session->delete(self::SESSION_RECOMMENDED);
     }
     // Redirect destination
     $next = $this->Controller->ParamTool->named_init(self::SESSION_NEXT_PAGE);
-    if (in_array($next, array('region','categories','index','likes'))) {
+    if (in_array($next, array('region','categories','index','likes','recommended'))) {
       $next = $next;
     } elseif($this->Controller->Session->read(self::SESSION_LIKE)) {
       $next = 'likes';
+    } elseif($this->Controller->Session->read(self::SESSION_RECOMMENDED)) {
+      $next = 'recommended';
     } else {
       $next = 'index';
     }
@@ -119,7 +125,7 @@ class MenuToolComponent extends Component {
     $next = $this->Controller->Session->read(self::SESSION_NEXT_PAGE);
     if (empty($next)) $next = 'index';
     $this->Controller->Session->delete(self::SESSION_NEXT_PAGE);
-    if (($next != 'index') && ($next != 'likes')) return '/menus/' . $next . '/';
+    if (($next != 'index') && ($next != 'likes') && ($next != 'recommended')) return '/menus/' . $next . '/';
 
     $query = array();
     $station_id = $this->Controller->Session->read(self::SESSION_STATION);

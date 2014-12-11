@@ -36,8 +36,8 @@ class RestaurantsController extends AppController {
 	  $this->set('restaurants', $this->RestaurantTool->listByStation(true));
 
 
-		$this->Restaurant->recursive = 0;
-		$this->set('restaurants', $this->Paginator->paginate());
+		/* $this->Restaurant->recursive = 0; */
+		/* $this->set('restaurants', $this->Paginator->paginate()); */
 	}
 
 /**

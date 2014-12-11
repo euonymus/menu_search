@@ -33,6 +33,7 @@
 					 'placeholder' => '検索'));
    echo $this->Form->end();
 ?></li>
+		<li><a href="/menus/recommended/"><?= UHelper::pictThumbUp() ?>おすすめメニュー！！</a></li>
 		<li><a href="/menus/region/refresh:1/next:categories/"><?= UHelper::pictRestaurantMenu() ?>メニューを探す</a></li>
                 <li><a href="/restaurants/region"><?= UHelper::pictRestaurant() ?></i>レストランを探す</a></li>
 
