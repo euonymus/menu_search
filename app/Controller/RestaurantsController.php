@@ -18,6 +18,7 @@ class RestaurantsController extends AppController {
 
 
   public function region() {
+    $this->_loadComponent('MenuTool');
     $this->loadModel('Station');
     $this->set('stations', $this->Station->find('list'));
   }
@@ -30,6 +31,7 @@ class RestaurantsController extends AppController {
  */
 	public function index() {
 
+	  $this->_loadComponent('MenuTool');
 	  $this->_loadComponent('RestaurantTool');
 	  $this->set('restaurants', $this->RestaurantTool->listByStation(true));
 

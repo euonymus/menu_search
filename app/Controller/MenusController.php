@@ -29,23 +29,30 @@ class MenusController extends AppController {
 
   public function likes() {
     $this->_loadComponent('MenuTool');
+    $this->MenuTool->searchInit();
     $this->set('menus', Set::extract('{n}/Menu', $this->MenuTool->likes(true)));
   }
 
   public function categories() {
     self::$title_for_layout = '検索メニュー選択:'.self::$title_for_layout;
     self::$description_for_layout = '料理の名前を選んでお店毎のメニューを比較！一番好みの食べたい料理を見つけてお店へGo！';
+
+    $this->_loadComponent('MenuTool');
+    $this->MenuTool->sessionFilter(MenuToolComponent::SESSION_TAGS);
+    // Set View Values
     $this->_loadComponent('StationTool');
     $this->StationTool->setStationName();
   }
 
   public function region() {
-    $this->loadModel('Station');
-    $this->set('stations', $this->Station->find('list'));
+    $this->_loadComponent('MenuTool');
+    $this->MenuTool->sessionFilter(MenuToolComponent::SESSION_STATION);
 
-    $this->_loadComponent('ParamTool');
-    $tags = $this->ParamTool->query_init('tags');
-    $this->set(compact('tags'));
+    // Set View Values
+    $this->loadModel('Station');
+    $stations = $this->Station->find('list');
+    $tags = $this->Session->read(MenuToolComponent::SESSION_TAGS);
+    $this->set(compact('stations','tags'));
   }
 
   public function view($id = null) {

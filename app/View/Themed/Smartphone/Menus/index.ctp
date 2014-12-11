@@ -3,8 +3,8 @@
     <p><? $tagList = explode(',',$tags); foreach ($tagList as $tag){ echo '「'.$tag.'」';} ?>でレストランのメニューを検索した結果</p>
 
     <ul class="nav nav-pills">
-      <li class="active"><?= $this->Html->link('別のメニュー', '/menus/categories/' . (!empty($station_id) ? '?station='. $station_id : ''), array()) ?></li>
-      <li class="active"><?= $this->Html->link('別の地域', '/menus/region/?tags='. $tags, array()) ?></li>
+      <li class="active"><?= $this->Html->link('別のメニュー', '/menus/categories/') ?></li>
+      <li class="active"><?= $this->Html->link('別の地域', '/menus/region/') ?></li>
     </ul>
 
 <? /*

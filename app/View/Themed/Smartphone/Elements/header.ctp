@@ -29,13 +29,13 @@
 					 'placeholder' => '検索'));
    echo $this->Form->end();
 ?></li>
-		<li><a href="/menus/region"><?= UHelper::pictRestaurantMenu() ?>メニューを探す</a></li>
+		<li><a href="/menus/region/refresh:1/next:categories/"><?= UHelper::pictRestaurantMenu() ?>メニューを探す</a></li>
                 <li><a href="/restaurants/region"><?= UHelper::pictRestaurant() ?></i>レストランを探す</a></li>
 
 
 <? if ($user = $this->Session->read('Auth.User')): ?>
                 <li><a href="/mypage"><?= UHelper::pictMypage() ?>マイページ</a></li>
-                <li><a href="/menus/likes"><?= UHelper::pictHeart() ?>お気に入りメニュー</a></li>
+                <li><a href="/menus/likes/refresh:1/"><?= UHelper::pictHeart() ?>お気に入りメニュー</a></li>
         </ul>
         <ul>
         </ul>
