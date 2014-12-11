@@ -43,7 +43,7 @@ class AppController extends Controller {
       )
   );
 
-  public $helpers = array('U');
+  public $helpers = array('U','User');
 
   const TITLE_SITE_NAME = 'Coozo';
   static $title_for_layout = self::TITLE_SITE_NAME;
