@@ -4,6 +4,8 @@ App::uses('AuthComponent', 'Controller/Component');
 class User extends AppModel {
   public $name = 'User';
 
+  public $image_upload = TRUE;
+
   const STATUS_DISABLED = 0;
   const STATUS_ENABLED  = 1;
 
@@ -16,6 +18,8 @@ class User extends AppModel {
 			    );
 
   public function beforeSave($options = array()) {
+    if (!parent::beforeSave($options)) return FALSE;
+
     if (isset($this->data[$this->alias]['password'])) {
       $this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);
     }

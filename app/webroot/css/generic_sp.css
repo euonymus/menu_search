@@ -71,6 +71,9 @@ p.copyright {
   display:block;
   color:red;
 }
+img.img-thumbnail {
+  width:100%;
+}
 
 .sns-logo {
   width:70pt;
