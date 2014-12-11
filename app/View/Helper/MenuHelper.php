@@ -27,4 +27,23 @@ class MenuHelper extends AppHelper {
 
     return $this->Html->link($label, $linkAction, $options);
   }
+
+  public static function stars($point) {
+    $ret = '';
+    $ret = UHelper::pictStar('16pt', 'lime');
+
+    if ($point > 5) {
+      $ret .= UHelper::pictStar('16pt', 'lime');
+    }
+    if ($point > 10) {
+      $ret .= UHelper::pictStar('16pt', 'lime');
+    }
+    if ($point > 15) {
+      $ret .= UHelper::pictStar('16pt', 'lime');
+    }
+    if ($point > 20) {
+      $ret .= UHelper::pictStar('16pt', 'lime');
+    }
+    return $ret;
+  }
 }

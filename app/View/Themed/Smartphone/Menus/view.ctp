@@ -8,8 +8,13 @@ echo $this->Html->link($menu['Restaurant']['name'], '/restaurants/view/'.$menu['
 <h4>
 <span class="label label-info"><?= UHelper::currency($menu['Menu']['price'], '\\') ?></span>
 <? if ($menu['Menu']['combo']) echo '<span class="label label-success">セットメニュー</span>&nbsp;';?>
+
+<?= MenuHelper::stars($menu['Menu']['point']) ?>
+
+<? /* 今のところランチのみをターゲットとしているためわざわざ表示しない。
 <? if ($menu['Menu']['lunch']) echo '<span class="label label-warning">ランチ</span>&nbsp;';?>
 <? if ($menu['Menu']['dinner']) echo '<span class="label label-default">ディナー</span>';?>
+*/ ?>
 </h4>
 
 <div>

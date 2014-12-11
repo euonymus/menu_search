@@ -10,9 +10,17 @@
             <p ng-if="list.Menu.remarks"><small class="list-group-item-text">備考：{{list.Menu.remarks}}</small></p>
             <p class="list-group-item-text">
                 <span class="label label-info">&yen;{{list.Menu.price|number}}</span>
+
+                <i class="mdi-action-grade mdi-material-lime" style="font-size:16pt;"></i>
+                <i ng-if="list.Menu.point > 5" class="mdi-action-grade mdi-material-lime" style="font-size:16pt;"></i>
+                <i ng-if="list.Menu.point > 10" class="mdi-action-grade mdi-material-lime" style="font-size:16pt;"></i>
+                <i ng-if="list.Menu.point > 15" class="mdi-action-grade mdi-material-lime" style="font-size:16pt;"></i>
+                <i ng-if="list.Menu.point > 20" class="mdi-action-grade mdi-material-lime" style="font-size:16pt;"></i>
+<? /* 今のところランチのみをターゲットとしているためわざわざ表示しない。
                 <span ng-if="list.Menu.combo" class="label label-success">セットメニュー</span>&nbsp;
                 <span ng-if="list.Menu.lunch" class="label label-warning">ランチ</span>&nbsp;
                 <span ng-if="list.Menu.dinner" class="label label-default">ディナー</span>
+*/ ?>
             </p>
         </div>
     </div>
