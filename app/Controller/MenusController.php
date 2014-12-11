@@ -88,6 +88,11 @@ class MenusController extends AppController {
       $failed_message = __('お気に入り登録に失敗しました');
     }
     if ($saved) {
+      $this->loadModel('Menu');
+      $updated = $this->Menu->updatePoint($id);
+      if (!$updated) {
+	LogTool::error('Failed to update menu point. id='.$id);
+      }
       $this->_setFlash($success_message);
     } else {
       $this->_setFlash($failed_message, TRUE);

@@ -13,7 +13,8 @@ class MenuTest extends CakeTestCase {
  * @var array
  */
 	public $fixtures = array(
-		'app.menu'
+           'app.menu',
+	   'app.menu_user',
 	);
 
 /**
@@ -37,4 +38,12 @@ class MenuTest extends CakeTestCase {
 		parent::tearDown();
 	}
 
+  public function testUpdatePoint() {
+    $menuId = 2;
+    $res = $this->Menu->updatePoint($menuId);
+    $this->assertFalse(empty($res));
+
+    $data = $this->Menu->findById($menuId, array('point'));
+    $this->assertIdentical($data['Menu']['point'], '3');
+  }
 }

@@ -39,4 +39,9 @@ class MenuUserTest extends CakeTestCase {
 		parent::tearDown();
 	}
 
+  public function testSumUpLikes() {
+    $menuId = 2;
+    $res = $this->MenuUser->sumUpLikes($menuId);
+    $this->assertIdentical($res, 3);
+  }
 }

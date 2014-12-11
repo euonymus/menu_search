@@ -4,23 +4,7 @@
  *
  */
 class MenuUserFixture extends CakeTestFixture {
-
-/**
- * Fields
- *
- * @var array
- */
-	public $fields = array(
-		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => true, 'key' => 'primary'),
-		'menu_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => true),
-		'user_id' => array('type' => 'string', 'null' => false, 'length' => 36, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
-		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
-		'indexes' => array(
-			'PRIMARY' => array('column' => 'id', 'unique' => 1)
-		),
-		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
-	);
+  public $import = 'MenuUser';
 
 /**
  * Records
@@ -31,7 +15,42 @@ class MenuUserFixture extends CakeTestFixture {
 		array(
 			'id' => 1,
 			'menu_id' => 1,
-			'user_id' => 'Lorem ipsum dolor sit amet',
+			'user_id' => 'user1',
+			'created' => '2014-12-09 23:16:31',
+			'modified' => '2014-12-09 23:16:31'
+		),
+		array(
+			'id' => 2,
+			'menu_id' => 2,
+			'user_id' => 'user1',
+			'created' => '2014-12-09 23:16:31',
+			'modified' => '2014-12-09 23:16:31'
+		),
+		array(
+			'id' => 3,
+			'menu_id' => 2,
+			'user_id' => 'user2',
+			'created' => '2014-12-09 23:16:31',
+			'modified' => '2014-12-09 23:16:31'
+		),
+		array(
+			'id' => 4,
+			'menu_id' => 3,
+			'user_id' => 'user2',
+			'created' => '2014-12-09 23:16:31',
+			'modified' => '2014-12-09 23:16:31'
+		),
+		array(
+			'id' => 5,
+			'menu_id' => 3,
+			'user_id' => 'user3',
+			'created' => '2014-12-09 23:16:31',
+			'modified' => '2014-12-09 23:16:31'
+		),
+		array(
+			'id' => 6,
+			'menu_id' => 2,
+			'user_id' => 'user8',
 			'created' => '2014-12-09 23:16:31',
 			'modified' => '2014-12-09 23:16:31'
 		),
