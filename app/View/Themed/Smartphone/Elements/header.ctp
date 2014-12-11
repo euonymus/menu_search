@@ -14,6 +14,7 @@
 	<ul>
 		<!--class名に"active"を指定するとボタンを押した状態を表現できます。-->
 <? if ($user = $this->Session->read('Auth.User')): ?>
+                <li><a href="/mypage"><?= UHelper::pictMypage() ?>マイページ</a></li>
 <? else: ?>
                 <?php $callbackUrl = (isset($callbackUrl) ? $callbackUrl : Router::reverse(Router::getRequest())); ?>
                 <li><?= $this->Html->link(UHelper::pictAssignment().'サインアップ', array('controller' => 'users', 'action' => 'add', '?' => array('location'=>$callbackUrl)), array('escape'=>false)); ?>
@@ -34,7 +35,6 @@
 
 
 <? if ($user = $this->Session->read('Auth.User')): ?>
-                <li><a href="/mypage"><?= UHelper::pictMypage() ?>マイページ</a></li>
                 <li><a href="/menus/likes/refresh:1/"><?= UHelper::pictHeart() ?>お気に入りメニュー</a></li>
         </ul>
         <ul>
