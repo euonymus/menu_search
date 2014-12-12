@@ -23,6 +23,8 @@ class RestaurantsController extends AppController {
     $this->set('stations', $this->Station->find('list'));
   }
 
+  public function hoge() {
+  }
 
 /**
  * index method
