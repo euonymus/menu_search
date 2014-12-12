@@ -122,3 +122,38 @@ function start(){
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+    var map;
+    
+    // 初期化。bodyのonloadでinit()を指定することで呼び出してます
+    function init() {
+
+      // Google Mapで利用する初期設定用の変数
+      var latlng = new google.maps.LatLng(39, 138);
+      var opts = {
+        zoom: 6,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        center: latlng
+      };
+
+      // getElementById("map")の"map"は、body内の<div id="map">より
+      map = new google.maps.Map(document.getElementById("map"), opts);
+
+      google.maps.event.addListener(map, 'click', mylistener);
+    }
+
+    function mylistener(event) {
+      document.getElementById("show_lat").innerHTML = event.latLng.lat();
+      document.getElementById("show_lng").innerHTML = event.latLng.lng();
+    }
+
+init();
