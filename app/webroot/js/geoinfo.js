@@ -138,9 +138,9 @@ function start(){
     function init() {
 
       // Google Mapで利用する初期設定用の変数
-      var latlng = new google.maps.LatLng(39, 138);
+      var latlng = new google.maps.LatLng(35.64418424015282, 139.69862937927246);
       var opts = {
-        zoom: 6,
+        zoom: 16,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         center: latlng
       };
@@ -152,8 +152,8 @@ function start(){
     }
 
     function mylistener(event) {
-      document.getElementById("show_lat").innerHTML = event.latLng.lat();
-      document.getElementById("show_lng").innerHTML = event.latLng.lng();
+      document.getElementById("show_lat").setAttribute("value",event.latLng.lat());
+      document.getElementById("show_lng").setAttribute("value",event.latLng.lng());
     }
 
 init();

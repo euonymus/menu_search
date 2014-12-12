@@ -8,6 +8,20 @@
 		echo $this->Form->input('description');
                 echo $this->Form->input('Station', array('options'=>$stations, 'multiple' => true));
         ?>
+
+
+
+  <div id="map" style="height:250pt"></div>
+<?= $this->Form->input('latitude', array('id' => 'show_lat')) ?>
+<?= $this->Form->input('longitude', array('id' => 'show_lng')) ?>
+
+<?= $this->Html->script('//maps.google.com/maps/api/js?v=3&sensor=false') ?>
+<?= $this->Html->script('geoinfo') ?>
+
+
+
+
+
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>
 </div>
