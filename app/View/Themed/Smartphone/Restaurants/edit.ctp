@@ -26,12 +26,8 @@ echo $this->Form->create('User', $formOption); ?>
         <div class="form-group">
             <div id="map" style="height:250pt"></div>
         </div>
-<?= $this->Form->input('latitude', array('id' => 'show_lat')) ?>
-<?= $this->Form->input('longitude', array('id' => 'show_lng')) ?>
-
-<?= $this->Html->script('//maps.google.com/maps/api/js?v=3&sensor=false') ?>
-<?= $this->Html->script('geoinfo') ?>
-
+        <?= $this->Form->input('latitude', array('id' => 'show_lat')) ?>
+        <?= $this->Form->input('longitude', array('id' => 'show_lng')) ?>
 
         <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">
@@ -42,3 +38,7 @@ echo $this->Form->create('User', $formOption); ?>
     <?php echo $this->Form->end(); ?>
 </div>
 </div>
+
+
+<?= $this->Html->script('//maps.google.com/maps/api/js?v=3&sensor=false') ?>
+<?= $this->Html->script('geoinfo') ?>
