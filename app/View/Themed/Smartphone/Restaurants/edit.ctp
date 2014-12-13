@@ -1,10 +1,3 @@
-<?= $this->Html->script('//maps.google.com/maps/api/js?v=3&sensor=false') ?>
-<?= $this->element('js_map') ?>
-<?php $this->Html->scriptStart(array('inline' => false)); ?>
-    $(function() {gmap.init();});
-    $(function() {gmap.onClickCallback(gmap.setLatLngInput);});
-<?php $this->Html->scriptEnd(); ?>
-
 <div class="container">
 <div class="restaurants form">
     <h1><?= UHelper::pictRestaurant(24) ?>レストラン編集</h1>
@@ -29,11 +22,7 @@ echo $this->Form->create('Restaurant', $formOption); ?>
 					  'multiple' => true, 'class'=>'form-control', 'div'=>array('class'=>'col-lg-3'))) ?>
         </div>
         <br>
-        <div class="form-group">
-            <div id="map" style="height:250pt"></div>
-        </div>
-        <?= $this->Form->input('latitude', array('id' => 'show_lat')) ?>
-        <?= $this->Form->input('longitude', array('id' => 'show_lng')) ?>
+        <?= $this->element('map', array('position' => $this->data['Restaurant'])) ?>
 
         <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">
