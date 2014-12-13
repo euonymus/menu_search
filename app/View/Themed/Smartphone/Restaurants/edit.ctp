@@ -1,17 +1,31 @@
+<div class="container">
 <div class="restaurants form">
-<?php echo $this->Form->create('Restaurant'); ?>
-	<fieldset>
-		<legend><?php echo __('Edit Restaurant'); ?></legend>
-	<?php
-		echo $this->Form->input('id');
-		echo $this->Form->input('name');
-		echo $this->Form->input('description');
-                echo $this->Form->input('Station', array('options'=>$stations, 'multiple' => true));
-        ?>
 
+    <h1><?= UHelper::pictRestaurant(24) ?>レストラン編集</h1>
 
-
-  <div id="map" style="height:250pt"></div>
+<?php 
+$formOption = array('class' => 'form-horizontal');
+echo $this->Form->create('User', $formOption); ?>
+    <fieldset>
+	<?= $this->Form->input('id') ?>
+        <div class="form-group">
+             <? echo $this->Form->input('name',
+					   array('class' => 'form-control',
+						 'div' => array('class' => 'col-lg-3'),
+						 'label' => 'レストラン名')); ?>
+             <? echo $this->Form->input('description',
+			   array('class' => 'form-control',
+				 'div' => array('class' => 'col-lg-3'),
+				 'label' => '説明文')); ?>
+        </div>
+        <div class="form-group">
+             <?= $this->Form->input('Station', array('options'=>$stations,
+					  'multiple' => true, 'class'=>'form-control', 'div'=>array('class'=>'col-lg-3'))) ?>
+        </div>
+        <br>
+        <div class="form-group">
+            <div id="map" style="height:250pt"></div>
+        </div>
 <?= $this->Form->input('latitude', array('id' => 'show_lat')) ?>
 <?= $this->Form->input('longitude', array('id' => 'show_lng')) ?>
 
@@ -19,17 +33,12 @@
 <?= $this->Html->script('geoinfo') ?>
 
 
-
-
-
-	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <?php echo $this->Form->submit('サインアップ', array('class'=>'btn btn-success', 'div' => false)); ?>
+            </div>
+        </div>
+    </fieldset>
+    <?php echo $this->Form->end(); ?>
 </div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-
-		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Restaurant.id')), array(), __('Are you sure you want to delete # %s?', $this->Form->value('Restaurant.id'))); ?></li>
-		<li><?php echo $this->Html->link(__('List Restaurants'), array('action' => 'index')); ?></li>
-	</ul>
 </div>
