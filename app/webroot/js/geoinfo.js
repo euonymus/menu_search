@@ -1,4 +1,4 @@
-
+/*
  
 // 位置情報取得処理に渡すオプション
 var options = {
@@ -121,39 +121,5 @@ function start(){
         alert("Geolocation not supported in this browser");
     }
 }
+*/
 
-
-
-
-
-
-
-
-
-
-
-    var map;
-    
-    // 初期化。bodyのonloadでinit()を指定することで呼び出してます
-    function init() {
-
-      // Google Mapで利用する初期設定用の変数
-      var latlng = new google.maps.LatLng(35.64418424015282, 139.69862937927246);
-      var opts = {
-        zoom: 16,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        center: latlng
-      };
-
-      // getElementById("map")の"map"は、body内の<div id="map">より
-      map = new google.maps.Map(document.getElementById("map"), opts);
-
-      google.maps.event.addListener(map, 'click', mylistener);
-    }
-
-    function mylistener(event) {
-      document.getElementById("show_lat").setAttribute("value",event.latLng.lat());
-      document.getElementById("show_lng").setAttribute("value",event.latLng.lng());
-    }
-
-init();

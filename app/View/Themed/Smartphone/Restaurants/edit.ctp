@@ -1,11 +1,17 @@
+<?= $this->Html->script('//maps.google.com/maps/api/js?v=3&sensor=false') ?>
+<?= $this->element('js_map') ?>
+<?php $this->Html->scriptStart(array('inline' => false)); ?>
+    $(function() {gmap.init();});
+    $(function() {gmap.onClickCallback(gmap.setLatLngInput);});
+<?php $this->Html->scriptEnd(); ?>
+
 <div class="container">
 <div class="restaurants form">
-
     <h1><?= UHelper::pictRestaurant(24) ?>レストラン編集</h1>
 
 <?php 
 $formOption = array('class' => 'form-horizontal');
-echo $this->Form->create('User', $formOption); ?>
+echo $this->Form->create('Restaurant', $formOption); ?>
     <fieldset>
 	<?= $this->Form->input('id') ?>
         <div class="form-group">
@@ -40,5 +46,3 @@ echo $this->Form->create('User', $formOption); ?>
 </div>
 
 
-<?= $this->Html->script('//maps.google.com/maps/api/js?v=3&sensor=false') ?>
-<?= $this->Html->script('geoinfo') ?>
