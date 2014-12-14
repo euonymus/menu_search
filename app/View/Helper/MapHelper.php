@@ -6,6 +6,10 @@ class MapHelper extends AppHelper {
     parent::__construct($View, $settings);
   }
 
+  public function updateLocation() {
+    echo $this->_View->element('js_location');
+  }
+
   public function map($data, $asInput = false) {
     if ($asInput) {
       echo $this->_View->element('map', array('position' => $data, 'asInput'=>true));

@@ -43,7 +43,7 @@ class AppController extends Controller {
       )
   );
 
-  public $helpers = array('U','User');
+  public $helpers = array('U','User','Map');
 
   const TITLE_SITE_NAME = 'Coozo';
   static $title_for_layout = self::TITLE_SITE_NAME;
@@ -61,6 +61,9 @@ class AppController extends Controller {
 
     // TODO: スマホファーストで作っているので、今はPCで壊れない様にいつもSmartphoneテーマを使っておく。後で下は消す事。
     $this->theme = 'Smartphone';
+    // Geo Info
+    $this->_loadComponent('GeoTool');
+    $this->GeoTool->read();
   }
 
   public function beforeRender() {

@@ -2,6 +2,7 @@
 if (!isset($latitude)) $latitude = '35.64418424015282';
 if (!isset($longitude)) $longitude = '139.69862937927246';
 if (!isset($zoom)) $zoom = '16';
+echo $this->Html->script('//maps.google.com/maps/api/js?v=3&sensor=false');
 ?>
 <?php $this->Html->scriptStart(array('inline' => false)); ?>
 var gmap = {

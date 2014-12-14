@@ -8,7 +8,6 @@ if (isset($position) && U::notEmpty('latitude', $position) && U::notEmpty('longi
 }
 if (!isset($asInput)) $asInput = false;
 // Read Javascripts
-echo $this->Html->script('//maps.google.com/maps/api/js?v=3&sensor=false');
 echo $this->element('js_map', compact('latitude', 'longitude'));
 ?>
 <? $this->Html->scriptStart(array('inline' => false)); ?>
