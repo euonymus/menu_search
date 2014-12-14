@@ -62,6 +62,8 @@ class MenusController extends AppController {
   }
 
   public function view($id = null) {
+    $this->helpers[] = 'Restaurant';
+
     if (!$this->Menu->exists($id)) {
       throw new NotFoundException(__('Invalid menu'));
     }

@@ -1,15 +1,16 @@
 <?
+// Initialization
 $hasPosition = false;
-if (U::notEmpty('latitude', $position) && U::notEmpty('longitude', $position)) {
+if (isset($position) && U::notEmpty('latitude', $position) && U::notEmpty('longitude', $position)) {
   $hasPosition = true;
   $latitude = $position['latitude'];
   $longitude = $position['longitude'];
 }
+if (!isset($asInput)) $asInput = false;
+// Read Javascripts
+echo $this->Html->script('//maps.google.com/maps/api/js?v=3&sensor=false');
+echo $this->element('js_map', compact('latitude', 'longitude'));
 ?>
-
-
-<?= $this->Html->script('//maps.google.com/maps/api/js?v=3&sensor=false') ?>
-<?= $this->element('js_map', compact('latitude', 'longitude')) ?>
 <? $this->Html->scriptStart(array('inline' => false)); ?>
     var presentMap = {
         successCallback: (function(position){
@@ -23,7 +24,9 @@ if (U::notEmpty('latitude', $position) && U::notEmpty('longitude', $position)) {
 <? else: ?>
 	    gmap.init(position.coords);
 <? endif; ?>
+<? if ($asInput): ?>
 	    gmap.onClickCallback(gmap.setLatLngInput);
+<? endif; ?>
         }),
     }
     $(function() {
@@ -31,10 +34,11 @@ if (U::notEmpty('latitude', $position) && U::notEmpty('longitude', $position)) {
     });
 <? $this->Html->scriptEnd(); ?>
 
-
-
         <div class="form-group">
-            <div id="map" style="height:250pt"></div>
+            <div id="map" style="height:120pt"></div>
         </div>
+
+<? if ($asInput): ?>
         <?= $this->Form->input('latitude', array('id' => 'show_lat')) ?>
         <?= $this->Form->input('longitude', array('id' => 'show_lng')) ?>
+<? endif; ?>

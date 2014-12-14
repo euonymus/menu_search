@@ -47,6 +47,8 @@ class RestaurantsController extends AppController {
  * @return void
  */
 	public function view($id = null) {
+	  $this->helpers[] = 'Restaurant';
+
 		if (!$this->Restaurant->exists($id)) {
 			throw new NotFoundException(__('Invalid restaurant'));
 		}
@@ -84,6 +86,8 @@ class RestaurantsController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
+	  $this->helpers[] = 'Restaurant';
+
 		if (!$this->Restaurant->exists($id)) {
 			throw new NotFoundException(__('Invalid restaurant'));
 		}
