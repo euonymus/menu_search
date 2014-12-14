@@ -17,7 +17,7 @@
 </div>
 
 
-<?= $this->Restaurant->map($restaurant['Restaurant']) ?>
+<?= $this->Map->map($restaurant['Restaurant']) ?>
 
 
 <div class="well bs-component">

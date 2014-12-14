@@ -1,5 +1,5 @@
 <?php
-class RestaurantHelper extends AppHelper {
+class MapHelper extends AppHelper {
   public $helpers = array('Html', 'Form');
 
   public function __construct(View $View, $settings = array()) {
