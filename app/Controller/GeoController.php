@@ -14,8 +14,8 @@ class GeoController extends AppController {
 					     'altitudeAccuracy' => '',
 					     'accuracy' => 33,
 					     'altitude' => '',
-					     'longitude' => '139.68791059999998',
-					     'latitude' => '35.6530333',
+					     'latitude' => '35.64418424015282',
+					     'longitude' => '139.69862937927246',
 					     )
 			   );
 

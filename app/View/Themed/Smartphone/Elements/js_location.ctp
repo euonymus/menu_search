@@ -1,4 +1,9 @@
 <?= $this->element('js_map') ?>
+
+<? $hasPosition = $this->Map->initGmapLib(); ?>
+
+
+
 <? $this->Html->scriptStart(array('inline' => false)); ?>
     var updateLocation = {
         successCallback: (function(position){

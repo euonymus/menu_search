@@ -1,14 +1,6 @@
 <?
-// Initialization
-$hasPosition = false;
-if (isset($position) && U::notEmpty('latitude', $position) && U::notEmpty('longitude', $position)) {
-  $hasPosition = true;
-  $latitude = $position['latitude'];
-  $longitude = $position['longitude'];
-}
+$hasPosition = $this->Map->initGmapLib();
 if (!isset($asInput)) $asInput = false;
-// Read Javascripts
-echo $this->element('js_map', compact('latitude', 'longitude'));
 ?>
 <? $this->Html->scriptStart(array('inline' => false)); ?>
     var presentMap = {
@@ -20,6 +12,10 @@ echo $this->element('js_map', compact('latitude', 'longitude'));
                 position: latlng,
 	        map: map,
             });
+	    alert(position.coords.latitude);
+	    alert(position.coords.longitude);
+
+
 <? else: ?>
 	    gmap.init(position.coords);
 <? endif; ?>
