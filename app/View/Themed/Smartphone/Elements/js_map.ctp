@@ -7,6 +7,8 @@ echo $this->Html->script('//maps.google.com/maps/api/js?v=3&sensor=false');
 <?php $this->Html->scriptStart(array('inline' => false)); ?>
 var gmap = {
   map:false,
+  latitude:false,
+  longitude:false,
   init: (function(data){
       // Google Mapで利用する初期設定用の変数
       //var latlng = new google.maps.LatLng(<?= $latitude ?>, <?= $longitude ?>);
@@ -22,6 +24,9 @@ var gmap = {
 	  latitude = '<?= $latitude ?>';
 	  longitude = '<?= $longitude ?>';
       }
+      parent.latitude = latitude;
+      parent.longitude = longitude;
+
       var latlng = new google.maps.LatLng(latitude, longitude);
       var opts = {
         zoom: <?= $zoom ?>,
@@ -30,6 +35,14 @@ var gmap = {
       };
       // getElementById("map")の"map"は、body内の<div id="map">より
       parent.map = new google.maps.Map(document.getElementById("map"), opts);
+  }),
+  marker: (function(data){
+      google.maps.event.addListener(parent.map, 'click', data);
+      var latlng = new google.maps.LatLng(parent.latitude, parent.longitude);
+      var marker = new google.maps.Marker({
+	position: latlng,
+	    map: map,
+      });
   }),
   onClickCallback: (function(data){
       google.maps.event.addListener(parent.map, 'click', data);

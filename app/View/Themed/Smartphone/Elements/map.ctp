@@ -5,27 +5,22 @@ if (!isset($asInput)) $asInput = false;
 <? $this->Html->scriptStart(array('inline' => false)); ?>
     var presentMap = {
         successCallback: (function(position){
-<? if ($hasPosition): ?>
-	    gmap.init();
-	    var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-	    var marker = new google.maps.Marker({
-                position: latlng,
-	        map: map,
-            });
-	    alert(position.coords.latitude);
-	    alert(position.coords.longitude);
-
-
-<? else: ?>
 	    gmap.init(position.coords);
-<? endif; ?>
 <? if ($asInput): ?>
 	    gmap.onClickCallback(gmap.setLatLngInput);
 <? endif; ?>
         }),
     }
     $(function() {
+<? if ($hasPosition): ?>
+	    gmap.init();
+	    gmap.marker();
+    <? if ($asInput): ?>
+	    gmap.onClickCallback(gmap.setLatLngInput);
+    <? endif; ?>
+<? else: ?>
 	gmap.getLocation(presentMap);
+<? endif; ?>
     });
 <? $this->Html->scriptEnd(); ?>
 
