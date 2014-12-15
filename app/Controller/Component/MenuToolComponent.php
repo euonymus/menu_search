@@ -1,7 +1,7 @@
 <?php
 App::uses('Component', 'Controller');
 class MenuToolComponent extends Component {
-  public $components = array('ParamTool');
+  public $components = array('ParamTool', 'GeoTool');
 
   const SESSION_NEXT_PAGE = 'next';
   const SESSION_TAGS      = 'tags';
@@ -12,6 +12,7 @@ class MenuToolComponent extends Component {
   public function initialize(Controller $controller) {
     $this->Controller = $controller;
     $this->ParamTool->initialize($controller);
+    $this->GeoTool->initialize($controller);
   }
 
   /************************************************************************/
@@ -24,7 +25,51 @@ class MenuToolComponent extends Component {
     return $this->Controller->_getModelsList('Menu', $options, $isPaging);
   }
 
+  public static function degreePerSec() {
+    return (1 / (60 * 60));
+  }
+  public static function latRange($latitude, $range = 500/* m */) {
+    // 30.8184の求め方は http://blog.epitaph-t.com/?p=172 参照
+    $delta = (($range / 30.8184) * self::degreePerSec());
+    // 緯度(500mプラス) ＝ 基準の緯度 + (範囲 ÷ 1秒当たりの緯度 × 1秒当たりの度)
+    return array('posi' => ($latitude + $delta), 'nega' => ($latitude - $delta));
+  }
+  public static function lngRange($longitude, $range = 500/* m */) {
+    // 25.2450の求め方は http://blog.epitaph-t.com/?p=172 参照
+    $delta = (($range / 25.2450) * self::degreePerSec());
+    // 経度(500mプラス) ＝ 基準の経度 + (範囲 ÷ 1秒当たりの緯度 × 1秒当たりの度)
+    return array('posi' => ($longitude + $delta), 'nega' => ($longitude - $delta));
+  }
+
   public function search($isPaging = false) {
+    /*
+    $geo = $this->GeoTool->read(true);
+    $latitude = $geo['coords']['latitude'];
+    $longitude = $geo['coords']['longitude'];
+
+    $latRange = self::latRange('35.71654578');
+    pr($latRange);
+
+    $latRange = self::lngRange('139.777254');
+    pr($latRange);
+
+
+
+SELECT 
+  id, name, lat, lng, geom 
+FROM 
+  geos 
+WHERE 
+  MBRContains(GeomFromText('LineString(139.782756 35.72105247, 139.771752 35.71203906)'), geom)
+
+    */
+
+
+    
+
+
+
+
     $conditions = $this->searchConditions();
     if ($conditions) {
       $options = array('conditions' => $conditions);

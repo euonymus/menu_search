@@ -3,9 +3,17 @@ App::uses('AppController', 'Controller');
 class GeoController extends AppController {
   public $components = array('Session', 'RequestHandler');
 
+  // get geo info from browser and save it to session and redirect
+  public function init() {
+    $this->_loadComponent('ParamTool');
+    $location = $this->ParamTool->query_init('location');
+    $this->set(compact('location'));
+  }
+
   /******************************************************************/
   /* API                                                            */
   /******************************************************************/
+  /*
   static $testData = array(
 			   'timestamp' => 1518574049079,
 			   'coords' => array(
@@ -18,7 +26,7 @@ class GeoController extends AppController {
 					     'longitude' => '139.69862937927246',
 					     )
 			   );
-
+  */
   public function update() {
     $this->set('data', 'stay');
     // MEMO: test

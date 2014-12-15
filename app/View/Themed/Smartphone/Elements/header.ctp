@@ -1,5 +1,3 @@
-<? /* Layout で Html->scriptStart() を利用するとレンダーされないため常に読み込むヘッダでupdateLocation()を行う */ ?>
-<?= $this->Map->updateLocation() ?>
 <div class="navbar navbar-inverse">
     <div class="navbar-header">
         <button style="float:left;" id="simple-menu" type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
@@ -20,9 +18,11 @@
 		<!--class名に"active"を指定するとボタンを押した状態を表現できます。-->
 <? if ($user = $this->Session->read('Auth.User')): ?>
                 <li><a href="/mypage"><?= UHelper::pictMypage() ?>マイページ</a></li>
+                <li><a href="/menus/likes/refresh:1/"><?= UHelper::pictHeart() ?>お気に入りメニュー</a></li>
 <? else: ?>
                 <?php $callbackUrl = (isset($callbackUrl) ? $callbackUrl : Router::reverse(Router::getRequest())); ?>
                 <li><?= $this->Html->link(UHelper::pictAssignment().'サインアップ', array('controller' => 'users', 'action' => 'add', '?' => array('location'=>$callbackUrl)), array('escape'=>false)); ?>
+                <li><?= $this->Html->link(UHelper::pictLockOpen().'ログイン', array('controller' => 'users', 'action' => 'login', '?' => array('location'=>$callbackUrl)), array('escape'=>false)); ?>
 <? endif; ?>
 		<li><?
    // TODO: Helperに持って行く。
@@ -35,13 +35,13 @@
 					 'placeholder' => '検索'));
    echo $this->Form->end();
 ?></li>
-		<li><a href="/menus/recommended/"><?= UHelper::pictThumbUp() ?>おすすめメニュー！！</a></li>
-		<li><a href="/menus/region/refresh:1/next:categories/"><?= UHelper::pictRestaurantMenu() ?>メニューを探す</a></li>
+		<li><a href="/geo/init/?location=<?= urlencode('/menus/recommended/') ?>"><?= UHelper::pictThumbUp() ?>お店の逸品！！</a></li>
+		<li><a href="/geo/init/?location=<?= urlencode('/menus/') ?>"><?= UHelper::pictRestaurantMenu() ?>周辺のメニュー</a></li>
+		<li><a href="/menus/region/refresh:1/next:categories/"><?= UHelper::pictCafe() ?>種類でメニュー検索</a></li>
                 <li><a href="/restaurants/region"><?= UHelper::pictRestaurant() ?></i>レストランを探す</a></li>
 
 
-<? if ($user = $this->Session->read('Auth.User')): ?>
-                <li><a href="/menus/likes/refresh:1/"><?= UHelper::pictHeart() ?>お気に入りメニュー</a></li>
+<? if ($user): ?>
         </ul>
         <ul>
         </ul>
@@ -49,8 +49,6 @@
         </ul>
         <ul>
                 <li><?= $this->Html->link(UHelper::pictKey().'ログアウト', array('controller' => 'users', 'action' => 'logout'), array('escape'=>false)); ?></li>
-<? else: ?>
-                <li><?= $this->Html->link(UHelper::pictLockOpen().'ログイン', array('controller' => 'users', 'action' => 'login', '?' => array('location'=>$callbackUrl)), array('escape'=>false)); ?>
 <? endif; ?>
 	</ul>
 <? if (isset($user['role']) && ($user['role'] == 'admin')): ?>
