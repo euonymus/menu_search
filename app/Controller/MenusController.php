@@ -76,7 +76,10 @@ class MenusController extends AppController {
 
     $options = array('conditions' => array('Menu.' . $this->Menu->primaryKey => $id));
     $this->Menu->bindRestaurant(false);
-    $this->set('menu', $this->Menu->find('first', $options));
+
+    $menu = $this->Menu->find('first', $options);
+    $this->set('menu', $menu);
+    $this->GeoTool->initMap($menu['Restaurant']);
   }
 
   public function like($id = false) {

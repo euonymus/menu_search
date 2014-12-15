@@ -1,5 +1,5 @@
 <? /* Layout で Html->scriptStart() を利用するとレンダーされないため常に読み込むヘッダでupdateLocation()を行う */ ?>
-<?= $this->Map->updateLocation() ?>
+<?//= $this->Map->updateLocation() ?>
 <div class="navbar navbar-inverse">
     <div class="navbar-header">
         <button style="float:left;" id="simple-menu" type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">

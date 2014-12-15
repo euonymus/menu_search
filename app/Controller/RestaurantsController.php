@@ -55,10 +55,8 @@ class RestaurantsController extends AppController {
 		$options = array('conditions' => array('Restaurant.' . $this->Restaurant->primaryKey => $id));
 		$this->Restaurant->bindStation(false);
 		$restaurant = $this->Restaurant->find('first', $options);
-		$mapInit = array();
-		$mapInit['latitude'] = $restaurant['Restaurant']['latitude'];
-		$mapInit['longitude'] = $restaurant['Restaurant']['longitude'];
-		$this->set(compact('restaurant', 'mapInit'));
+		$this->set(compact('restaurant'));
+		$this->GeoTool->initMap($restaurant['Restaurant']);
 
 	  $this->_loadComponent('MenuTool');
 	  $this->set('menus', $this->MenuTool->listByRestaurant($id, true));
@@ -105,14 +103,7 @@ class RestaurantsController extends AppController {
 		} else {
 			$options = array('conditions' => array('Restaurant.' . $this->Restaurant->primaryKey => $id));
 			$this->request->data = $this->Restaurant->find('first', $options);
-
-
-			$mapInit = array();
-			$mapInit['latitude'] = $this->request->data['Restaurant']['latitude'];
-			$mapInit['longitude'] = $this->request->data['Restaurant']['longitude'];
-			$this->set(compact('mapInit'));
-
-
+			$this->GeoTool->initMap($this->request->data['Restaurant']);
 		}
 
 		$this->loadModel('Station');

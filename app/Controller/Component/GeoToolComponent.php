@@ -87,4 +87,11 @@ class GeoToolComponent extends Component {
     //$hoge['distance_unit']で整形された直線距離を返す（1000m以下ならメートルで記述 例：836m ｜ 1000m以下は小数点第一位以上の数をkmで記述 例：2.8km）
     return array("distance" => $distance, "distance_unit" => $distance_unit);
   }
+
+  public function initMap($data) {
+    $mapInit = array();
+    $mapInit['latitude'] = $data['latitude'];
+    $mapInit['longitude'] = $data['longitude'];
+    $this->Controller->set(compact('mapInit'));
+  }
 }
