@@ -6,22 +6,19 @@ App::uses('AppModel', 'Model');
  */
 class RestaurantGeo extends AppModel {
 
-  var $virtualFields = array(
+  public $virtualFields = array(
 		'lng' => 'X(geo)',
 		'lat' => 'Y(geo)',
 		);
 
   public function beforeSave($options = array()) {
     if (!parent::beforeSave($options)) return FALSE;
-    $this->data[__CLASS__]['geo'] = $this->buildGeo($this->data[__CLASS__]['lat'], $this->data[__CLASS__]['lng']);
+    $this->data[__CLASS__]['geo'] = self::buildGeo($this->data[__CLASS__]['lat'], $this->data[__CLASS__]['lng']);
     return true;
   }
 
-  public function buildGeo($lat, $lng) {
-    $db = $this->getDataSource();
-    $instance = self::getInstance();
-
-
+  public static function buildGeo($lat, $lng) {
+    $db = self::getInstance()->getDataSource();
     return $db->expression("GeomFromText('POINT($lng $lat)')");
   }
 
@@ -33,7 +30,7 @@ class RestaurantGeo extends AppModel {
     if (!self::$instance) {
       // MEMO: DO NOT USE 'new' to Model to avoid using actial database when simpletest
       // self::$instance = new {__CLASS__}();
-      self::$instance =& ClassRegistry::init(__CLASS__);
+      self::$instance = ClassRegistry::init(__CLASS__);
     }
     return self::$instance;
   }
@@ -96,21 +93,30 @@ class RestaurantGeo extends AppModel {
   /****************************************************************************/
   /* conditions                                                               */
   /****************************************************************************/
-  public static function distanceField() {
-    return __CLASS__.'__distance';
-  }
+  //public static function distanceField() {
+  //return __CLASS__.'__distance';
+  //}
   // in meter
-  public function fieldDistanceFrom($lat, $lng) {
-    $this->virtualFields['distance'] = "ROUND(GLENGTH( GEOMFROMTEXT( CONCAT( 'LineString( ".$lng." ".$lat." , ', X( geo ) ,  ' ', Y( geo ) ,  ')' ) ) ) * 111000 )";
+  public static function setFieldDistanceFrom($lat, $lng) {
+    // 何度か呼ばれた場合に壊れる事があるので$instanceのinit()が必要
+    self::init();
+    self::getInstance()->virtualFields['distance'] = "ROUND(GLENGTH( GEOMFROMTEXT( CONCAT( 'LineString( ".$lng." ".$lat." , ', X( geo ) ,  ' ', Y( geo ) ,  ')' ) ) ) * 111000 )";
   }
-  public static function optionInRange($lat, $lng, $meter = 500) {
-    //$options = array('fields' => array(RestaurantGeo::fieldDistanceFrom($lat, $lng)));
-    //$options['conditions'] = array(__CLASS__.'.distance' => $meter);
+
+  // conditionInRange と conditionInRange2 は精度が異なる。conditionInRangeはdistanceフィールドが追加される。conditionInRange2は条件のみ。
+  public static function conditionInRange($lat, $lng, $meter = 500) {
+    self::setFieldDistanceFrom($lat, $lng);
+    return array(__CLASS__.'.distance <' => $meter);
+  }
+  public static function conditionInRange2($lat, $lng, $meter = 500) {
     $latRange = self::latRange($lat, $meter);
     $lngRange = self::lngRange($lng, $meter);
     return "MBRContains(GeomFromText('LineString(".$lngRange['east']." ".$latRange['north'].", ".$lngRange['west']." ".$latRange['south'].")'), geo)";
   }
 
+  /****************************************************************************/
+  /* calculation                                                              */
+  /****************************************************************************/
   public static function degreePerSec() {
     return (1 / (60 * 60));
   }
@@ -126,28 +132,4 @@ class RestaurantGeo extends AppModel {
     // 経度(500mプラス) ＝ 基準の経度 + (範囲 ÷ 1秒当たりの緯度 × 1秒当たりの度)
     return array('east' => ($lng + $delta), 'west' => ($lng - $delta));
   }
-
-    /*
-    $geo = $this->GeoTool->read(true);
-    $lat = $geo['coords']['lat'];
-    $lng = $geo['coords']['lng'];
-
-    $latRange = self::latRange('35.71654578');
-    pr($latRange);
-
-    $latRange = self::lngRange('139.777254');
-    pr($latRange);
-
-
-
-SELECT 
-  id, name, lat, lng, geom 
-FROM 
-  geos 
-WHERE 
-  MBRContains(GeomFromText('LineString(139.782756 35.72105247, 139.771752 35.71203906)'), geom)
-
-    */
-
-
 }
