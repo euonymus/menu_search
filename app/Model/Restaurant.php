@@ -17,6 +17,23 @@ class Restaurant extends AppModel {
   /****************************************************************************/
   /* Model bind settings                                                      */
   /****************************************************************************/
+  function bindRestaurantGeo($reset = TRUE) {
+    App::import('Model', 'RestaurantGeo');
+    $bind = array(
+      'hasOne' => array(
+        'RestaurantGeo' => array(
+          'className'  => 'RestaurantGeo',
+          'foreignKey' => 'id',
+        )
+      )
+    );
+    $this->bindModel($bind, $reset);
+  }
+
+  function unbindRestaurantGeo($reset = TRUE) {
+    $this->unbindModel(array('hasOne' => array('RestaurantGeo')), $reset);
+  }
+
   public function bindStation($reset = TRUE) {
        $hasAndBelongsToMany = array(
 		'Station' => array(
