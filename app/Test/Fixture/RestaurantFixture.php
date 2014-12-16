@@ -4,37 +4,72 @@
  *
  */
 class RestaurantFixture extends CakeTestFixture {
+  public $import = 'Restaurant';
 
-/**
- * Fields
- *
- * @var array
- */
-	public $fields = array(
-		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => true, 'key' => 'primary'),
-		'name' => array('type' => 'string', 'null' => false, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'description' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
-		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
-		'indexes' => array(
-			'PRIMARY' => array('column' => 'id', 'unique' => 1)
-		),
-		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
-	);
-
-/**
- * Records
- *
- * @var array
- */
-	public $records = array(
-		array(
-			'id' => 1,
-			'name' => 'Lorem ipsum dolor sit amet',
-			'description' => 'Lorem ipsum dolor sit amet',
-			'created' => '2014-11-02 23:33:50',
-			'modified' => '2014-11-02 23:33:50'
-		),
-	);
+  public $records = array(
+	array(
+		'id' => 1,
+		'name' => 'restaurant1',
+		'description' => 'Lorem ipsum dolor sit amet',
+		'created' => '2014-11-02 23:33:50',
+		'modified' => '2014-11-02 23:33:50'
+	),
+	array(
+		'id' => 2,
+		'name' => 'restaurant2',
+		'description' => 'Lorem ipsum dolor sit amet',
+		'created' => '2014-11-02 23:33:50',
+		'modified' => '2014-11-02 23:33:50'
+	),
+	array(
+		'id' => 3,
+		'name' => 'restaurant3',
+		'description' => 'Lorem ipsum dolor sit amet',
+		'created' => '2014-11-02 23:33:50',
+		'modified' => '2014-11-02 23:33:50'
+	),
+	array(
+		'id' => 4,
+		'name' => 'restaurant4',
+		'description' => 'Lorem ipsum dolor sit amet',
+		'created' => '2014-11-02 23:33:50',
+		'modified' => '2014-11-02 23:33:50'
+	),
+	array(
+		'id' => 5,
+		'name' => 'restaurant5',
+		'description' => 'Lorem ipsum dolor sit amet',
+		'created' => '2014-11-02 23:33:50',
+		'modified' => '2014-11-02 23:33:50'
+	),
+	array(
+		'id' => 6,
+		'name' => 'restaurant6',
+		'description' => 'Lorem ipsum dolor sit amet',
+		'created' => '2014-11-02 23:33:50',
+		'modified' => '2014-11-02 23:33:50'
+	),
+	array(
+		'id' => 7,
+		'name' => 'restaurant7',
+		'description' => 'Lorem ipsum dolor sit amet',
+		'created' => '2014-11-02 23:33:50',
+		'modified' => '2014-11-02 23:33:50'
+	),
+	array(
+		'id' => 8,
+		'name' => 'restaurant8',
+		'description' => 'Lorem ipsum dolor sit amet',
+		'created' => '2014-11-02 23:33:50',
+		'modified' => '2014-11-02 23:33:50'
+	),
+	array(
+		'id' => 9,
+		'name' => 'restaurant9',
+		'description' => 'Lorem ipsum dolor sit amet',
+		'created' => '2014-11-02 23:33:50',
+		'modified' => '2014-11-02 23:33:50'
+	),
+  );
 
 }

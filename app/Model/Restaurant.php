@@ -15,6 +15,25 @@ class Restaurant extends AppModel {
 	public $displayField = 'name';
 
   /****************************************************************************/
+  /* Instance manipulator for static members                                  */
+  /****************************************************************************/
+  private static $instance = NULL;
+  public static function getInstance() {
+    if (!self::$instance) {
+      // MEMO: DO NOT USE 'new' to Model to avoid using actial database when simpletest
+      // self::$instance = new {__CLASS__}();
+      self::$instance = ClassRegistry::init(__CLASS__);
+    }
+    return self::$instance;
+  }
+  public static function init() {
+    self::$instance = NULL;
+  }
+  protected static function setInstance($instance) {
+    self::$instance = $instance;
+  }
+
+  /****************************************************************************/
   /* Model bind settings                                                      */
   /****************************************************************************/
   function bindRestaurantGeo($reset = TRUE) {
@@ -94,29 +113,31 @@ class Restaurant extends AppModel {
   /****************************************************************************/
   /* Validations                                                              */
   /****************************************************************************/
-/**
- * Validation rules
- *
- * @var array
- */
-	public $validate = array(
-		'name' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
+  public $validate = array(
+	'name' => array(
+		'notEmpty' => array(
+			'rule' => array('notEmpty'),
+			//'message' => 'Your custom message here',
+			//'allowEmpty' => false,
+			//'required' => false,
+			//'last' => false, // Stop validation after this rule
+			//'on' => 'create', // Limit validation to 'create' or 'update' operations
 		),
-	);
+	),
+  );
 
   /****************************************************************************/
   /* conditions                                                               */
   /****************************************************************************/
   public static function conditionById($id) {
     return array(__CLASS__.'.id' => $id);
+  }
+  public static function conditionInRange($lat, $lng, $meter = 500) {
+    // 何度か呼ばれた場合に壊れる事があるので$instanceのinit()が必要
+    self::init();
+    self::getInstance()->bindRestaurantGeo(FALSE);
+    // conditionInRange はうまく動かないのでconditionInRange2を利用、その代わり近い順とかができない。
+    return RestaurantGeo::conditionInRange2($lat, $lng, $meter);
   }
 
 }
