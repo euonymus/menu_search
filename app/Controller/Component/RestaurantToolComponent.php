@@ -1,7 +1,7 @@
 <?php
 App::uses('Component', 'Controller');
 class RestaurantToolComponent extends Component {
-  public $components = array('ParamTool', 'StationTool');
+  public $components = array('ParamTool', 'StationTool', 'GeoTool');
 
   public $withAMenu = false;
 
@@ -9,6 +9,7 @@ class RestaurantToolComponent extends Component {
     $this->Controller = $controller;
     $this->ParamTool->initialize($controller);
     $this->StationTool->initialize($controller);
+    $this->GeoTool->initialize($controller);
   }
 
   /************************************************************************/
@@ -22,7 +23,7 @@ class RestaurantToolComponent extends Component {
 
   public function listByStation($isPaging = false) {
     $options = array();
-    $conditions = $this->conditionByStation();
+    $conditions = $this->searchConditions();
     if ($conditions) {
       $options = array('conditions' => $conditions);
     }
@@ -45,14 +46,27 @@ class RestaurantToolComponent extends Component {
   /************************************************************************/
   /* Tools                                                                */
   /************************************************************************/
-  public function conditionByStation() {
-    // 駅絞り込み
+  public function searchConditions() {
+    App::uses('Restaurant', 'Model');
     $this->Controller->loadModel('RestaurantStation');
+    $geo        = $this->GeoTool->read(true);
     $station_id = $this->ParamTool->query_init('station_id');
-    if (empty($station_id)) return false;
+    if (!$station_id && !$geo) return false;
 
-    $restaurants = $this->Controller->RestaurantStation->findAllByStationId($station_id);
-    $restaurant_ids = Set::extract('{n}/Restaurant/id', $restaurants);
-    return Restaurant::conditionById($restaurant_ids);
+    if (!empty($station_id)) {
+    // 駅絞り込み
+      $restaurants = $this->Controller->RestaurantStation->findAllByStationId($station_id);
+      $restaurant_ids = Set::extract('{n}/Restaurant/id', $restaurants);
+      $conditions =  Restaurant::conditionById($restaurant_ids);
+    } elseif ($geo) {
+    // 周辺絞り込み
+      $lat = $geo['coords']['latitude'];
+      $lng = $geo['coords']['longitude'];
+      $this->Controller->loadModel('RestaurantGeo');
+      $tmpOpt = array('conditions' => RestaurantGeo::conditionInRange($lat, $lng,4000));
+      $restaurant_ids = Set::extract('{n}/RestaurantGeo/id', $this->Controller->RestaurantGeo->find('all', $tmpOpt));
+      $conditions =  Restaurant::conditionById($restaurant_ids);
+    }
+    return $conditions;
   }
 }
