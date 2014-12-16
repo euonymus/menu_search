@@ -26,12 +26,6 @@ class MenuToolComponent extends Component {
   }
 
   public function search($isPaging = false) {
-    /*
-    $geo = $this->GeoTool->read(true);
-    $latitude = $geo['coords']['latitude'];
-    $longitude = $geo['coords']['longitude'];
-    */
-
     $conditions = $this->searchConditions();
     if ($conditions) {
       $options = array('conditions' => $conditions);
@@ -67,10 +61,11 @@ class MenuToolComponent extends Component {
   /* Tools                                                                */
   /************************************************************************/
   public function searchConditions() {
+    $geo        = $this->GeoTool->read(true);
     $tags       = $this->ParamTool->query_init(self::SESSION_TAGS);
     $station_id = $this->ParamTool->query_init(self::SESSION_STATION);
     $this->Controller->set(compact('tags','station_id'));
-    if (!$tags && !$station_id) return false;
+    if (!$tags && !$station_id && !$geo) return false;
 
     // タグ絞り込み
     $this->Controller->loadModel('Menu');
@@ -79,13 +74,24 @@ class MenuToolComponent extends Component {
       $this->Controller->Session->write(self::SESSION_TAGS, $tags);
     }
 
-    // 駅絞り込み
     if (!empty($station_id)) {
+    // 駅絞り込み
       $this->Controller->Session->write(self::SESSION_STATION, $station_id);
 
       $this->Controller->loadModel('RestaurantStation');
       $restaurants = $this->Controller->RestaurantStation->findAllByStationId($station_id);
       $restaurant_ids = Set::extract('{n}/Restaurant/id', $restaurants);
+      $conditionsRestaurant = Menu::conditionByRestaurantId($restaurant_ids);
+      $conditions = am($conditions, $conditionsRestaurant);
+    } elseif ($geo) {
+    // 周辺絞り込み
+      // 駅のフィルタリング用セッションを削除
+      $this->Controller->Session->delete(self::SESSION_STATION);
+      $lat = $geo['coords']['latitude'];
+      $lng = $geo['coords']['longitude'];
+      $this->Controller->loadModel('RestaurantGeo');
+      $tmpOpt = array('conditions' => RestaurantGeo::conditionInRange($lat, $lng));
+      $restaurant_ids = Set::extract('{n}/RestaurantGeo/id', $this->Controller->RestaurantGeo->find('all', $tmpOpt));
       $conditionsRestaurant = Menu::conditionByRestaurantId($restaurant_ids);
       $conditions = am($conditions, $conditionsRestaurant);
     }
@@ -113,6 +119,7 @@ class MenuToolComponent extends Component {
       $this->Controller->Session->delete(self::SESSION_STATION);
       $this->Controller->Session->delete(self::SESSION_LIKE);
       $this->Controller->Session->delete(self::SESSION_RECOMMENDED);
+      $this->Controller->Session->delete(GeoToolComponent::SESSION_CURRENT_GEO);
     }
     // Redirect destination
     $next = $this->Controller->ParamTool->named_init(self::SESSION_NEXT_PAGE);
