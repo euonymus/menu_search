@@ -1,6 +1,6 @@
 <?
-$hasPosition = $this->Map->initGmapLib();
 if (!isset($asInput)) $asInput = false;
+$hasPosition = $this->Map->initGmapLib();
 ?>
 <? $this->Html->scriptStart(array('inline' => false)); ?>
     var presentMap = {

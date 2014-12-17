@@ -31,13 +31,15 @@ var gmap = {
       var opts = {
         zoom: <?= $zoom ?>,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
-        center: latlng
+        center: latlng,
+<? if (isset($draggable)): ?>
+	draggable: <?= $draggable ? 'true' : 'false' ?>,
+<? endif; ?>
       };
       // getElementById("map")の"map"は、body内の<div id="map">より
       parent.map = new google.maps.Map(document.getElementById("map"), opts);
   }),
-  marker: (function(data){
-      google.maps.event.addListener(parent.map, 'click', data);
+  marker: (function(){
       var latlng = new google.maps.LatLng(parent.latitude, parent.longitude);
       var marker = new google.maps.Marker({
 	position: latlng,
