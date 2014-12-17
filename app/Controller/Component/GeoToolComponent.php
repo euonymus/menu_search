@@ -34,6 +34,10 @@ class GeoToolComponent extends Component {
     }
     return false;
   }
+  public function needToGetFromBrowser() {
+    $session = $this->read(true);
+    return self::hasExpired($session['timestamp']);
+  }
   public function needUpdate($data) {
     // do not update if passed data has been expired.
     if (!array_key_exists('timestamp', $data) || self::hasExpired($data['timestamp'])) return false;

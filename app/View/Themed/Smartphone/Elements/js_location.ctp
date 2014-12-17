@@ -11,11 +11,15 @@
               cache: false,
               success: function(data, textStatus){
                   //alert(data);
-		  location.href="<?= $location ?>";
+<? if (isset($location)): ?>
+	    	  location.href="<?= $location ?>";
+<? endif; ?>
               },
               error: function(xhr, textStatus, errorThrown){
                   alert(textStatus);
-		  location.href="<?= $location ?>";
+<? if (isset($location)): ?>
+	    	  location.href="<?= $location ?>";
+<? endif; ?>
               }
             });
         }),
@@ -38,8 +42,10 @@
 	      alert("指定されたタイムアウト時間内に現在の位置情報を特定できませんでした");
 	      break;
 	    }
+<? if (isset($location)): ?>
 	    location.href="<?= $location ?>";
-        }),
+<? endif; ?>
+        })
 
 
     }

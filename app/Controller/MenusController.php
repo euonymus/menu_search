@@ -22,6 +22,7 @@ class MenusController extends AppController {
 
   public function index() {
     $this->_loadComponent('MenuTool');
+
     $this->set('menus', $this->MenuTool->search(true));
     $this->_loadComponent('StationTool');
     $this->StationTool->setStationName();
