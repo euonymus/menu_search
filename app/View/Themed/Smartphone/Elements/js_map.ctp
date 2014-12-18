@@ -1,4 +1,5 @@
-<?
+<? /* Initial Settings are set by element attributes */
+/* Attributes:  $latitude, $longitude, $zoom, $draggable */
 if (!isset($latitude)) $latitude = '35.64418424015282';
 if (!isset($longitude)) $longitude = '139.69862937927246';
 if (!isset($zoom)) $zoom = '16';
@@ -11,7 +12,6 @@ var gmap = {
   longitude:false,
   init: (function(data){
       // Google Mapで利用する初期設定用の変数
-      //var latlng = new google.maps.LatLng(<?= $latitude ?>, <?= $longitude ?>);
       if (typeof data !== 'undefined') {
 	if ((typeof data.latitude !== 'undefined') && (typeof data.longitude !== 'undefined')) {
 	  latitude = data.latitude;
