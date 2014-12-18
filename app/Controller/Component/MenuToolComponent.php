@@ -87,10 +87,10 @@ class MenuToolComponent extends Component {
     // 周辺絞り込み
       // 駅のフィルタリング用セッションを削除
       $this->Controller->Session->delete(self::SESSION_STATION);
-      $lat = $geo['coords']['latitude'];
-      $lng = $geo['coords']['longitude'];
+      $latitude = $geo['coords']['latitude'];
+      $longitude = $geo['coords']['longitude'];
       $this->Controller->loadModel('RestaurantGeo');
-      $tmpOpt = array('conditions' => RestaurantGeo::conditionInRange($lat, $lng));
+      $tmpOpt = array('conditions' => RestaurantGeo::conditionInRange($latitude, $longitude));
       $restaurant_ids = Set::extract('{n}/RestaurantGeo/id', $this->Controller->RestaurantGeo->find('all', $tmpOpt));
       $conditionsRestaurant = Menu::conditionByRestaurantId($restaurant_ids);
       $conditions = am($conditions, $conditionsRestaurant);

@@ -24,43 +24,43 @@ class RestaurantTest extends CakeTestCase {
     $data = array(
         array(
 		  'id' => 1,
-		  'lat' => '33.229498',
-		  'lng' => '131.547546',
+		  'latitude' => '33.229498',
+		  'longitude' => '131.547546',
         ),
 	array(
 		  'id' => 2,
-		  'lat' => '33.229499',
-		  'lng' => '131.547547',
+		  'latitude' => '33.229499',
+		  'longitude' => '131.547547',
         ),
 	array(
 		  'id' => 3,
-		  'lat' => '33.229508',
-		  'lng' => '131.547556',
+		  'latitude' => '33.229508',
+		  'longitude' => '131.547556',
         ),
 	array(
 		  'id' => 4,
-		  'lat' => '33.229598',
-		  'lng' => '131.547646',
+		  'latitude' => '33.229598',
+		  'longitude' => '131.547646',
         ),
 	array(
 		  'id' => 5,
-		  'lat' => '33.230498',
-		  'lng' => '131.548546',
+		  'latitude' => '33.230498',
+		  'longitude' => '131.548546',
         ),
 	array(
 		  'id' => 6,
-		  'lat' => '33.239498',
-		  'lng' => '131.557546',
+		  'latitude' => '33.239498',
+		  'longitude' => '131.557546',
         ),
 	array(
 		  'id' => 7,
-		  'lat' => '33.329498',
-		  'lng' => '131.647546',
+		  'latitude' => '33.329498',
+		  'longitude' => '131.647546',
         ),
 	array(
 		  'id' => 8,
-		  'lat' => '34.229498',
-		  'lng' => '132.547546',
+		  'latitude' => '34.229498',
+		  'longitude' => '132.547546',
         ),
     );
     foreach($data as $val) {
@@ -74,9 +74,9 @@ class RestaurantTest extends CakeTestCase {
   }
 
   public function testConditionInRange() {
-    $lat = '33.229498';
-    $lng = '131.547546';
-    $options = array('conditions' => Restaurant::conditionInRange($lat, $lng));
+    $latitude = '33.229498';
+    $longitude = '131.547546';
+    $options = array('conditions' => Restaurant::conditionInRange($latitude, $longitude));
     $res = $this->Restaurant->find('all', $options);
     foreach($res as $val) {
       $this->assertTrue($val['Restaurant']['id'] <= 5);

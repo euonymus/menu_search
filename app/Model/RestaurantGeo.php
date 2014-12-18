@@ -7,19 +7,19 @@ App::uses('AppModel', 'Model');
 class RestaurantGeo extends AppModel {
 
   public $virtualFields = array(
-		'lng' => 'X(geo)',
-		'lat' => 'Y(geo)',
+		'longitude' => 'X(geo)',
+		'latitude' => 'Y(geo)',
 		);
 
   public function beforeSave($options = array()) {
     if (!parent::beforeSave($options)) return FALSE;
-    $this->data[__CLASS__]['geo'] = self::buildGeo($this->data[__CLASS__]['lat'], $this->data[__CLASS__]['lng']);
+    $this->data[__CLASS__]['geo'] = self::buildGeo($this->data[__CLASS__]['latitude'], $this->data[__CLASS__]['longitude']);
     return true;
   }
 
-  public static function buildGeo($lat, $lng) {
+  public static function buildGeo($latitude, $longitude) {
     $db = self::getInstance()->getDataSource();
-    return $db->expression("GeomFromText('POINT($lng $lat)')");
+    return $db->expression("GeomFromText('POINT($longitude $latitude)')");
   }
 
   /****************************************************************************/
@@ -97,20 +97,20 @@ class RestaurantGeo extends AppModel {
   //return __CLASS__.'__distance';
   //}
   // in meter
-  public static function setFieldDistanceFrom($lat, $lng) {
+  public static function setFieldDistanceFrom($latitude, $longitude) {
     // 何度か呼ばれた場合に壊れる事があるので$instanceのinit()が必要
     self::init();
-    self::getInstance()->virtualFields['distance'] = "ROUND(GLENGTH( GEOMFROMTEXT( CONCAT( 'LineString( ".$lng." ".$lat." , ', X( geo ) ,  ' ', Y( geo ) ,  ')' ) ) ) * 111000 )";
+    self::getInstance()->virtualFields['distance'] = "ROUND(GLENGTH( GEOMFROMTEXT( CONCAT( 'LineString( ".$longitude." ".$latitude." , ', X( geo ) ,  ' ', Y( geo ) ,  ')' ) ) ) * 111000 )";
   }
 
   // conditionInRange と conditionInRange2 は精度が異なる。conditionInRangeはdistanceフィールドが追加される。conditionInRange2は条件のみ。
-  public static function conditionInRange($lat, $lng, $meter = 500) {
-    self::setFieldDistanceFrom($lat, $lng);
+  public static function conditionInRange($latitude, $longitude, $meter = 500) {
+    self::setFieldDistanceFrom($latitude, $longitude);
     return array(__CLASS__.'.distance <' => $meter);
   }
-  public static function conditionInRange2($lat, $lng, $meter = 500) {
-    $latRange = self::latRange($lat, $meter);
-    $lngRange = self::lngRange($lng, $meter);
+  public static function conditionInRange2($latitude, $longitude, $meter = 500) {
+    $latRange = self::latRange($latitude, $meter);
+    $lngRange = self::lngRange($longitude, $meter);
     return "MBRContains(GeomFromText('LineString(".$lngRange['east']." ".$latRange['north'].", ".$lngRange['west']." ".$latRange['south'].")'), geo)";
   }
 
@@ -120,16 +120,16 @@ class RestaurantGeo extends AppModel {
   public static function degreePerSec() {
     return (1 / (60 * 60));
   }
-  public static function latRange($lat, $range = 500/* m */) {
+  public static function latRange($latitude, $range = 500/* m */) {
     // 30.8184の求め方は http://blog.epitaph-t.com/?p=172 参照
     $delta = (($range / 30.8184) * self::degreePerSec());
     // 緯度(500mプラス) ＝ 基準の緯度 + (範囲 ÷ 1秒当たりの緯度 × 1秒当たりの度)
-    return array('north' => ($lat + $delta), 'south' => ($lat - $delta));
+    return array('north' => ($latitude + $delta), 'south' => ($latitude - $delta));
   }
-  public static function lngRange($lng, $range = 500/* m */) {
+  public static function lngRange($longitude, $range = 500/* m */) {
     // 25.2450の求め方は http://blog.epitaph-t.com/?p=172 参照
     $delta = (($range / 25.2450) * self::degreePerSec());
     // 経度(500mプラス) ＝ 基準の経度 + (範囲 ÷ 1秒当たりの緯度 × 1秒当たりの度)
-    return array('east' => ($lng + $delta), 'west' => ($lng - $delta));
+    return array('east' => ($longitude + $delta), 'west' => ($longitude - $delta));
   }
 }

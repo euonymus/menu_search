@@ -60,10 +60,10 @@ class RestaurantToolComponent extends Component {
       $conditions =  Restaurant::conditionById($restaurant_ids);
     } elseif ($geo) {
     // 周辺絞り込み
-      $lat = $geo['coords']['latitude'];
-      $lng = $geo['coords']['longitude'];
+      $latitude = $geo['coords']['latitude'];
+      $longitude = $geo['coords']['longitude'];
       $this->Controller->loadModel('RestaurantGeo');
-      $tmpOpt = array('conditions' => RestaurantGeo::conditionInRange($lat, $lng,4000));
+      $tmpOpt = array('conditions' => RestaurantGeo::conditionInRange($latitude, $longitude,4000));
       $restaurant_ids = Set::extract('{n}/RestaurantGeo/id', $this->Controller->RestaurantGeo->find('all', $tmpOpt));
       $conditions =  Restaurant::conditionById($restaurant_ids);
     }

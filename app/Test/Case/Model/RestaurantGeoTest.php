@@ -32,43 +32,43 @@ class RestaurantGeoTest extends CakeTestCase {
     $data = array(
         array(
 		  'id' => 1,
-		  'lat' => '33.229498',
-		  'lng' => '131.547546',
+		  'latitude' => '33.229498',
+		  'longitude' => '131.547546',
         ),
 	array(
 		  'id' => 2,
-		  'lat' => '33.229499',
-		  'lng' => '131.547547',
+		  'latitude' => '33.229499',
+		  'longitude' => '131.547547',
         ),
 	array(
 		  'id' => 3,
-		  'lat' => '33.229508',
-		  'lng' => '131.547556',
+		  'latitude' => '33.229508',
+		  'longitude' => '131.547556',
         ),
 	array(
 		  'id' => 4,
-		  'lat' => '33.229598',
-		  'lng' => '131.547646',
+		  'latitude' => '33.229598',
+		  'longitude' => '131.547646',
         ),
 	array(
 		  'id' => 5,
-		  'lat' => '33.230498',
-		  'lng' => '131.548546',
+		  'latitude' => '33.230498',
+		  'longitude' => '131.548546',
         ),
 	array(
 		  'id' => 6,
-		  'lat' => '33.239498',
-		  'lng' => '131.557546',
+		  'latitude' => '33.239498',
+		  'longitude' => '131.557546',
         ),
 	array(
 		  'id' => 7,
-		  'lat' => '33.329498',
-		  'lng' => '131.647546',
+		  'latitude' => '33.329498',
+		  'longitude' => '131.647546',
         ),
 	array(
 		  'id' => 8,
-		  'lat' => '34.229498',
-		  'lng' => '132.547546',
+		  'latitude' => '34.229498',
+		  'longitude' => '132.547546',
         ),
     );
     foreach($data as $val) {
@@ -87,17 +87,17 @@ class RestaurantGeoTest extends CakeTestCase {
   }
 
   public function testSetFieldDistanceFrom() {
-    $lat = '33.229498';
-    $lng = '131.547546';
-    RestaurantGeo::setFieldDistanceFrom($lat, $lng);
+    $latitude = '33.229498';
+    $longitude = '131.547546';
+    RestaurantGeo::setFieldDistanceFrom($latitude, $longitude);
     $instance = RestaurantGeo::getInstance();
     $this->assertTrue(array_key_exists('distance', $instance->virtualFields));
   }
 
   public function testConditionInRange() {
-    $lat = '33.229498';
-    $lng = '131.547546';
-    $options = array('conditions' => RestaurantGeo::conditionInRange($lat, $lng));
+    $latitude = '33.229498';
+    $longitude = '131.547546';
+    $options = array('conditions' => RestaurantGeo::conditionInRange($latitude, $longitude));
     $data = $this->RestaurantGeo->find('all', $options);
     foreach ($data as $val) {
       $this->assertTrue(is_numeric($val['RestaurantGeo']['distance']));
@@ -106,9 +106,9 @@ class RestaurantGeoTest extends CakeTestCase {
   }
 
   public function testConditionInRange2() {
-    $lat = '33.229498';
-    $lng = '131.547546';
-    $options = array('conditions' => RestaurantGeo::conditionInRange2($lat, $lng));
+    $latitude = '33.229498';
+    $longitude = '131.547546';
+    $options = array('conditions' => RestaurantGeo::conditionInRange2($latitude, $longitude));
     $data = $this->RestaurantGeo->find('all', $options);
     foreach ($data as $val) {
       $this->assertTrue($val['RestaurantGeo']['id'] <= 5);

@@ -132,12 +132,12 @@ class Restaurant extends AppModel {
   public static function conditionById($id) {
     return array(__CLASS__.'.id' => $id);
   }
-  public static function conditionInRange($lat, $lng, $meter = 500) {
+  public static function conditionInRange($latitude, $longitude, $meter = 500) {
     // 何度か呼ばれた場合に壊れる事があるので$instanceのinit()が必要
     self::init();
     self::getInstance()->bindRestaurantGeo(FALSE);
     // conditionInRange はうまく動かないのでconditionInRange2を利用、その代わり近い順とかができない。
-    return RestaurantGeo::conditionInRange2($lat, $lng, $meter);
+    return RestaurantGeo::conditionInRange2($latitude, $longitude, $meter);
   }
 
 }
