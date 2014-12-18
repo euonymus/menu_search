@@ -4,6 +4,9 @@ class GeoToolComponent extends Component {
   public $components = array('ParamTool');
 
   const SESSION_CURRENT_GEO = 'current_location';
+  // ベータ版（サービス範囲限定の中心ポイントをdefaultとする
+  const GEO_LATITUDE_DEFAULT = '35.64418424015282';
+  const GEO_LONGITUDE_DEFAULT = '139.69862937927246';
 
   public function initialize(Controller $controller) {
     $this->Controller = $controller;
@@ -47,17 +50,22 @@ class GeoToolComponent extends Component {
     if (!array_key_exists('coords', $data)) return false;
     if (!array_key_exists('latitude', $data['coords']) || !array_key_exists('longitude', $data['coords'])) return false;
 
-    $existing = $this->read(true);
-    if (empty($existing)) return true;
-
-    $oldLatitude  = $existing['coords']['latitude'];
-    $oldLongitude = $existing['coords']['longitude'];
-
     $newLatitude  = $data['coords']['latitude'];
     $newLongitude = $data['coords']['longitude'];
 
+    // Defaultポイントから現在地の距離が3000m以上の場合書き換えない。周辺機能サポート対象外
+    $oldLatitude  = self::GEO_LATITUDE_DEFAULT;
+    $oldLongitude = self::GEO_LONGITUDE_DEFAULT;
     $distance = self::distance($oldLatitude, $oldLongitude, $newLatitude, $newLongitude);
-    return ($distance['distance'] > 500);
+    if ($distance['distance'] > 3000) return false;
+
+    // 以前保存したセッション内の位置から現在地の距離が100m以内の場合書き換えない。
+    $existing = $this->read(true);
+    if (empty($existing)) return true;
+    $oldLatitude  = $existing['coords']['latitude'];
+    $oldLongitude = $existing['coords']['longitude'];
+    $distance = self::distance($oldLatitude, $oldLongitude, $newLatitude, $newLongitude);
+    return ($distance['distance'] > 100);
   }
   public static function hasExpired($timestamp, $sec = 3600 /* 1h as default */) {
     if (empty($timestamp)) return true;
