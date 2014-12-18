@@ -10,30 +10,40 @@ var gmap = {
   map:false,
   latitude:false,
   longitude:false,
+
+  render: (function(data){
+      gmap.init(data);
+      if (data.hasMarker) {
+	gmap.marker();
+      }
+      if (data.hasInput) {
+	gmap.onClickCallback(gmap.setLatLngInput);
+      }
+  }),
   init: (function(data){
       // Google Mapで利用する初期設定用の変数
       if (typeof data !== 'undefined') {
-	if ((typeof data.latitude !== 'undefined') && (typeof data.longitude !== 'undefined')) {
-	  latitude = data.latitude;
-	  longitude = data.longitude;
-	} else {
-	  latitude = '<?= $latitude ?>';
-	  longitude = '<?= $longitude ?>';
-	}
+          if ((typeof data.latitude !== 'undefined') && (typeof data.longitude !== 'undefined')) {
+              latitude = data.latitude;
+              longitude = data.longitude;
+          } else {
+              latitude = '<?= $latitude ?>';
+              longitude = '<?= $longitude ?>';
+          }
       } else {
-	  latitude = '<?= $latitude ?>';
-	  longitude = '<?= $longitude ?>';
+          latitude = '<?= $latitude ?>';
+          longitude = '<?= $longitude ?>';
       }
       parent.latitude = latitude;
       parent.longitude = longitude;
 
       var latlng = new google.maps.LatLng(latitude, longitude);
       var opts = {
-        zoom: <?= $zoom ?>,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        center: latlng,
+          zoom: <?= $zoom ?>,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          center: latlng,
 <? if (isset($draggable)): ?>
-	draggable: <?= $draggable ? 'true' : 'false' ?>,
+          draggable: <?= $draggable ? 'true' : 'false' ?>,
 <? endif; ?>
       };
       // getElementById("map")の"map"は、body内の<div id="map">より

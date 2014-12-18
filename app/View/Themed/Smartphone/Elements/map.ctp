@@ -5,30 +5,26 @@ $hasPosition = $this->Map->initGmapLib();
 <? $this->Html->scriptStart(array('inline' => false)); ?>
     var presentMap = {
         successCallback: (function(position){
-	    gmap.init(position.coords);
-<? if ($asInput): ?>
-	    gmap.onClickCallback(gmap.setLatLngInput);
-<? endif; ?>
+            <? if ($asInput): ?> position.coords.hasInput = true; <? endif; ?>
+	    gmap.render(position.coords);
         }),
     }
     $(function() {
 <? if ($hasPosition): ?>
-	    gmap.init();
-	    gmap.marker();
-    <? if ($asInput): ?>
-	    gmap.onClickCallback(gmap.setLatLngInput);
-    <? endif; ?>
+	data = {"hasMarker":true};
+        <? if ($asInput): ?> data.hasInput = true; <? endif; ?>
+        gmap.render(data);
 <? else: ?>
 	gmap.getLocation(presentMap);
 <? endif; ?>
     });
 <? $this->Html->scriptEnd(); ?>
 
-        <div class="form-group">
-            <div id="map" style="height:120pt"></div>
-        </div>
 
-<? if ($asInput): ?>
-        <?= $this->Form->input('latitude', array('id' => 'show_lat')) ?>
-        <?= $this->Form->input('longitude', array('id' => 'show_lng')) ?>
-<? endif; ?>
+
+<? if ($asInput): ?><div class="form-group"><? endif; ?>
+
+<div id="map" style="height:120pt"></div>
+
+<? if ($asInput): ?><?= $this->element('latlngInput', array('model' => $model)) ?></div><? endif; ?>
+

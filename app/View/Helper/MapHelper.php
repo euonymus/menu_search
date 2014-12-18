@@ -7,6 +7,12 @@ class MapHelper extends AppHelper {
     parent::__construct($View, $settings);
   }
 
+  public function map($data, $asInput = false, $model = false) {
+    echo $this->_View->element('map', array('asInput' => $asInput, 'model' => $model));
+  }
+  public function updateLocation() {
+    echo $this->_View->element('js_location');
+  }
   public function initGmapLib() {
     $position = false;
     // If mapInit exists
@@ -29,15 +35,5 @@ class MapHelper extends AppHelper {
     return $hasPosition;
   }
 
-  public function updateLocation() {
-    echo $this->_View->element('js_location');
-  }
 
-  public function map($data, $asInput = false) {
-    if ($asInput) {
-      echo $this->_View->element('map', array('asInput'=>true));
-    } elseif (isset($data['latitude']) && isset($data['longitude'])) {
-      echo $this->_View->element('map');
-    }
-  }
 }
