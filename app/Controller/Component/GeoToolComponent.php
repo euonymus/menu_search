@@ -34,10 +34,13 @@ class GeoToolComponent extends Component {
     }
     return false;
   }
+  /* 現在地をブラウザから再取得する必要が有るかどうかをセッションの経過時間を元にチェック */
   public function needToGetFromBrowser() {
     $session = $this->read(true);
-    return self::hasExpired($session['timestamp']);
+    if (empty($session) || !array_key_exists('timestamp', $session)) return true;
+    return self::hasExpired($session['timestamp'], (60 * 10)/* 10分 */);
   }
+  /* 取得した現在地を元にセッション情報の更新が必要かどうかを取得したデータの位置と経過時間を元にチェック */
   public function needUpdate($data) {
     // do not update if passed data has been expired.
     if (!array_key_exists('timestamp', $data) || self::hasExpired($data['timestamp'])) return false;
@@ -56,13 +59,13 @@ class GeoToolComponent extends Component {
     $distance = self::distance($oldLatitude, $oldLongitude, $newLatitude, $newLongitude);
     return ($distance['distance'] > 500);
   }
-  public static function hasExpired($timestamp) {
-    if (empty($timestamp)) return false;
+  public static function hasExpired($timestamp, $sec = 3600 /* 1h as default */) {
+    if (empty($timestamp)) return true;
     // time():秒単位, timestamp:ミリ秒単位
     $now = time();
     $created = floor($timestamp / 1000);
     // 1時間以上経過している場合期限切れとする。
-    return (($now - $created) > (60 * 60));
+    return (($now - $created) > $sec);
   }
   //GPSなどの緯度経度の２点間の直線距離を求める（世界測地系）
   //$lat1, $lon1 --- A地点の緯度経度

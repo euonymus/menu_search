@@ -9,7 +9,7 @@ class GeoController extends AppController {
     $location = $this->ParamTool->query_init('location');
 
     $this->_loadComponent('GeoTool');
-    if ($this->GeoTool->needToGetFromBrowser(true)) {
+    if ($this->GeoTool->needToGetFromBrowser()) {
       // セッション内のtimestampが1時間以上経過している場合新たにブラウザからgeo情報を取得する。
       $this->set(compact('location'));
     } else {
