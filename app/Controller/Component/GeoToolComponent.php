@@ -41,12 +41,13 @@ class GeoToolComponent extends Component {
   public function needToGetFromBrowser() {
     $session = $this->read(true);
     if (empty($session) || !array_key_exists('timestamp', $session)) return true;
-    return self::hasExpired($session['timestamp'], (60 * 10)/* 10分 */);
+    return self::hasExpired($session['timestamp']);
   }
   /* 取得した現在地を元にセッション情報の更新が必要かどうかを取得したデータの位置と経過時間を元にチェック */
   public function needUpdate($data) {
     // do not update if passed data has been expired.
-    if (!array_key_exists('timestamp', $data) || self::hasExpired($data['timestamp'])) return false;
+    $sec = (60 * 60);/* 1時間 */
+    if (!array_key_exists('timestamp', $data) || self::hasExpired($data['timestamp'], $sec)) return false;
     if (!array_key_exists('coords', $data)) return false;
     if (!array_key_exists('latitude', $data['coords']) || !array_key_exists('longitude', $data['coords'])) return false;
 
@@ -67,10 +68,11 @@ class GeoToolComponent extends Component {
     $distance = self::distance($oldLatitude, $oldLongitude, $newLatitude, $newLongitude);
     return ($distance['distance'] > 100);
   }
-  public static function hasExpired($timestamp, $sec = 3600 /* 1h as default */) {
+  public static function hasExpired($timestamp, $sec = 600 /* 10min as default */) {
     if (empty($timestamp)) return true;
     // time():秒単位, timestamp:ミリ秒単位
     $now = time();
+
     $created = floor($timestamp / 1000);
     // 1時間以上経過している場合期限切れとする。
     return (($now - $created) > $sec);
