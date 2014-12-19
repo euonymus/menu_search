@@ -22,7 +22,7 @@ echo $this->Form->create('Restaurant', $formOption); ?>
 					  'multiple' => true, 'class'=>'form-control', 'div'=>array('class'=>'col-lg-3'))) ?>
         </div>
         <br>
-        <?= $this->Map->map($this->data['Restaurant'], true) ?>
+        <?= $this->Map->map(true, 'RestaurantGeo') ?>
 
         <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">

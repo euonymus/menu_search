@@ -50,7 +50,7 @@ foreach($tags as $tag):
 <? endforeach; ?>
 </h4>
 
-<?= $this->Map->map($menu['Restaurant']) ?>
+<?= $this->Map->map() ?>
 
 </div>
 </div>

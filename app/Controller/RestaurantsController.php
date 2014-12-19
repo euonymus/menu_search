@@ -54,9 +54,11 @@ class RestaurantsController extends AppController {
 		}
 		$options = array('conditions' => array('Restaurant.' . $this->Restaurant->primaryKey => $id));
 		$this->Restaurant->bindStation(false);
+		$this->Restaurant->bindRestaurantGeo();
 		$restaurant = $this->Restaurant->find('first', $options);
 		$this->set(compact('restaurant'));
-		$this->GeoTool->initMap($restaurant['Restaurant']);
+		$this->GeoTool->initMap($restaurant['RestaurantGeo']);
+
 
 	  $this->_loadComponent('MenuTool');
 	  $this->set('menus', $this->MenuTool->listByRestaurant($id, true));
@@ -94,16 +96,18 @@ class RestaurantsController extends AppController {
 		}
 		$this->Restaurant->bindStation(false);
 		if ($this->request->is(array('post', 'put'))) {
-			if ($this->Restaurant->save($this->request->data)) {
+			if ($this->Restaurant->saveAll($this->request->data)) {
 				$this->_setFlash(__('The restaurant has been saved.'));
+				$this->GeoTool->initMap($this->request->data['RestaurantGeo']);
 				//return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->_setFlash(__('The restaurant could not be saved. Please, try again.'), TRUE);
 			}
 		} else {
 			$options = array('conditions' => array('Restaurant.' . $this->Restaurant->primaryKey => $id));
+			$this->Restaurant->bindRestaurantGeo();
 			$this->request->data = $this->Restaurant->find('first', $options);
-			$this->GeoTool->initMap($this->request->data['Restaurant']);
+			$this->GeoTool->initMap($this->request->data['RestaurantGeo']);
 		}
 
 		$this->loadModel('Station');

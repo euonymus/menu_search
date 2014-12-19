@@ -7,7 +7,7 @@ class MapHelper extends AppHelper {
     parent::__construct($View, $settings);
   }
 
-  public function map($data, $asInput = false, $model = false) {
+  public function map($asInput = false, $model = false) {
     echo $this->_View->element('map', array('asInput' => $asInput, 'model' => $model));
   }
   public function updateLocation() {

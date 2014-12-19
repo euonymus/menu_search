@@ -5,14 +5,18 @@ App::uses('AppModel', 'Model');
  *
  */
 class Restaurant extends AppModel {
-
   public $actsAs = array('Master');
-/**
- * Display field
- *
- * @var string
- */
-	public $displayField = 'name';
+  public $displayField = 'name';
+
+  public function beforeValidate($options = array()) {
+    if (!parent::beforeValidate($options)) return FALSE;
+
+    if (U::arrPrepared('RestaurantGeo', $this->data)
+	&& U::arrPrepared('latitude', $this->data['RestaurantGeo'])
+	&& U::arrPrepared('longitude', $this->data['RestaurantGeo'])) {
+      $this->bindRestaurantGeo(false);
+    }
+  }
 
   /****************************************************************************/
   /* Instance manipulator for static members                                  */

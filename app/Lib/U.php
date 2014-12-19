@@ -3,6 +3,10 @@
  *  General library. It's usable anywhere.
  */
 class U extends Object {
+  public static function arrPrepared($needle, $data) {
+    return (is_array($data) && array_key_exists($needle, $data));
+  }
+
   //public static function isEmpty($needle, $data) {
   //  return (!isset($data[$needle]) || (($data[$needle] !== 0) && empty($data[$needle])));
   //}

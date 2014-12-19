@@ -1,5 +1,6 @@
 <?
 if (!isset($asInput)) $asInput = false;
+if (!isset($model)) $model = false;
 $hasPosition = $this->Map->initGmapLib();
 ?>
 <? $this->Html->scriptStart(array('inline' => false)); ?>
