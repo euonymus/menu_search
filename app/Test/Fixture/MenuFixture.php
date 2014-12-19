@@ -14,7 +14,7 @@ class MenuFixture extends CakeTestFixture {
 	public $records = array(
 		array(
 			'id' => 1,
-			'name' => 'Lorem ipsum dolor sit amet',
+			'name' => 'menu1',
 			'restaurant_id' => 1,
 			'description' => 'Lorem ipsum dolor sit amet',
 			'image'  => 'http://hogehoge.jpg',
@@ -30,7 +30,7 @@ class MenuFixture extends CakeTestFixture {
 		),
 		array(
 			'id' => 2,
-			'name' => 'Lorem ipsum dolor sit amet',
+			'name' => 'menu2',
 			'restaurant_id' => 4,
 			'description' => 'Lorem ipsum dolor sit amet',
 			'image'  => 'http://hogehoge.jpg',

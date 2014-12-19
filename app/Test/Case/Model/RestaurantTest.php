@@ -84,16 +84,123 @@ class RestaurantTest extends CakeTestCase {
   }
 
   public function testGetLikelihood() {
+    // NG: not an array
+    $data = false;
+    $res = $this->Restaurant->getLikelihood($data);
+    $this->assertIdentical($res, false);
+    // NG: Restaurant is not an array
+    $data = array('Restaurant' => false);
+    $res = $this->Restaurant->getLikelihood($data);
+    $this->assertIdentical($res, false);
+    // NG: name does not exist
+    $data = array();
+    $res = $this->Restaurant->getLikelihood($data);
+    $this->assertIdentical($res, false);
+
+    // OK: RestaurantGeo is not an array, but treated just without geo info
     $data = array(
       'Restaurant' => array(
-        'name' => '橙 daidai',
-       ),
-      'RestaurantGeo' => array(
-        'latitude' => '35.64594541953124',
-	'longitude' => '139.7080492973328',
+        'name' => 'restaurant4'
+      ),
+      'RestaurantGeo' => false
+    );
+    $res = $this->Restaurant->getLikelihood($data);
+    $this->assertIdentical($res['Restaurant']['name'], $data['Restaurant']['name']);
+
+    // OK: without RestaurantGeo
+    $data = array(
+      'Restaurant' => array(
+        'name' => 'restaurant5'
       ),
     );
     $res = $this->Restaurant->getLikelihood($data);
+    $this->assertIdentical($res['Restaurant']['name'], $data['Restaurant']['name']);
+
+    // OK: 名前,場所完全一致。
+    $data = array(
+      'Restaurant' => array(
+        'name' => 'restaurant3',
+       ),
+      'RestaurantGeo' => array(
+        'latitude' => '33.229508',
+	'longitude' => '131.547556',
+      ),
+    );
+    $res = $this->Restaurant->getLikelihood($data);
+    $this->assertIdentical($res['Restaurant']['name'], $data['Restaurant']['name']);
+    $this->assertIdentical($res['RestaurantGeo']['latitude'], $data['RestaurantGeo']['latitude']);
+
+    // OK: in the range of 30 meter
+    $data = array(
+      'Restaurant' => array(
+        'name' => 'restaurant6',
+       ),
+      'RestaurantGeo' => array(
+        'latitude' => '33.239768',
+        'longitude' => '131.557546',
+      ),
+    );
+    $res = $this->Restaurant->getLikelihood($data);
+    $this->assertIdentical($res['Restaurant']['name'], $data['Restaurant']['name']);
+
+    // empty: out of the range of 30 meter
+    $data = array(
+      'Restaurant' => array(
+        'name' => 'restaurant6',
+       ),
+      'RestaurantGeo' => array(
+        'latitude' => '33.239769',
+        'longitude' => '131.557546',
+      ),
+    );
+    $res = $this->Restaurant->getLikelihood($data);
+    $this->assertIdentical($res, array());
+
+    // empty: name doesn't exist
+    $data = array(
+      'Restaurant' => array(
+        'name' => 'hogen',
+       ),
+      'RestaurantGeo' => array(
+        'latitude' => '33.239498',
+        'longitude' => '131.557546',
+      ),
+    );
+    $res = $this->Restaurant->getLikelihood($data);
+    $this->assertIdentical($res, array());
+  }
+
+  public function testSaveIfNotExist() {
+    // OK: Data exists and receive the id of it
+    $data = array(
+      'Restaurant' => array(
+        'name' => 'restaurant6',
+       ),
+      'RestaurantGeo' => array(
+        'latitude' => '33.239768',
+        'longitude' => '131.557546',
+      ),
+    );
+    $res = $this->Restaurant->saveIfNotExist($data);
+    $this->assertIdentical($res, '6');
+
+    // OK: Data does not exist and recieve the inserted id of the new record
+    $data = array(
+      'Restaurant' => array(
+        'name' => 'new restaurant',
+       ),
+      'RestaurantGeo' => array(
+        'latitude' => '33.239768',
+        'longitude' => '131.557546',
+      ),
+    );
+    $res = $this->Restaurant->saveIfNotExist($data);
+    // the result depends on the Fixture. If the biggest number of id on fixture changes, below should be modified.
+    $this->assertIdentical($res, '10');
+    // check if the tables are saved properly
+    $after = $this->Restaurant->find('first', array('conditions' => Restaurant::conditionById($res)));
+    $this->assertIdentical($after['Restaurant']['name'], $data['Restaurant']['name']);
+    $this->assertIdentical($after['RestaurantGeo']['latitude'], $data['RestaurantGeo']['latitude']);
   }
 
 }

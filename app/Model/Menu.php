@@ -130,6 +130,48 @@ class Menu extends AppModel {
   }
 
   /****************************************************************************/
+  /* Menu Data Initializer                                                    */
+  /****************************************************************************/
+  public function initMenuData() {
+    $datas = self::roadFromCsv();
+    foreach($datas as $data) {
+      $saved = $this->saveThread($data);
+      if (!$saved) {
+	LogTool::error('Failed to save menu from csvfile. $data='.LogTool::formVal($data));
+	return false;
+      }
+    }
+    return true;
+  }
+
+  // return id or false
+  public function saveThread($data) {
+    // has to have Restaurant data
+    if (!U::arrPrepared(__CLASS__, $data) || !is_array($data[__CLASS__]) || !U::arrPrepared('Restaurant', $data)) return false;
+    // Get Restaurant Info.
+    $this->loadModel('Restaurant');
+    $restaurant_id = $this->Restaurant->saveIfNotExist($data);
+    if (!$restaurant_id) return false;
+
+    // Save Menu
+    $data[__CLASS__]['restaurant_id'] = $restaurant_id;
+    return $this->saveIfNotExist($data);
+  }
+
+  // return id or false
+  public function saveIfNotExist($obj) {
+    $data = $this->getLikelihood($obj);
+    if ($data === false) return false;
+    if (!empty($data)) return $data[__CLASS__]['id'];
+
+    $saving = array(__CLASS__ => $obj[__CLASS__]);
+    $this->create(); // これが無いと連続で起動した時に別レコードが上書きされてしまう。
+    $saved = $this->save($saving);
+    if (!$saved) return false;
+    return $this->getLastInsertID();
+  }
+
+  /****************************************************************************/
   /* Save & Edit                                                              */
   /****************************************************************************/
   public function updatePoint($id) {
@@ -140,28 +182,58 @@ class Menu extends AppModel {
     return $this->save($data);
   }
 
-  public function saveCsv($csv) {
-    $data = self::csvParser($csv);
-    return $this->saveThread($data);
-  }
-
-  public function saveThread($data) {
-    // TODO: treat restaurant part
-    if (array_key_exists('Restaurant', $data)) {
-      $restaurant = $this->Restaurant->getLikelihood($data);
-    }
-
-
-    // TODO: treat menu part
-
-  }
-
   /****************************************************************************/
   /* Get                                                                      */
   /****************************************************************************/
+  // 名前と位置情報だけから推察してデータ取得
+  public function getLikelihood($data) {
+    if (!is_array($data)) return false;
+    if (array_key_exists(__CLASS__, $data)) $menu = $data[__CLASS__];
+    else $menu = $data;
+    if (!U::arrPrepared('name', $menu) || !U::arrPrepared('restaurant_id', $menu)) return false;
+    $conditions = self::conditionByName($menu['name']);
+    $restaurantCondition = self::conditionByRestaurantId($menu['restaurant_id']);
+    $conditions = am($conditions, $restaurantCondition);
+    $options = array('conditions' => $conditions);
+    return $this->find('first', $options);
+  }
+
+  public static function roadFromCsv() {
+    // MEMO: 行毎にファイル読み込みすると改行がデータとして存在する場合にまずい。あとで考えよう。
+    $path = APP.'Config/data/menu.csv';
+
+    //ファイルを開く
+    //モード[r]の読み込み専用
+    if (! ($fp = fopen ($path, "r" ))) {
+      LogTool::error('Failed to open menu csv file');
+      return false;
+    }
+    //１行ずつファイルを読み込む。
+    $arr = array();
+    while (! feof ($fp)) {
+      $load = fgets ($fp, 4096);
+      $arr[] = $load;
+    }
+    //ファイルを閉じる
+    fclose ($fp);
+
+    $ret = array();
+    foreach($arr as $key => $csv) {
+      $ret[] = self::csvParser($csv);
+    }
+    return $ret;
+  }
+
   /****************************************************************************/
   /* conditions                                                               */
   /****************************************************************************/
+  public static function conditionById($id) {
+    return array(__CLASS__.'.id' => $id);
+  }
+  public static function conditionByName($name) {
+    // TODO: need to put index on Menu.name field
+    return array(__CLASS__.'.name' => $name);
+  }
   public static function conditionByRestaurantId($restaurant_id) {
     return array(__CLASS__.'.restaurant_id' => $restaurant_id);
   }
@@ -205,11 +277,15 @@ class Menu extends AppModel {
 	$ret['Restaurant']['name'] = $val;
 	break;
       case 1:
-	if (!array_key_exists('RestaurantGeo', $ret)) $ret['RestaurantGeo'] = array();
-	$ret['RestaurantGeo']['latitude'] = $val;
+	if (!empty($val)) {
+	  if (!array_key_exists('RestaurantGeo', $ret)) $ret['RestaurantGeo'] = array();
+	  $ret['RestaurantGeo']['latitude'] = $val;
+	}
 	break;
       case 2:
-	$ret['RestaurantGeo']['longitude'] = $val;
+	if (!empty($val) && array_key_exists('RestaurantGeo', $ret)) {
+	  $ret['RestaurantGeo']['longitude'] = $val;
+	}
 	break;
       case 3:
 	if (!array_key_exists(__CLASS__, $ret)) $ret[__CLASS__] = array();
@@ -222,13 +298,13 @@ class Menu extends AppModel {
 	$ret[__CLASS__]['remarks'] = $val;
 	break;
       case 6:
-	$ret[__CLASS__]['combo'] = $val;
+	$ret[__CLASS__]['combo'] = !!$val;
 	break;
       case 7:
-	$ret[__CLASS__]['lunch'] = $val;
+	$ret[__CLASS__]['lunch'] = !!$val;
 	break;
       case 8:
-	$ret[__CLASS__]['dinner'] = $val;
+	$ret[__CLASS__]['dinner'] = !!$val;
 	break;
       case 9:
 	$ret[__CLASS__]['price'] = $val;

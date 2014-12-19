@@ -130,20 +130,39 @@ class Restaurant extends AppModel {
 	),
   );
 
+  /****************************************************************************/
+  /* Save & Edit                                                              */
+  /****************************************************************************/
+  // return id or false
+  public function saveIfNotExist($obj) {
+    $data = $this->getLikelihood($obj);
+    if ($data === false) return false;
+    if (!empty($data)) return $data[__CLASS__]['id'];
+
+    $saved = $this->saveAll($obj);
+    if (!$saved) return false;
+    return $this->getLastInsertID();
+  }
 
   /****************************************************************************/
   /* Get                                                                      */
   /****************************************************************************/
+  // 名前と位置情報だけから推察してデータ取得
   public function getLikelihood($data) {
+    if (!is_array($data)) return false;
     if (array_key_exists(__CLASS__, $data)) $restaurant = $data[__CLASS__];
     else $restaurant = $data;
+    if (!U::arrPrepared('name', $restaurant)) return false;
+    $conditions = self::conditionByName($restaurant['name']);
 
-    if (array_key_exists('RestaurantGeo', $data)) $geo = $data['RestaurantGeo'];
-    else $geo = false;
+    if (array_key_exists('RestaurantGeo', $data)
+	&& U::arrPrepared('latitude', $data['RestaurantGeo']) && U::arrPrepared('longitude', $data['RestaurantGeo'])) {
+      $geoCondition = self::conditionInRange($data['RestaurantGeo']['latitude'], $data['RestaurantGeo']['longitude'], 30);
+      $conditions = am($conditions, $geoCondition);
+    }
 
-    // TODO: geoが有る場合がgeoを含めてnameで検索。geoが無い場合はnameだけで検索
-
-    pr($data);
+    $options = array('conditions' => $conditions);
+    return $this->find('first', $options);
   }
 
   /****************************************************************************/
