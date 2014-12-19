@@ -140,6 +140,22 @@ class Menu extends AppModel {
     return $this->save($data);
   }
 
+  public function saveCsv($csv) {
+    $data = self::csvParser($csv);
+    return $this->saveThread($data);
+  }
+
+  public function saveThread($data) {
+    // TODO: treat restaurant part
+    if (array_key_exists('Restaurant', $data)) {
+      $restaurant = $this->Restaurant->getLikelihood($data);
+    }
+
+
+    // TODO: treat menu part
+
+  }
+
   /****************************************************************************/
   /* Get                                                                      */
   /****************************************************************************/
@@ -174,5 +190,57 @@ class Menu extends AppModel {
       $min_score = '';
     }
     return array("MATCH(Menu.tags) AGAINST('".$expr."' ".$modifier.")".$min_score);
+  }
+
+  /****************************************************************************/
+  /* Tools                                                                    */
+  /****************************************************************************/
+  public static function csvParser($csv) {
+    $arr = str_getcsv($csv);
+    $ret = array();
+    foreach($arr as $key => $val) {
+      switch ($key) {
+      case 0:
+	if (!array_key_exists('Restaurant', $ret)) $ret['Restaurant'] = array();
+	$ret['Restaurant']['name'] = $val;
+	break;
+      case 1:
+	if (!array_key_exists('RestaurantGeo', $ret)) $ret['RestaurantGeo'] = array();
+	$ret['RestaurantGeo']['latitude'] = $val;
+	break;
+      case 2:
+	$ret['RestaurantGeo']['longitude'] = $val;
+	break;
+      case 3:
+	if (!array_key_exists(__CLASS__, $ret)) $ret[__CLASS__] = array();
+	$ret[__CLASS__]['name'] = $val;
+	break;
+      case 4:
+	$ret[__CLASS__]['description'] = $val;
+	break;
+      case 5:
+	$ret[__CLASS__]['remarks'] = $val;
+	break;
+      case 6:
+	$ret[__CLASS__]['combo'] = $val;
+	break;
+      case 7:
+	$ret[__CLASS__]['lunch'] = $val;
+	break;
+      case 8:
+	$ret[__CLASS__]['dinner'] = $val;
+	break;
+      case 9:
+	$ret[__CLASS__]['price'] = $val;
+	break;
+      case 10:
+	$ret[__CLASS__]['tags'] = $val;
+	break;
+      case 11:
+	$ret[__CLASS__]['image'] = $val;
+	break;
+      }
+    }
+    return $ret;
   }
 }

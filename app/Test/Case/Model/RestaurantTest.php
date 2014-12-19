@@ -83,4 +83,17 @@ class RestaurantTest extends CakeTestCase {
     }
   }
 
+  public function testGetLikelihood() {
+    $data = array(
+      'Restaurant' => array(
+        'name' => '橙 daidai',
+       ),
+      'RestaurantGeo' => array(
+        'latitude' => '35.64594541953124',
+	'longitude' => '139.7080492973328',
+      ),
+    );
+    $res = $this->Restaurant->getLikelihood($data);
+  }
+
 }

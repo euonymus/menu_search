@@ -130,11 +130,31 @@ class Restaurant extends AppModel {
 	),
   );
 
+
+  /****************************************************************************/
+  /* Get                                                                      */
+  /****************************************************************************/
+  public function getLikelihood($data) {
+    if (array_key_exists(__CLASS__, $data)) $restaurant = $data[__CLASS__];
+    else $restaurant = $data;
+
+    if (array_key_exists('RestaurantGeo', $data)) $geo = $data['RestaurantGeo'];
+    else $geo = false;
+
+    // TODO: geoが有る場合がgeoを含めてnameで検索。geoが無い場合はnameだけで検索
+
+    pr($data);
+  }
+
   /****************************************************************************/
   /* conditions                                                               */
   /****************************************************************************/
   public static function conditionById($id) {
     return array(__CLASS__.'.id' => $id);
+  }
+  public static function conditionByName($name) {
+    // TODO: need to put index on Restaurant.name field
+    return array(__CLASS__.'.name' => $name);
   }
   public static function conditionInRange($latitude, $longitude, $meter = 500) {
     // 何度か呼ばれた場合に壊れる事があるので$instanceのinit()が必要
