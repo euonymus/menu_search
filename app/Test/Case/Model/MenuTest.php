@@ -308,6 +308,7 @@ class MenuTest extends CakeTestCase {
     $after = $this->Menu->find('all');
     $this->Restaurant = ClassRegistry::init('Restaurant');
     $after_restaurant = $this->Restaurant->find('all');
+    pr($after);
 
 
   }
