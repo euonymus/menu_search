@@ -79,3 +79,7 @@ img.img-thumbnail {
   width:70pt;
   margin:10pt;
 }
+/* map */
+div#map {
+ height:120pt;
+}

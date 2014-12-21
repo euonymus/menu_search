@@ -25,7 +25,7 @@ $hasPosition = $this->Map->initGmapLib();
 
 
 <? if ($asInput): ?><div class="form-group"><? endif; ?>
-  <div id="map" style="height:120pt"></div>
+  <div id="map"></div>
 <? if ($asInput): ?><?= $this->element('latlngInput', array('model' => $model)) ?></div><? endif; ?>
 
 <? endif; /* if ($showAlways || $hasPosition) */?>
