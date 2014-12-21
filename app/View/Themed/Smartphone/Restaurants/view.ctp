@@ -17,7 +17,7 @@
 </div>
 
 
-<?= $this->Map->map() ?>
+<?= $this->Map->mapIfExists() ?>
 
 
 <div class="well bs-component">

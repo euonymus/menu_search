@@ -107,8 +107,8 @@ class GeoToolComponent extends Component {
 
   public function initMap($data) {
     $mapInit = array();
-    $mapInit['latitude'] = $data['latitude'];
-    $mapInit['longitude'] = $data['longitude'];
+    $mapInit['latitude'] = array_key_exists('latitude', $data) ? $data['latitude'] : '';
+    $mapInit['longitude'] = array_key_exists('longitude', $data) ? $data['longitude'] : '';
     $this->Controller->set(compact('mapInit'));
   }
 }

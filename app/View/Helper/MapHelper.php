@@ -7,11 +7,15 @@ class MapHelper extends AppHelper {
     parent::__construct($View, $settings);
   }
 
+  public function mapIfExists() {
+    return $this->_View->element('map', array('showAlways' => false));
+  }
+
   public function map($asInput = false, $model = false) {
-    echo $this->_View->element('map', array('asInput' => $asInput, 'model' => $model));
+    return $this->_View->element('map', array('asInput' => $asInput, 'model' => $model));
   }
   public function updateLocation() {
-    echo $this->_View->element('js_location');
+    return $this->_View->element('js_location');
   }
   public function initGmapLib() {
     $position = false;

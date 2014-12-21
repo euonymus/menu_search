@@ -50,7 +50,7 @@ foreach($tags as $tag):
 <? endforeach; ?>
 </h4>
 
-<?= $this->Map->map() ?>
+<?= $this->Map->mapIfExists() ?>
 
 </div>
 </div>
