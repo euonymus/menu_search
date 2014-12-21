@@ -313,7 +313,7 @@ class Menu extends AppModel {
 	$ret[__CLASS__]['tags'] = $val;
 	break;
       case 11:
-	$ret[__CLASS__]['image'] = $val;
+	$ret[__CLASS__]['image'] = empty($val) ? NULL : $val;
 	break;
       }
     }

@@ -14,10 +14,18 @@ class MenusController extends AppController {
   const FULLTEXT_MIN_SCORE = 50;
 
 
-  function beforeFilter() {
+  public function beforeFilter() {
     parent::beforeFilter();
     //ログインが必要なアクション
     $this->Auth->deny('like', 'likes');
+  }
+
+  public function admin_init() {
+    $this->autoRender = false;
+    echo 'init menus, restaurants and restaurant_geos table';
+
+    $this->loadModel('Menu');
+    $this->Menu->initMenuData();
   }
 
   public function index() {
