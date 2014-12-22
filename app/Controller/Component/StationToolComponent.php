@@ -12,7 +12,7 @@ class StationToolComponent extends Component {
   /* Data finder                                                          */
   /************************************************************************/
   public function setStationName() {
-    $station_id = $this->Controller->Session->read(MenuToolComponent::SESSION_STATION);
+    $station_id = $this->ParamTool->query_init('station_id');
     $this->Controller->loadModel('Station');
     $station = $this->Controller->Station->findById($station_id);
     $station = empty($station) ? '' : $station['Station']['name'];

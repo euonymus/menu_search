@@ -1,14 +1,13 @@
 <?php
 App::uses('Component', 'Controller');
 class RestaurantToolComponent extends Component {
-  public $components = array('ParamTool', 'StationTool', 'GeoTool');
+  public $components = array('ParamTool', 'GeoTool');
 
   public $withAMenu = false;
 
   public function initialize(Controller $controller) {
     $this->Controller = $controller;
     $this->ParamTool->initialize($controller);
-    $this->StationTool->initialize($controller);
     $this->GeoTool->initialize($controller);
   }
 
@@ -21,13 +20,15 @@ class RestaurantToolComponent extends Component {
     return $this->Controller->_getModelsList('Restaurant', $options, $isPaging);
   }
 
-  public function listByStation($isPaging = false) {
-    $options = array();
-    $conditions = $this->searchConditions();
-    if ($conditions) {
-      $options = array('conditions' => $conditions);
-    }
-    $this->StationTool->setStationName();
+  public function search($isPaging = false) {
+    $center = $this->getLatLngCenter();
+    if (!$center) return false;
+    return $this->listInRange($isPaging, $center['latitude'], $center['longitude']);
+  }
+
+  public function listInRange($isPaging = false, $latitude = false, $longitude = false) {
+    $conditions = $this->inRangeConditions($latitude, $longitude);
+    $options = array('conditions' => $conditions);
     return $this->getList($options, $isPaging);
   }
 
@@ -41,11 +42,49 @@ class RestaurantToolComponent extends Component {
   }
 
   /************************************************************************/
-  /* Validation                                                           */
-  /************************************************************************/
-  /************************************************************************/
   /* Tools                                                                */
   /************************************************************************/
+  public function getLatLngCenter() {
+    $ret = array();
+    // If station_id is set on query_string
+    $station_id = $this->ParamTool->query_init('station_id');
+    if (!empty($station_id)) {
+      $this->Controller->loadModel('Station');
+      $station = $this->Controller->Station->findById($station_id);
+      $ret['latitude'] = $station['Station']['latitude'];
+      $ret['longitude'] = $station['Station']['longitude'];
+    } else {
+      $geo = $this->GeoTool->read(true);
+      if (!$geo) return false;
+      $ret['latitude'] = $geo['coords']['latitude'];
+      $ret['longitude'] = $geo['coords']['longitude'];
+    }
+    return $ret;
+  }
+
+  public function inRangeConditions($latitude = false, $longitude = false, $distance = 1000) {
+    $this->Controller->loadModel('RestaurantGeo');
+    $tmpOpt = array('conditions' => RestaurantGeo::conditionInRange($latitude, $longitude, $distance));
+    $restaurant_ids = Set::extract('{n}/RestaurantGeo/id', $this->Controller->RestaurantGeo->find('all', $tmpOpt));
+    if (empty($restaurant_ids)) return false;
+    App::uses('Restaurant', 'Model');
+    return Restaurant::conditionById($restaurant_ids);
+  }
+
+  /************************************************************************/
+  /* legacy                                                               */
+  /************************************************************************/
+  /*
+  public function listByStation($isPaging = false) {
+    $options = array();
+    $conditions = $this->searchConditions();
+    if ($conditions) {
+      $options = array('conditions' => $conditions);
+    }
+    $this->StationTool->setStationName();
+    return $this->getList($options, $isPaging);
+  }
+
   public function searchConditions() {
     App::uses('Restaurant', 'Model');
     $this->Controller->loadModel('RestaurantStation');
@@ -69,4 +108,5 @@ class RestaurantToolComponent extends Component {
     }
     return $conditions;
   }
+  */
 }

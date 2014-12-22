@@ -124,4 +124,7 @@ class UHelper extends AppHelper {
   public static function pictCafe($font_size = '20pt', $color = false) {
     return self::pictgram("mdi-maps-local-cafe", $font_size, $color);
   }
+  public static function pictTrain($font_size = '20pt', $color = false) {
+    return self::pictgram("mdi-maps-directions-subway", $font_size, $color);
+  }
 }

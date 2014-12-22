@@ -19,7 +19,9 @@ class RestaurantsController extends AppController {
   public function index() {
     $this->_loadComponent('MenuTool');
     $this->_loadComponent('RestaurantTool');
-    $this->set('restaurants', $this->RestaurantTool->listByStation(true));
+    $this->_loadComponent('StationTool');
+    $this->set('restaurants', $this->RestaurantTool->search(true));
+    $this->StationTool->setStationName();
   }
 
   public function view($id = null) {
