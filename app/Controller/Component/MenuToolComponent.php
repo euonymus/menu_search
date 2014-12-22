@@ -84,7 +84,7 @@ class MenuToolComponent extends Component {
     if (!$center) return $conditions;
 
     $this->Controller->loadModel('RestaurantGeo');
-    $tmpOpt = array('conditions' => RestaurantGeo::conditionInRange($center['latitude'], $center['longitude']));
+    $tmpOpt = array('conditions' => RestaurantGeo::conditionInRange($center['latitude'], $center['longitude'], 1000));
     $restaurant_ids = Set::extract('{n}/RestaurantGeo/id', $this->Controller->RestaurantGeo->find('all', $tmpOpt));
     $conditionsRestaurant = Menu::conditionByRestaurantId($restaurant_ids);
     return am($conditions, $conditionsRestaurant);
