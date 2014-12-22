@@ -53,8 +53,8 @@
 	</ul>
 <? if (isset($user['role']) && ($user['role'] == 'admin')): ?>
         <ul>
-            <li><a href="/menus/add"><?= UHelper::pictAddList() ?>メニュー登録</a></li>
-            <li><a href="/restaurants/add"><?= UHelper::pictSettings() ?>レストラン登録</a></li>
+            <li><a href="/admin/menus/add"><?= UHelper::pictAddList() ?>メニュー登録</a></li>
+            <li><a href="/admin/restaurants/add"><?= UHelper::pictSettings() ?>レストラン登録</a></li>
         </ul>
 <? endif; ?>
 </div>

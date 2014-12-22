@@ -13,19 +13,10 @@ class MenusController extends AppController {
 
   const FULLTEXT_MIN_SCORE = 50;
 
-
   public function beforeFilter() {
     parent::beforeFilter();
     //ログインが必要なアクション
     $this->Auth->deny('like', 'likes');
-  }
-
-  public function admin_init() {
-    $this->autoRender = false;
-    echo 'init menus, restaurants and restaurant_geos table';
-
-    $this->loadModel('Menu');
-    $this->Menu->initMenuData();
   }
 
   public function index() {
@@ -131,12 +122,18 @@ class MenusController extends AppController {
     $this->set('_serialize', array('menus'));
   }
 
-/**
- * add method
- *
- * @return void
- */
-  public function add() {
+  /******************************************************************/
+  /* Admin                                                          */
+  /******************************************************************/
+  public function admin_init() {
+    $this->autoRender = false;
+    echo 'init menus, restaurants and restaurant_geos table';
+
+    $this->loadModel('Menu');
+    $this->Menu->initMenuData();
+  }
+
+  public function admin_add() {
     $this->Menu->bindRestaurant(false);
     $this->set('restaurantList', $this->Menu->Restaurant->getList());
 
@@ -154,14 +151,7 @@ class MenusController extends AppController {
     }
   }
 
-/**
- * edit method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-  public function edit($id = null) {
+  public function admin_edit($id = null) {
     $this->Menu->bindRestaurant(false);
     $this->set('restaurantList', $this->Menu->Restaurant->getList());
 
@@ -181,14 +171,7 @@ class MenusController extends AppController {
     }
   }
 
-/**
- * delete method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-  public function delete($id = null) {
+  public function admin_delete($id = null) {
     $this->Menu->id = $id;
     if (!$this->Menu->exists()) {
       throw new NotFoundException(__('Invalid menu'));

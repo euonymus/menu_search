@@ -8,14 +8,7 @@ App::uses('AppController', 'Controller');
  * @property SessionComponent $Session
  */
 class RestaurantsController extends AppController {
-/**
- * Components
- *
- * @var array
- */
-	public $components = array('Paginator', 'Session');
-
-
+  public $components = array('Paginator', 'Session');
 
   public function region() {
     $this->_loadComponent('MenuTool');
@@ -23,53 +16,39 @@ class RestaurantsController extends AppController {
     $this->set('stations', $this->Station->find('list'));
   }
 
-/**
- * index method
- *
- * @return void
- */
-	public function index() {
+  public function index() {
+    $this->_loadComponent('MenuTool');
+    $this->_loadComponent('RestaurantTool');
+    $this->set('restaurants', $this->RestaurantTool->listByStation(true));
+  }
 
-	  $this->_loadComponent('MenuTool');
-	  $this->_loadComponent('RestaurantTool');
-	  $this->set('restaurants', $this->RestaurantTool->listByStation(true));
+  public function view($id = null) {
+    $this->helpers[] = 'Map';
 
+    if (!$this->Restaurant->exists($id)) {
+      throw new NotFoundException(__('Invalid restaurant'));
+    }
+    $options = array('conditions' => array('Restaurant.' . $this->Restaurant->primaryKey => $id));
+    $this->Restaurant->bindStation(false);
+    $this->Restaurant->bindRestaurantGeo();
+    $restaurant = $this->Restaurant->find('first', $options);
+    $this->set(compact('restaurant'));
+    $this->GeoTool->initMap($restaurant['RestaurantGeo']);
 
-		/* $this->Restaurant->recursive = 0; */
-		/* $this->set('restaurants', $this->Paginator->paginate()); */
-	}
+    // Menu list
+    $this->_loadComponent('MenuTool');
+    $this->set('menus', $this->MenuTool->listByRestaurant($id, true));
+  }
 
-/**
- * view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function view($id = null) {
-	  $this->helpers[] = 'Map';
-
-		if (!$this->Restaurant->exists($id)) {
-			throw new NotFoundException(__('Invalid restaurant'));
-		}
-		$options = array('conditions' => array('Restaurant.' . $this->Restaurant->primaryKey => $id));
-		$this->Restaurant->bindStation(false);
-		$this->Restaurant->bindRestaurantGeo();
-		$restaurant = $this->Restaurant->find('first', $options);
-		$this->set(compact('restaurant'));
-		$this->GeoTool->initMap($restaurant['RestaurantGeo']);
-
-
-	  $this->_loadComponent('MenuTool');
-	  $this->set('menus', $this->MenuTool->listByRestaurant($id, true));
-	}
-
+  /******************************************************************/
+  /* Admin                                                          */
+  /******************************************************************/
 /**
  * add method
  *
  * @return void
  */
-	public function add() {
+	public function admin_add() {
 		if ($this->request->is('post')) {
 			$this->Restaurant->create();
 			if ($this->Restaurant->save($this->request->data)) {
@@ -88,7 +67,7 @@ class RestaurantsController extends AppController {
  * @param string $id
  * @return void
  */
-	public function edit($id = null) {
+	public function admin_edit($id = null) {
 	  $this->helpers[] = 'Map';
 
 		if (!$this->Restaurant->exists($id)) {
@@ -122,7 +101,7 @@ class RestaurantsController extends AppController {
  * @param string $id
  * @return void
  */
-	public function delete($id = null) {
+	public function admin_delete($id = null) {
 		$this->Restaurant->id = $id;
 		if (!$this->Restaurant->exists()) {
 			throw new NotFoundException(__('Invalid restaurant'));
