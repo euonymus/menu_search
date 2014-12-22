@@ -1,7 +1,7 @@
 <?php
 App::uses('Component', 'Controller');
 class MenuToolComponent extends Component {
-  public $components = array('ParamTool', 'GeoTool');
+  public $components = array('ParamTool', 'RestaurantTool', 'GeoTool');
 
   const SESSION_NEXT_PAGE = 'next';
   const SESSION_TAGS      = 'tags';
@@ -12,6 +12,7 @@ class MenuToolComponent extends Component {
   public function initialize(Controller $controller) {
     $this->Controller = $controller;
     $this->ParamTool->initialize($controller);
+    $this->RestaurantTool->initialize($controller);
     $this->GeoTool->initialize($controller);
   }
 
@@ -61,11 +62,16 @@ class MenuToolComponent extends Component {
   /* Tools                                                                */
   /************************************************************************/
   public function searchConditions() {
-    $geo        = $this->GeoTool->read(true);
     $tags       = $this->ParamTool->query_init(self::SESSION_TAGS);
     $station_id = $this->ParamTool->query_init(self::SESSION_STATION);
     $this->Controller->set(compact('tags','station_id'));
-    if (!$tags && !$station_id && !$geo) return false;
+    if (!$tags && !$station_id) {
+      $this->Controller->Session->delete(self::SESSION_STATION);
+      return false;
+    }
+    if (!empty($station_id)) {
+      $this->Controller->Session->write(self::SESSION_STATION, $station_id);
+    }
 
     // タグ絞り込み
     $this->Controller->loadModel('Menu');
@@ -73,29 +79,15 @@ class MenuToolComponent extends Component {
     if ($conditions) {
       $this->Controller->Session->write(self::SESSION_TAGS, $tags);
     }
+    // 検索中心。中心が無い場合（周辺サポート対象外エリアの場合含む）はタグ絞りのみで返却。
+    $center = $this->RestaurantTool->getLatLngCenter();
+    if (!$center) return $conditions;
 
-    if (!empty($station_id)) {
-    // 駅絞り込み
-      $this->Controller->Session->write(self::SESSION_STATION, $station_id);
-
-      $this->Controller->loadModel('RestaurantStation');
-      $restaurants = $this->Controller->RestaurantStation->findAllByStationId($station_id);
-      $restaurant_ids = Set::extract('{n}/Restaurant/id', $restaurants);
-      $conditionsRestaurant = Menu::conditionByRestaurantId($restaurant_ids);
-      $conditions = am($conditions, $conditionsRestaurant);
-    } elseif ($geo) {
-    // 周辺絞り込み
-      // 駅のフィルタリング用セッションを削除
-      $this->Controller->Session->delete(self::SESSION_STATION);
-      $latitude = $geo['coords']['latitude'];
-      $longitude = $geo['coords']['longitude'];
-      $this->Controller->loadModel('RestaurantGeo');
-      $tmpOpt = array('conditions' => RestaurantGeo::conditionInRange($latitude, $longitude));
-      $restaurant_ids = Set::extract('{n}/RestaurantGeo/id', $this->Controller->RestaurantGeo->find('all', $tmpOpt));
-      $conditionsRestaurant = Menu::conditionByRestaurantId($restaurant_ids);
-      $conditions = am($conditions, $conditionsRestaurant);
-    }
-    return $conditions;
+    $this->Controller->loadModel('RestaurantGeo');
+    $tmpOpt = array('conditions' => RestaurantGeo::conditionInRange($center['latitude'], $center['longitude']));
+    $restaurant_ids = Set::extract('{n}/RestaurantGeo/id', $this->Controller->RestaurantGeo->find('all', $tmpOpt));
+    $conditionsRestaurant = Menu::conditionByRestaurantId($restaurant_ids);
+    return am($conditions, $conditionsRestaurant);
   }
 
   public function sessionFilter($sessionName) {
