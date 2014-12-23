@@ -41,7 +41,8 @@
 ?></li>
         <li><a href="/geo/init/?location=<?= urlencode('/menus/') ?>"><?= UHelper::pictRestaurantMenu() ?>周辺のメニュー</a></li>
         <li><a href="/menus/region/refresh:1/"><?= UHelper::pictTrain() ?>駅からメニュー検索</a></li>
-        <li><a href="/menus/categories/refresh:1/"><?= UHelper::pictCafe() ?>種類でメニュー検索</a></li>
+        <li><a href="/geo/init/?location=<?= urlencode('/menus/categories/refresh:1/') ?>"><?= UHelper::pictCafe() ?>種類でメニュー検索</a></li>
+        <li><a href="/geo/init/?location=<?= urlencode('/menus/add/') ?>"><?= UHelper::pictCamera() ?>メニューを登録</a></li>
     </ul>
     <nav class="nav">レストラン</nav>
     <ul>
