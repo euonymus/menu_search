@@ -115,8 +115,6 @@ class MenusController extends AppController {
 
   public function add() {
     $this->Menu->bindRestaurant(false);
-    // TODO: 文字列 => 文字列で半径30m以内のリストに変更
-    // $this->Menu->Restaurant->nearList($latitude, $longitude)
     $geo = $this->GeoTool->read(true);
     if (empty($geo)) {
       $restaurantList = array();
@@ -132,11 +130,11 @@ class MenusController extends AppController {
 
     if ($this->request->is('post')) {
       $this->Menu->create();
-      if ($this->Menu->save($this->request->data)) {
-	$this->_setFlash(__('The menu has been saved.'));
-	return $this->redirect(array('action' => 'index'));
+      if ($this->Menu->saveThread($this->request->data)) {
+      	$this->_setFlash(__('The menu has been saved.'));
+      	return $this->redirect(array('action' => 'index'));
       } else {
-	$this->_setFlash(__('The menu could not be saved. Please, try again.'), TRUE);
+      	$this->_setFlash(__('The menu could not be saved. Please, try again.'), TRUE);
       }
     }
   }

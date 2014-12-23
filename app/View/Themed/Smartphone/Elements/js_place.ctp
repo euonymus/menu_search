@@ -23,7 +23,7 @@
 	    if (status == google.maps.places.PlacesServiceStatus.OK) {
 	      for (var i = 0; i < results.length; i++) {
                 // <select id="select"> を取得
-		var select = document.getElementById('MenuRestaurantId');
+		var select = document.getElementById('RestaurantName');
 		var option = document.createElement('option');
 		option.setAttribute('value', results[i].name);
 		option.innerHTML = results[i].name;

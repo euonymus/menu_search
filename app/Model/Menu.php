@@ -155,6 +155,7 @@ class Menu extends AppModel {
 
     // Save Menu
     $data[__CLASS__]['restaurant_id'] = $restaurant_id;
+    $this->image_upload = true;
     return $this->saveIfNotExist($data);
   }
 
@@ -165,6 +166,7 @@ class Menu extends AppModel {
     if (!empty($data)) return $data[__CLASS__]['id'];
 
     $saving = array(__CLASS__ => $obj[__CLASS__]);
+    if (array_key_exists('NoModel', $obj)) $saving['NoModel'] = $obj['NoModel'];
     $this->create(); // これが無いと連続で起動した時に別レコードが上書きされてしまう。
     $saved = $this->save($saving);
     if (!$saved) return false;

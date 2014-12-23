@@ -156,7 +156,9 @@ class Restaurant extends AppModel {
     $conditions = self::conditionByName($restaurant['name']);
 
     if (array_key_exists('RestaurantGeo', $data)
-	&& U::arrPrepared('latitude', $data['RestaurantGeo']) && U::arrPrepared('longitude', $data['RestaurantGeo'])) {
+	&& U::arrPrepared('latitude', $data['RestaurantGeo']) && U::arrPrepared('longitude', $data['RestaurantGeo'])
+	&& !empty($data['RestaurantGeo']['latitude']) && !empty($data['RestaurantGeo']['longitude'])
+    ) {
       $geoCondition = self::conditionInRange($data['RestaurantGeo']['latitude'], $data['RestaurantGeo']['longitude'], 30);
       $conditions = am($conditions, $geoCondition);
     }
@@ -187,6 +189,7 @@ class Restaurant extends AppModel {
     return array(__CLASS__.'.name' => $name);
   }
   public static function conditionInRange($latitude, $longitude, $meter = 500) {
+    if (empty($latitude) || empty($longitude)) return false;
     // 何度か呼ばれた場合に壊れる事があるので$instanceのinit()が必要
     self::init();
     self::getInstance()->bindRestaurantGeo(FALSE);

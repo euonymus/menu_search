@@ -15,7 +15,7 @@ echo $this->Form->create('Menu', $formOption); ?>
         </div>
         <div class="form-group">
 
-             <? echo $this->Form->input('restaurant_id',
+             <? echo $this->Form->input('Restaurant.name',
 					   array('class' => 'form-control',
 						 'options' => $restaurantList,
 						 'div' => array('class' => 'col-lg-3'),

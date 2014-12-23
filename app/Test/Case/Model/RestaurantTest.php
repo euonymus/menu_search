@@ -81,6 +81,11 @@ class RestaurantTest extends CakeTestCase {
     foreach($res as $val) {
       $this->assertTrue($val['Restaurant']['id'] <= 5);
     }
+
+    $latitude = '';
+    $longitude = '';
+    $res = Restaurant::conditionInRange($latitude, $longitude, 30);
+    $this->assertFalse($res);
   }
 
   public function testGetLikelihood() {
@@ -171,6 +176,19 @@ class RestaurantTest extends CakeTestCase {
   }
 
   public function testSaveIfNotExist() {
+    // OK: Data without RestaurantGeo
+    $data = array(
+      'Restaurant' => array(
+        'name' => 'restaurant6',
+       ),
+      'RestaurantGeo' => array(
+        'latitude' => '',
+        'longitude' => '',
+      ),
+    );
+    $res = $this->Restaurant->saveIfNotExist($data);
+    $this->assertIdentical($res, '6');
+
     // OK: Data exists and receive the id of it
     $data = array(
       'Restaurant' => array(

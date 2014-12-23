@@ -30,6 +30,8 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
+  public $image_upload = FALSE;
+
   /*************************************************************************/
   /* Reserved functions                                                    */
   /*************************************************************************/
@@ -118,7 +120,6 @@ class AppModel extends Model {
   /*************************************************************************/
   /* Care for Uploaded Image File                                          */
   /*************************************************************************/
-  public $image_upload = FALSE;
   public static $image_path = '/uploaded/'; // It's a web path
   public static $image_filename = NULL;
 
