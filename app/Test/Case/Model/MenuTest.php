@@ -108,7 +108,7 @@ class MenuTest extends CakeTestCase {
 	'dinner' => false,
 	'price' => '900',
 	'tags' => '日替り麺,日本食',
-	'image' => '',
+	'image' => NULL,
       )
     );
     $this->assertIdentical($res, $expected);
@@ -131,7 +131,7 @@ class MenuTest extends CakeTestCase {
 	'dinner' => false,
 	'price' => '900',
 	'tags' => '日替り麺,日本食',
-	'image' => '',
+	'image' => NULL,
       )
     );
     $this->assertIdentical($res, $expected);

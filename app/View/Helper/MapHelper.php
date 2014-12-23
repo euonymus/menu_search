@@ -17,7 +17,11 @@ class MapHelper extends AppHelper {
   public function updateLocation() {
     return $this->_View->element('js_location');
   }
-  public function initGmapLib() {
+  public function place() {
+    return $this->_View->element('js_place');
+  }
+
+  public function initGmapLib($withPlace = false) {
     $position = false;
     // If mapInit exists
     if (isset($this->_View->viewVars['mapInit'])) {
@@ -32,8 +36,10 @@ class MapHelper extends AppHelper {
     }
     // Read Javascripts and render only once.
     if ($this->gmap == false) {
-      if ($hasPosition) $this->gmap = $this->_View->element('js_map', compact('latitude', 'longitude'));
-      else $this->gmap = $this->_View->element('js_map');
+      $attribute = array();
+      if ($hasPosition) $attribute = compact('latitude', 'longitude');
+      if ($withPlace) $attribute['withPlace'] = true;
+      $this->gmap = $this->_View->element('js_map', $attribute);
       echo $this->gmap;
     }
     return $hasPosition;

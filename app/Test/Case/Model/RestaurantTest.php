@@ -203,4 +203,11 @@ class RestaurantTest extends CakeTestCase {
     $this->assertIdentical($after['RestaurantGeo']['latitude'], $data['RestaurantGeo']['latitude']);
   }
 
+  public function testNearList() {
+    $latitude = '33.229508';
+    $longitude = '131.547556';
+    $res = $this->Restaurant->nearList($latitude, $longitude);
+    $this->assertIdentical($res, array('restaurant1'=>'restaurant1','restaurant2'=>'restaurant2','restaurant3'=>'restaurant3','restaurant4'=>'restaurant4'));
+  }
+
 }

@@ -165,6 +165,17 @@ class Restaurant extends AppModel {
     return $this->find('first', $options);
   }
 
+  public function nearList($latitude, $longitude) {
+    $options = array('conditions' => self::conditionInRange($latitude, $longitude, 30));
+    $options['fields'] = array('name');
+    $data = $this->find('all', $options);
+    $ret = array();
+    foreach($data as $val) {
+      $ret[$val[__CLASS__]['name']] = $val[__CLASS__]['name'];
+    }
+    return $ret;
+  }
+
   /****************************************************************************/
   /* conditions                                                               */
   /****************************************************************************/
