@@ -29,6 +29,7 @@ class RestaurantToolComponent extends Component {
   public function listInRange($isPaging = false, $latitude = false, $longitude = false) {
     $conditions = $this->inRangeConditions($latitude, $longitude);
     $options = array('conditions' => $conditions);
+    $options['order'] = "FIELD(Restaurant.id,".implode(',',$conditions['Restaurant.id']).")";
     return $this->getList($options, $isPaging);
   }
 
@@ -65,6 +66,7 @@ class RestaurantToolComponent extends Component {
   public function inRangeConditions($latitude = false, $longitude = false, $distance = 1000) {
     $this->Controller->loadModel('RestaurantGeo');
     $tmpOpt = array('conditions' => RestaurantGeo::conditionInRange($latitude, $longitude, $distance));
+    $tmpOpt['order'] = array('RestaurantGeo.distance' => 'ASC');
     $restaurant_ids = Set::extract('{n}/RestaurantGeo/id', $this->Controller->RestaurantGeo->find('all', $tmpOpt));
     if (empty($restaurant_ids)) return false;
     App::uses('Restaurant', 'Model');
