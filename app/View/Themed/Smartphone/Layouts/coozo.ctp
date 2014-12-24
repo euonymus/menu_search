@@ -54,8 +54,9 @@
     <? // removed for DebugKit.    echo $this->element('sql_dump'); ?>
 
     <?= $this->Html->script('//code.jquery.com/jquery-1.11.1.min.js') ?>
-    <?= $this->Html->script('//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js') ?>
     <?= $this->Html->script('jquery.sidr.min') ?>
+    <?= $this->element('sidrInit'); ?>
+    <?= $this->Html->script('//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js') ?>
     <?//= $this->Html->script('bootstrapSlideInMenu-1.0.0.min') ?>
     <?= $this->Html->script('ripples.min') ?>
     <?= $this->Html->script('material.min') ?>
@@ -64,6 +65,5 @@
     <?= $this->fetch('script') ?>
 
     <?= $this->element('materialInit'); ?>
-    <?= $this->element('sidrInit'); ?>
 </body>
 </html>
