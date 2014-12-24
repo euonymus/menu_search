@@ -29,7 +29,7 @@ class RestaurantToolComponent extends Component {
   public function listInRange($isPaging = false, $latitude = false, $longitude = false) {
     $conditions = $this->inRangeConditions($latitude, $longitude);
     $options = array('conditions' => $conditions);
-    $options['order'] = "FIELD(Restaurant.id,".implode(',',$conditions['Restaurant.id']).")";
+    if ($conditions) $options['order'] = "FIELD(Restaurant.id,".implode(',',$conditions['Restaurant.id']).")";
     return $this->getList($options, $isPaging);
   }
 
@@ -52,6 +52,7 @@ class RestaurantToolComponent extends Component {
     if (!empty($station_id)) {
       $this->Controller->loadModel('Station');
       $station = $this->Controller->Station->findById($station_id);
+      if (empty($station)) return false;
       $ret['latitude'] = $station['Station']['latitude'];
       $ret['longitude'] = $station['Station']['longitude'];
     } else {

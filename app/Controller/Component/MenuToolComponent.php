@@ -23,6 +23,11 @@ class MenuToolComponent extends Component {
     $this->Controller->loadModel('Menu');
     $this->Controller->Menu->bindRestaurant();
     $options['order'] = array('Menu.point' => 'DESC');
+    // If Menu.restaurant_id exists, order should be written
+    if (isset($options['conditions']['Menu.restaurant_id'])) {
+      $options['order']
+	= "Menu.point DESC, FIELD(Menu.restaurant_id,".implode(',',$options['conditions']['Menu.restaurant_id']).")";
+    }
     return $this->Controller->_getModelsList('Menu', $options, $isPaging);
   }
 
@@ -63,9 +68,10 @@ class MenuToolComponent extends Component {
   /************************************************************************/
   public function searchConditions() {
     $tags       = $this->ParamTool->query_init(self::SESSION_TAGS);
+    $center = $this->RestaurantTool->getLatLngCenter();
     $station_id = $this->ParamTool->query_init(self::SESSION_STATION);
     $this->Controller->set(compact('tags','station_id'));
-    if (!$tags && !$station_id) {
+    if (!$tags && !$center) {
       $this->Controller->Session->delete(self::SESSION_STATION);
       return false;
     }
@@ -80,11 +86,11 @@ class MenuToolComponent extends Component {
       $this->Controller->Session->write(self::SESSION_TAGS, $tags);
     }
     // 検索中心。中心が無い場合（周辺サポート対象外エリアの場合含む）はタグ絞りのみで返却。
-    $center = $this->RestaurantTool->getLatLngCenter();
     if (!$center) return $conditions;
 
     $this->Controller->loadModel('RestaurantGeo');
     $tmpOpt = array('conditions' => RestaurantGeo::conditionInRange($center['latitude'], $center['longitude'], 1000));
+    $tmpOpt['order'] = array('RestaurantGeo.distance' => 'ASC');
     $restaurant_ids = Set::extract('{n}/RestaurantGeo/id', $this->Controller->RestaurantGeo->find('all', $tmpOpt));
     $conditionsRestaurant = Menu::conditionByRestaurantId($restaurant_ids);
     return am($conditions, $conditionsRestaurant);
