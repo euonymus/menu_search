@@ -41,7 +41,10 @@ body > div.navbar-collapse {
   background-color:#ddd;
 }
 .navbar {
-  background-color:#ff6633;
+  background-color:#e89681;
+}
+.btn-primary:not(.btn-link):not(.btn-flat){
+  background-color:#e89681;
 }
 /* home */
 body.home {
@@ -75,7 +78,8 @@ body.home .footer {
 .footer {
   display:block;
   width:100%;
-  background-color:#4285f4;
+  /*background-color:#4285f4;*/
+  background-color:#e89681;
   bottom: 0;
   text-align:center;
 }
