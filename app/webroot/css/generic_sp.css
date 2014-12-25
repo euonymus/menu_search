@@ -25,6 +25,9 @@
 }
 /** original parts **/
 /* common */
+h1 {
+ font-size:2em;
+}
 body {
   position:relative !important;
   top:45pt;
@@ -78,6 +81,12 @@ body.home .footer {
 }
 p.copyright {
   margin: 8pt auto 8pt auto;
+  color:white;
+}
+/* sidebar */
+#sidr > .nav-title {
+  padding:10px;
+  background-color:#aaaaaa;
   color:white;
 }
 /* parts */

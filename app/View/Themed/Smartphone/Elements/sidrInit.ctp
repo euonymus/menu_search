@@ -5,7 +5,7 @@ $(document).ready(function() {
 });
 <? $this->Html->scriptEnd();?>
 <div id="sidr">
-    <nav class="nav">アカウント</nav>
+    <div class="nav-title text-center">アカウント</div>
     <ul>
         <!--class名に"active"を指定するとボタンを押した状態を表現できます。-->
 <? if ($user = $this->Session->read('Auth.User')): ?>
@@ -17,7 +17,7 @@ $(document).ready(function() {
         <li><?= $this->Html->link(UHelper::pictLockOpen().'ログイン', array('controller' => 'users', 'action' => 'login', '?' => array('location'=>$callbackUrl)), array('escape'=>false)); ?>
 <? endif; ?>
     </ul>
-    <nav class="nav">メニュー</nav>
+    <div class="nav-title text-center">メニュー</div>
     <ul>
         <li><?
    // TODO: Helperに持って行く。
@@ -35,16 +35,13 @@ $(document).ready(function() {
         <li><a href="/geo/init/?location=<?= urlencode('/menus/categories/refresh:1/') ?>"><?= UHelper::pictCafe() ?>種類でメニュー検索</a></li>
         <li><a href="/geo/init/?location=<?= urlencode('/menus/add/') ?>"><?= UHelper::pictCamera() ?>メニューを登録</a></li>
     </ul>
-    <nav class="nav">レストラン</nav>
+    <div class="nav-title text-center">レストラン</div>
     <ul>
         <li><a href="/geo/init/?location=<?= urlencode('/restaurants/') ?>"><?= UHelper::pictRestaurant() ?></i>周辺を検索</a></li>
         <li><a href="/restaurants/region"><?= UHelper::pictTrain() ?></i>駅から検索</a></li>
 <? if ($user): ?>
     </ul>
-    <ul>
-    </ul>
-    <ul>
-    </ul>
+    <div class="nav-title text-center">その他</div>
     <ul>
         <li><?= $this->Html->link(UHelper::pictKey().'ログアウト', array('controller' => 'users', 'action' => 'logout'), array('escape'=>false)); ?></li>
 <? endif; ?>
