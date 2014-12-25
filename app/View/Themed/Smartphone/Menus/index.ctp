@@ -1,7 +1,6 @@
 <?= $this->Map->updateLocation() ?>
-<div class="well bs-component">
-    <h2><?= $station ?> - <?= $tags ?></h2>
-    <p><? $tagList = explode(',',$tags); foreach ($tagList as $tag){ echo '「'.$tag.'」';} ?>でレストランのメニューを検索した結果</p>
+<div class="container">
+    <h1><?= $this->Menu->searchTitle() ?></h1>
 
     <ul class="nav nav-pills">
       <li class="active"><?= $this->Html->link('別のメニュー', '/menus/categories/') ?></li>
@@ -13,6 +12,6 @@
       <?= $this->Html->link('別の地域で検索', '/menus/region_filter/?tags='. $t
     </div>
 */ ?>
-    <br>
-    <?= $this->element('js_menu_list') ?>
 </div>
+
+<?= $this->element('js_menu_list') ?>

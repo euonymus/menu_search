@@ -2,7 +2,7 @@
 <div class="list-group">
     <div class="list-group-item">
         <div class="row-picture">
-            <img ng-if="list.Menu.image" src="{{list.Menu.thumbnail}}" alt="icon">
+            <img ng-if="list.Menu.image" src="{{list.Menu.thumbnail}}" alt="icon" class="img-rounded">
         </div>
         <div class="row-content">
    <h4 class="list-group-item-heading">{{list.Menu.name}}&nbsp;<small><i class="mdi-action-home" style="font-size: 20pt;"></i>{{list.Restaurant.name}}</small></h4>

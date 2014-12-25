@@ -115,7 +115,7 @@ class MenusController extends AppController {
 
   public function add() {
     $this->Menu->bindRestaurant(false);
-    $geo = $this->GeoTool->read(true);
+    $geo = $this->geo;
     if (empty($geo)) {
       $restaurantList = array();
     } else {

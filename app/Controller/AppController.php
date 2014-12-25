@@ -64,6 +64,7 @@ class AppController extends Controller {
     // Geo Info
     $this->_loadComponent('GeoTool');
     $this->GeoTool->read();
+    $this->set('currentGeo', $this->geo);
   }
 
   public function beforeRender() {

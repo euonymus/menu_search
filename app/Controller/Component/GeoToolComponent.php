@@ -11,7 +11,7 @@ class GeoToolComponent extends Component {
   public function initialize(Controller $controller) {
     $this->Controller = $controller;
     $this->ParamTool->initialize($controller);
-    $this->Controller->geo = false;
+    if (!$this->Controller->geo) $this->Controller->geo = false;
   }
 
   /************************************************************************/

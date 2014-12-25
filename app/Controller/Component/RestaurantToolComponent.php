@@ -56,7 +56,7 @@ class RestaurantToolComponent extends Component {
       $ret['latitude'] = $station['Station']['latitude'];
       $ret['longitude'] = $station['Station']['longitude'];
     } else {
-      $geo = $this->GeoTool->read(true);
+      $geo = $this->Controller->geo;
       if (!$geo) return false;
       $ret['latitude'] = $geo['coords']['latitude'];
       $ret['longitude'] = $geo['coords']['longitude'];
