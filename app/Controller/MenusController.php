@@ -27,16 +27,10 @@ class MenusController extends AppController {
     $this->StationTool->setStationName();
   }
 
-  public function recommended() {
-    $this->_loadComponent('MenuTool');
-    $this->_loadComponent('RestaurantTool');
-    $this->set('menus', $this->RestaurantTool->recommendedMenus(true));
-  }
-
   public function likes() {
     $this->_loadComponent('MenuTool');
     $this->MenuTool->searchInit();
-    $this->set('menus', Set::extract('{n}/Menu', $this->MenuTool->likes(true)));
+    $this->set('menus', $this->MenuTool->likes(true));
   }
 
   public function categories() {
@@ -209,5 +203,14 @@ class MenusController extends AppController {
       $this->Session->setFlash(__('The menu could not be deleted. Please, try again.'));
     }
     return $this->redirect(array('action' => 'index'));
+  }
+
+  /******************************************************************/
+  /* Legacy                                                         */
+  /******************************************************************/
+  public function recommended() {
+    $this->_loadComponent('MenuTool');
+    $this->_loadComponent('RestaurantTool');
+    $this->set('menus', $this->RestaurantTool->recommendedMenus(true));
   }
 }

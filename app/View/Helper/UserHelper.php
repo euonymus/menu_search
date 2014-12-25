@@ -10,7 +10,7 @@ class UserHelper extends AppHelper {
 
   public function mypageLink() {
     if ($user = $this->_View->Session->read('Auth.User')){
-      return $this->Html->link($this->Html->image($user['image'], array('height'=>'45pt')),'/mypage',array('escape'=>false));
+      return $this->Html->link($this->Html->image($user['image'], array('height'=>'100%')),'/mypage',array('escape'=>false));
     }
     return '';
   }

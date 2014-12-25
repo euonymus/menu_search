@@ -6,8 +6,9 @@
             <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="/"><?= $this->Html->image('/img/coozo_logo.png', array('height'=>'100%', 'alt'=>$site_name, 'title'=>$site_name)) ?></a>
-
-        <?= $this->User->mypageLink() ?>
+        <div class="text-right">
+            <?= $this->User->mypageLink() ?>
+        </div>
 
     </div>
 
