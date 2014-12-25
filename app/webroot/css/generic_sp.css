@@ -37,6 +37,9 @@ body > div.navbar {
 body > div.navbar-collapse {
   background-color:#ddd;
 }
+.navbar {
+  background-color:#ff6633;
+}
 /* home */
 body.home {
   background-image: url("/img/home_bg.png");
