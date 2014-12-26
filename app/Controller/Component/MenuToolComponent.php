@@ -112,12 +112,7 @@ class MenuToolComponent extends Component {
     $this->Controller->_loadComponent('ParamTool');
     // Refresh
     if ($this->Controller->ParamTool->named_init('refresh')) {
-      $this->Controller->Session->delete(self::SESSION_NEXT_PAGE);
-      $this->Controller->Session->delete(self::SESSION_TAGS);
-      $this->Controller->Session->delete(self::SESSION_STATION);
-      $this->Controller->Session->delete(self::SESSION_LIKE);
-      $this->Controller->Session->delete(self::SESSION_RECOMMENDED);
-      $this->Controller->Session->delete(GeoToolComponent::SESSION_CURRENT_GEO);
+      $this->sessionInit();
     }
     // Redirect destination
     $next = $this->Controller->ParamTool->named_init(self::SESSION_NEXT_PAGE);
@@ -152,4 +147,14 @@ class MenuToolComponent extends Component {
     }
     return array('controller' => 'menus', 'action' => $next, '?' => $query);
   }
+
+  public function sessionInit() {
+    $this->Controller->Session->delete(self::SESSION_NEXT_PAGE);
+    $this->Controller->Session->delete(self::SESSION_TAGS);
+    $this->Controller->Session->delete(self::SESSION_STATION);
+    $this->Controller->Session->delete(self::SESSION_LIKE);
+    $this->Controller->Session->delete(self::SESSION_RECOMMENDED);
+    $this->Controller->Session->delete(GeoToolComponent::SESSION_CURRENT_GEO);
+  }
+
 }

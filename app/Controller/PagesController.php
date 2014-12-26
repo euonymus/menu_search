@@ -48,7 +48,8 @@ class PagesController extends AppController {
   public function display() {
     $this->helpers[] = 'Menu';
     $this->_loadComponent('MenuTool');
-    $this->MenuTool->sessionFilter(MenuToolComponent::SESSION_STATION);
+    // ややこしいセッションは全部消しておく。
+    $this->MenuTool->sessionInit();
     // next page を categories として上書きする。
     $this->Session->write(MenuToolComponent::SESSION_NEXT_PAGE, 'categories');
     $this->loadModel('Station');
