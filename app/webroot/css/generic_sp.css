@@ -44,7 +44,8 @@ body > div.navbar-collapse {
   background-color:#e89681;
 }
 .btn-primary:not(.btn-link):not(.btn-flat){
-  background-color:#e89681;
+  /*background-color:#e89681;*/
+  background-color:#8196c8;
 }
 /* home */
 body.home {
