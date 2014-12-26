@@ -1,28 +1,21 @@
-<div class="bs-docs-section">
-
-<div class="well bs-component">
-<h2><?php echo h($restaurant['Restaurant']['name']); ?></h2>
-    <dl>
-	<dt>レストランの説明</dt>
-	<dd>
-		<?php echo h($restaurant['Restaurant']['description']); ?>
-		&nbsp;
-	</dd>
-    </dl>
-    <div>
+<div class="container">
+   <h1><?= h($restaurant['Restaurant']['name']) ?></h1>
+   <dl>
+      <dt>レストランの説明</dt>
+      <dd>
+         <?= h($restaurant['Restaurant']['description']) ?>&nbsp;
+      </dd>
+   </dl>
  <? foreach ($restaurant['Station'] as $station): ?>
-        <span class="label label-default"><?= $station['name'] ?></span>
+   <div>
+      <span class="label label-primary"><?= $station['name'] ?></span>
+      <br>
+      <br>
+   </div>
  <? endforeach; ?>
-    </div>
 </div>
-
 
 <?= $this->Map->mapIfExists() ?>
 
-
-<div class="well bs-component">
- <?= $this->element('js_menu_list') ?>
-</div>
-
-</div>
+<?= $this->element('js_menu_list') ?>
 

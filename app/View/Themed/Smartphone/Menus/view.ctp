@@ -1,6 +1,9 @@
+<? if (!is_null($menu['Menu']['image'])): ?>
 <div class="row-picture">
-    <? if (!is_null($menu['Menu']['image'])) echo $this->Html->image($menu['Menu']['image'], array('style'=>'width:100%')); ?>
+    <?= $this->Html->image($menu['Menu']['image'], array('style'=>'width:100%')) ?>
 </div>
+<? endif; ?>
+
 <div class="container">
 
 
