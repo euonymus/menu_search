@@ -34,6 +34,7 @@
     ?>
 </head>
 <body<?= ($this->name == 'Pages') ? ' class="home"' : '' ?>>
+    <?= $this->element('google_tagmanager') ?>
 
     <?= $this->element('facebook_sdk') ?>
     <?= $this->element('header') ?>
