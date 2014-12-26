@@ -1,11 +1,18 @@
 <div class="container">
-   <h1>レストラン一覧</h1>
-   <span class="label label-success"><?= $station ?></span>
-   <table class="table table-striped table-hover">
-      <tbody>
+   <h1><?= $this->Restaurant->searchTitle() ?></h1>
+   <div class="well">
+      <small>
+         <?= $this->Html->link(UHelper::pictTrain('16pt').'駅から', '/restaurants/region/',
+                  array('escape' => false, 'class' => 'btn')); ?>
+      </small>
+   </div>
+</div>
+
+<table class="table table-striped table-hover">
+   <tbody>
 <?php foreach ($restaurants as $restaurant): ?>
-         <tr>
-            <td>
+      <tr>
+         <td>
 <?php
    $anchor = h($restaurant['Restaurant']['name']);
    $anchor .= '<br>';
@@ -18,10 +25,9 @@
 		    );
    echo $this->Html->link($anchor, $url, $options);
 ?>
-            </td>
-         </tr>
+         </td>
+      </tr>
 <?php endforeach; ?>
-      </tbody>
-   </table>
-   <?= $this->element('paginator') ?>
-</div>
+   </tbody>
+</table>
+<?= $this->element('paginator') ?>
