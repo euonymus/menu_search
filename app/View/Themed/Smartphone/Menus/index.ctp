@@ -1,4 +1,3 @@
-<?= $this->Map->updateLocation() ?>
 <div class="container">
     <h1><?= $this->Menu->searchTitle() ?></h1>
     <div class="well">
