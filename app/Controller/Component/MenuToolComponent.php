@@ -1,7 +1,7 @@
 <?php
 App::uses('Component', 'Controller');
 class MenuToolComponent extends Component {
-  public $components = array('ParamTool', 'RestaurantTool', 'GeoTool');
+  public $components = array('ParamTool', 'RestaurantTool');
 
   const SESSION_NEXT_PAGE = 'next';
   const SESSION_TAGS      = 'tags';
@@ -13,7 +13,6 @@ class MenuToolComponent extends Component {
     $this->Controller = $controller;
     $this->ParamTool->initialize($controller);
     $this->RestaurantTool->initialize($controller);
-    $this->GeoTool->initialize($controller);
   }
 
   /************************************************************************/
@@ -42,6 +41,7 @@ class MenuToolComponent extends Component {
   }
 
   public function likes($isPaging = false) {
+    $this->sessionInit();
     // likesである事をセッションに記録。その後の検索フィルターに利用
     $this->Controller->Session->write(self::SESSION_LIKE, true);
     // データ取得
@@ -104,16 +104,24 @@ class MenuToolComponent extends Component {
       // Prepare the next page
       $this->Controller->redirect($this->prepareNextPath());
     } else {
-      $this->searchInit();
+      // Refresh
+      if ($this->Controller->ParamTool->named_init('refresh')) {
+	$this->sessionInit();
+      }
+      $this->initNext();
     }
   }
 
-  public function searchInit() {
+  public function sessionInit() {
+    $this->Controller->Session->delete(self::SESSION_NEXT_PAGE);
+    $this->Controller->Session->delete(self::SESSION_TAGS);
+    $this->Controller->Session->delete(self::SESSION_STATION);
+    $this->Controller->Session->delete(self::SESSION_LIKE);
+    $this->Controller->Session->delete(self::SESSION_RECOMMENDED);
+  }
+
+  public function initNext() {
     $this->Controller->_loadComponent('ParamTool');
-    // Refresh
-    if ($this->Controller->ParamTool->named_init('refresh')) {
-      $this->sessionInit();
-    }
     // Redirect destination
     $next = $this->Controller->ParamTool->named_init(self::SESSION_NEXT_PAGE);
     if (in_array($next, array('region','categories','index','likes','recommended'))) {
@@ -146,15 +154,6 @@ class MenuToolComponent extends Component {
       $query = am($query, $q_tags);
     }
     return array('controller' => 'menus', 'action' => $next, '?' => $query);
-  }
-
-  public function sessionInit() {
-    $this->Controller->Session->delete(self::SESSION_NEXT_PAGE);
-    $this->Controller->Session->delete(self::SESSION_TAGS);
-    $this->Controller->Session->delete(self::SESSION_STATION);
-    $this->Controller->Session->delete(self::SESSION_LIKE);
-    $this->Controller->Session->delete(self::SESSION_RECOMMENDED);
-    $this->Controller->Session->delete(GeoToolComponent::SESSION_CURRENT_GEO);
   }
 
 }

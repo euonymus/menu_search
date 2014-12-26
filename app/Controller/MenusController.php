@@ -29,7 +29,7 @@ class MenusController extends AppController {
 
   public function likes() {
     $this->_loadComponent('MenuTool');
-    $this->MenuTool->searchInit();
+    //$this->MenuTool->initNext();
     $this->set('menus', $this->MenuTool->likes(true));
   }
 

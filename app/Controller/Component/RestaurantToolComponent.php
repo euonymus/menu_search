@@ -1,14 +1,13 @@
 <?php
 App::uses('Component', 'Controller');
 class RestaurantToolComponent extends Component {
-  public $components = array('ParamTool', 'GeoTool');
+  public $components = array('ParamTool');
 
   public $withAMenu = false;
 
   public function initialize(Controller $controller) {
     $this->Controller = $controller;
     $this->ParamTool->initialize($controller);
-    $this->GeoTool->initialize($controller);
   }
 
   /************************************************************************/
