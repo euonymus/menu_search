@@ -47,7 +47,7 @@ class AppController extends Controller {
 
   const TITLE_SITE_NAME = 'Coozo';
   static $title_for_layout = self::TITLE_SITE_NAME;
-  static $description_for_layout = 'Coozoはこれまでに無い次世代型ランチ検索サービス。ここは大きなフードコート。食べたいメニューを選んでお店にGo！';
+  static $description_for_layout = 'Coozoはこれまでに無い次世代型ランチメニュー検索サービス。ここは大きなフードコート。食べたいメニューを選んでお店にGo！';
 
   public function beforeFilter() {
     $this->Auth->allow();  // Empty allows all actions
@@ -69,7 +69,7 @@ class AppController extends Controller {
 
   public function beforeRender() {
     $site_name = self::TITLE_SITE_NAME;
-    $title_for_layout = self::$title_for_layout;
+    $title_for_layout = self::$title_for_layout . ' | ランチメニュー検索';
     $description_for_layout = self::$description_for_layout;
     $this->set(compact('site_name', 'title_for_layout', 'description_for_layout'));
   }

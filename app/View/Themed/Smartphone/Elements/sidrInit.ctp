@@ -10,7 +10,7 @@ $(document).ready(function() {
         <!--class名に"active"を指定するとボタンを押した状態を表現できます。-->
 <? if ($user = $this->Session->read('Auth.User')): ?>
         <li><a href="/mypage"><?= UHelper::pictMypage() ?>マイページ</a></li>
-        <li><a href="/menus/likes/refresh:1/"><?= UHelper::pictHeart() ?>お気に入りメニュー</a></li>
+        <li><a href="/menus/likes/refresh:1/"><?= UHelper::pictHeart() ?>お気に入りランチメニュー</a></li>
 <? else: ?>
         <?php $callbackUrl = (isset($callbackUrl) ? $callbackUrl : Router::reverse(Router::getRequest())); ?>
         <li><?= $this->Html->link(UHelper::pictAssignment().'サインアップ', array('controller' => 'users', 'action' => 'add', '?' => array('location'=>$callbackUrl)), array('escape'=>false)); ?>
@@ -30,9 +30,9 @@ $(document).ready(function() {
 					 'placeholder' => '検索'));
    echo $this->Form->end();
 ?></li>
-        <li><a href="/geo/init/?location=<?= urlencode('/menus/') ?>"><?= UHelper::pictRestaurantMenu() ?>周辺のメニュー</a></li>
-        <li><a href="/menus/region/refresh:1/"><?= UHelper::pictTrain() ?>駅からメニュー検索</a></li>
-        <li><a href="/geo/init/?location=<?= urlencode('/menus/categories/refresh:1/') ?>"><?= UHelper::pictCafe() ?>種類でメニュー検索</a></li>
+        <li><a href="/geo/init/?location=<?= urlencode('/menus/') ?>"><?= UHelper::pictRestaurantMenu() ?>周辺のランチメニュー</a></li>
+        <li><a href="/menus/region/refresh:1/"><?= UHelper::pictTrain() ?>駅からランチメニュー</a></li>
+        <li><a href="/geo/init/?location=<?= urlencode('/menus/categories/refresh:1/') ?>"><?= UHelper::pictCafe() ?>種類でランチメニュー</a></li>
         <li><a href="/geo/init/?location=<?= urlencode('/menus/add/') ?>"><?= UHelper::pictCamera() ?>メニューを登録</a></li>
     </ul>
     <div class="nav-title text-center">レストラン</div>
@@ -48,7 +48,7 @@ $(document).ready(function() {
     </ul>
 <? if (isset($user['role']) && ($user['role'] == 'admin')): ?>
     <ul>
-        <li><a href="/admin/menus/add"><?= UHelper::pictAddList() ?>メニュー登録</a></li>
+        <li><a href="/admin/menus/add"><?= UHelper::pictAddList() ?>ランチメニュー登録</a></li>
         <li><a href="/admin/restaurants/add"><?= UHelper::pictSettings() ?>レストラン登録</a></li>
     </ul>
 <? endif; ?>

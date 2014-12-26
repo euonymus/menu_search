@@ -25,17 +25,34 @@ class MenusController extends AppController {
     $this->set('menus', $this->MenuTool->search(true));
     $this->_loadComponent('StationTool');
     $this->StationTool->setStationName();
+
+    // html title
+    $station = $this->viewVars['station'];
+    $tags = $this->viewVars['tags'];
+    $currentGeo = $this->viewVars['currentGeo'];
+    $title = '';
+    if ($station) $title .= $station.'駅周辺の';
+    elseif ($currentGeo) {
+      $title .= '周辺の';
+    }
+    if ($tags) $title .= $tags;
+    else $title .= 'ランチメニュー';
+    $title .= '検索結果';
+    self::$title_for_layout = $title . ' - '.self::$title_for_layout;
+    self::$description_for_layout = $title . 'を人気順に表示します！エリアや種類でランチメニューを選んで比較！一番好みの食べたい料理を見つけてお店へGo！';
   }
 
   public function likes() {
     $this->_loadComponent('MenuTool');
     //$this->MenuTool->initNext();
     $this->set('menus', $this->MenuTool->likes(true));
+    self::$title_for_layout = 'お気に入りに登録したランチメニュー - '.self::$title_for_layout;
+    self::$description_for_layout = '食べたいランチメニューをお気に入り登録していつでもレストランを調べる事ができちゃう！エリアや種類でランチメニューを選んで比較！一番好みの食べたい料理を見つけてお店へGo！';
   }
 
   public function categories() {
-    self::$title_for_layout = '検索メニュー選択:'.self::$title_for_layout;
-    self::$description_for_layout = '料理の名前を選んでお店毎のメニューを比較！一番好みの食べたい料理を見つけてお店へGo！';
+    self::$title_for_layout = '種類でランチメニュー検索 - '.self::$title_for_layout;
+    self::$description_for_layout = '料理の名前を選んでお店毎のランチメニューを比較！一番好みの食べたい料理を見つけてお店へGo！';
 
     $this->_loadComponent('MenuTool');
     $this->MenuTool->sessionFilter(MenuToolComponent::SESSION_TAGS);
@@ -45,6 +62,9 @@ class MenusController extends AppController {
   }
 
   public function region() {
+    self::$title_for_layout = '駅からランチメニュー検索 - '.self::$title_for_layout;
+    self::$description_for_layout = '駅を選んでランチメニューを比較！一番好みの食べたい料理を見つけてお店へGo！';
+
     $this->_loadComponent('MenuTool');
     $this->MenuTool->sessionFilter(MenuToolComponent::SESSION_STATION);
 
@@ -76,6 +96,9 @@ class MenusController extends AppController {
     $menu = $this->Menu->find('first', $options);
     $this->set('menu', $menu);
     $this->GeoTool->initMap($menu['Restaurant']['RestaurantGeo']);
+
+    self::$title_for_layout = $menu['Restaurant']['name'] .'の'. $menu['Menu']['name'] . ' - '.self::$title_for_layout;
+    self::$description_for_layout = $menu['Restaurant']['name'] .'の'. $menu['Menu']['name'] . ' '.$menu['Menu']['description'] . ' '.$menu['Menu']['remarks'];
   }
 
   public function like($id = false) {

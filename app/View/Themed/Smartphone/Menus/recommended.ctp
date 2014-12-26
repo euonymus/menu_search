@@ -1,5 +1,5 @@
 <div class="well bs-component">
-    <h2>おすすめメニュー</h2>
+    <h2>おすすめランチメニュー</h2>
     <p>お店毎の一押し料理を一覧しています！！</p>
 
     <ul class="nav nav-pills">

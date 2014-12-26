@@ -1,5 +1,5 @@
 <div class="well bs-component">
-    <h2>メニュー一覧</h2>
+    <h2>ランチメニュー一覧</h2>
     <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>

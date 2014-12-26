@@ -1,4 +1,4 @@
 <div>
-    <h1>メニュー検索</h1>
+    <h1>駅からランチメニュー検索</h1>
     <?= $this->element('regions') ?>
 </div>

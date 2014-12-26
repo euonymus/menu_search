@@ -1,5 +1,5 @@
 <div class="well bs-component">
-    <h2>メニューを検索</h2>
+    <h1>種類でランチメニューを検索</h1>
     <div>
 
 <dl class="dl-horizontal">

@@ -58,7 +58,7 @@ class MenuHelper extends AppHelper {
       $res .= '周辺の';
     }
     if ($tags) $res .= $tags;
-    else $res .= 'メニュー';
+    else $res .= 'ランチメニュー';
     $res .= '<br><small>検索結果</small>';
 
     return $res;
