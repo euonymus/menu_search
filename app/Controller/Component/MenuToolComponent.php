@@ -66,9 +66,12 @@ class MenuToolComponent extends Component {
   /************************************************************************/
   /* Tools                                                                */
   /************************************************************************/
+  public function delegate() {
+  }
+
   public function searchConditions() {
     $tags       = $this->ParamTool->query_init(self::SESSION_TAGS);
-    $center = $this->RestaurantTool->getLatLngCenter();
+    $center     = $this->RestaurantTool->getLatLngCenter();
     $station_id = $this->ParamTool->query_init(self::SESSION_STATION);
     $this->Controller->set(compact('tags','station_id'));
     if (!$tags && !$center) {
