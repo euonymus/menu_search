@@ -70,6 +70,11 @@ body.home p.description {
   font: 18pt serif;
   margin: 5pt;
 }
+body.home h1 {
+  color:white;
+  font: 300% cursive;
+  margin: 30pt 5pt 5pt 5pt;
+}
 /* footer */
 body.home .footer {
   position: absolute;
