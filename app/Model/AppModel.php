@@ -261,7 +261,7 @@ class AppModel extends Model {
   }
 
   /**
-   * Check if the image is under /img/socialnews/ dir on twinavi.jp
+   * Check if the image is under /img/
    */
   public static function isLocalImage($url) {
     if (!is_string($url) || empty($url)) return false;

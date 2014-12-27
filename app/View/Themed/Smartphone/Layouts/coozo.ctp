@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>
-        <?php echo $title_for_layout; ?>
+        <?= $title_for_layout; ?>
     </title>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -18,7 +18,9 @@
     <![endif]-->
     <link rel="apple-touch-icon-precomposed" href="/webclip.png" />
 
-    <?php
+    <?= $this->element('opengraph') ?>
+    <?= $this->element('twittercards') ?>
+    <?
         echo $this->Html->meta('description', $description_for_layout);
         echo $this->Html->meta('icon');
 
