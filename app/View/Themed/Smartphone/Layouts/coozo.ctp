@@ -25,7 +25,7 @@
         echo $this->Html->css('//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css');
         echo $this->Html->css('//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css');
         echo $this->Html->css('jquery.sidr.light');
-        echo $this->Html->css('ripples.min');
+        //echo $this->Html->css('ripples.min');
         echo $this->Html->css('material-wfont.min');
         echo $this->Html->css('generic_sp');
 
@@ -59,12 +59,12 @@
     <?= $this->element('sidrInit'); ?>
     <?= $this->Html->script('//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js') ?>
     <?//= $this->Html->script('bootstrapSlideInMenu-1.0.0.min') ?>
-    <?= $this->Html->script('ripples.min') ?>
-    <?= $this->Html->script('material.min') ?>
+    <?//= $this->Html->script('ripples.min') ?>
+    <?//= $this->Html->script('material.min') ?>
     <?= $this->Html->script('//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js') ?>
     <?= $this->Js->writeBuffer();?>
     <?= $this->fetch('script') ?>
 
-    <?= $this->element('materialInit'); ?>
+    <?//= $this->element('materialInit'); ?>
 </body>
 </html>
