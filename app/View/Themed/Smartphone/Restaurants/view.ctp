@@ -13,8 +13,6 @@
  <? foreach ($restaurant['Station'] as $station): ?>
    <div>
       <span class="label label-primary"><?= $station['name'] ?></span>
-      <br>
-      <br>
    </div>
  <? endforeach; ?>
 </div>

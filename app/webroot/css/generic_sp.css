@@ -99,6 +99,10 @@ p.copyright {
   background-color:#aaaaaa;
   color:white;
 }
+/* main content */
+#mainContent {
+  margin-top:-10px;
+}
 /* parts */
 .menu-large-category {
   display:block;
@@ -129,4 +133,12 @@ img.img-thumbnail {
 /* map */
 div#map {
  height:120pt;
+}
+/* menu image */
+.row-picture{
+  height: 180pt;
+  overflow: hidden;
+}
+.row-picture img{
+  width: 100%;
 }

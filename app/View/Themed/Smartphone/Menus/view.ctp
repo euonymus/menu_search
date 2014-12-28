@@ -1,6 +1,6 @@
 <? if (!is_null($menu['Menu']['image'])): ?>
 <div class="row-picture">
-    <?= $this->Html->image($menu['Menu']['image'], array('style'=>'width:100%')) ?>
+    <?= $this->Html->image($menu['Menu']['image']) ?>
 </div>
 <? endif; ?>
 
