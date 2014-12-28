@@ -5,8 +5,10 @@
 <? endif; ?>
 
 <div class="container">
+   <?= $this->element('social_buttons') ?>
+</div>
 
-
+<div class="container">
    <h1><?= h($menu['Menu']['name']); ?><br>
       <small><?= UHelper::pictRestaurant() ?><?= $this->Html->link($menu['Restaurant']['name'], '/restaurants/view/'.$menu['Restaurant']['id']) ?></small></h1>
 
@@ -19,17 +21,29 @@
 <? if ($menu['Menu']['dinner']) echo '<span class="label label-default">ディナー</span>';?>
 */ ?>
 
-
    <div>
-<? if ($liked) {
-    $undo = 'undo:1/';
-    $likeBtnMessage = UHelper::pictClear('13pt', 'pink').'お気に入り解除';
-    echo UHelper::pictHeart('20pt', 'pink');
-} else {
-    $undo = '';
+
+<? if ($this->User->loggedIn()): ?>
+    <? if ($liked) {
+        $undo = 'undo:1/';
+        $likeBtnMessage = UHelper::pictClear('13pt', 'pink').'お気に入り解除';
+        echo UHelper::pictHeart('20pt', 'pink');
+    } else {
+        $undo = '';
+        $likeBtnMessage = UHelper::pictHeart('13pt', 'pink').'お気に入りに登録！';
+    } ?>
+    <? $linkUri = '/menus/like/'.$undo.$menu['Menu']['id']; ?>
+<? else: ?>
+
+    <?
     $likeBtnMessage = UHelper::pictHeart('13pt', 'pink').'お気に入りに登録！';
-} ?>
-   <?= $this->Html->link($likeBtnMessage, '/menus/like/'.$undo.$menu['Menu']['id'], array('escape'=>false,'class'=>'btn btn-default btn-raised')) ?> 
+    $linkUri = '/users/login/?location=' . urlencode('/menus/like/'.$menu['Menu']['id']);
+    ?>
+
+<? endif; ?>
+      <? $linkOption = array('escape'=>false,'class'=>'btn btn-default btn-raised'); ?>
+      <?= $this->Html->link($likeBtnMessage, $linkUri, $linkOption) ?> 
+
    </div>
 
    <p><?= h($menu['Menu']['description']) ?></p>
