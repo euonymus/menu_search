@@ -30,10 +30,14 @@ $(document).ready(function() {
 					 'placeholder' => '検索'));
    echo $this->Form->end();
 ?></li>
-        <li><a href="/geo/init/?location=<?= urlencode('/menus/') ?>"><?= UHelper::pictRestaurantMenu() ?>周辺のランチメニュー</a></li>
-        <li><a href="/menus/region/refresh:1/"><?= UHelper::pictTrain() ?>駅からランチメニュー</a></li>
-        <li><a href="/geo/init/?location=<?= urlencode('/menus/categories/refresh:1/') ?>"><?= UHelper::pictCafe() ?>種類でランチメニュー</a></li>
-        <li><a href="/geo/init/?location=<?= urlencode('/menus/add/') ?>"><?= UHelper::pictCamera() ?>メニューを登録</a></li>
+        <li><a href="/geo/init/?location=<?= urlencode('/menus/') ?>"><?= UHelper::pictRestaurantMenu() ?>周辺の人気ランチ</a></li>
+        <li><a href="/menus/region/refresh:1/"><?= UHelper::pictTrain() ?>駅からランチを探す</a></li>
+        <li><a href="/geo/init/?location=<?= urlencode('/menus/categories/refresh:1/') ?>"><?= UHelper::pictCafe() ?>食べたい物から探す</a></li>
+<? if ($user): ?>
+        <li><a href="/geo/init/?location=<?= urlencode('/menus/add/') ?>"><?= UHelper::pictCamera() ?>ランチメニューを登録</a></li>
+<? else: ?>
+        <li><a href="/users/login/?location=<?= urlencode('/menus/add/') ?>"><?= UHelper::pictCamera() ?>ランチメニューを登録</a></li>
+<? endif; ?>
     </ul>
     <div class="nav-title text-center">レストラン</div>
     <ul>
@@ -46,11 +50,5 @@ $(document).ready(function() {
         <li><?= $this->Html->link(UHelper::pictKey().'ログアウト', array('controller' => 'users', 'action' => 'logout'), array('escape'=>false)); ?></li>
 <? endif; ?>
     </ul>
-<? if (isset($user['role']) && ($user['role'] == 'admin')): ?>
-    <ul>
-        <li><a href="/admin/menus/add"><?= UHelper::pictAddList() ?>ランチメニュー登録</a></li>
-        <li><a href="/admin/restaurants/add"><?= UHelper::pictSettings() ?>レストラン登録</a></li>
-    </ul>
-<? endif; ?>
 </div>
 

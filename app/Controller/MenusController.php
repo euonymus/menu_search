@@ -16,7 +16,7 @@ class MenusController extends AppController {
   public function beforeFilter() {
     parent::beforeFilter();
     //ログインが必要なアクション
-    $this->Auth->deny('like', 'likes');
+    $this->Auth->deny('like', 'likes', 'add');
   }
 
   public function index() {

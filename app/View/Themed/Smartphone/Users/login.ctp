@@ -1,3 +1,4 @@
+<?= $this->Map->updateLocation() ?>
 <div class="container">
 <div class="users form">
 
