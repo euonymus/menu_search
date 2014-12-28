@@ -45,7 +45,8 @@ foreach($tags as $tag):
   <?= $this->Html->link($tag,'/menus/?tags='.$tag, array('class'=> 'btn btn-primary btn-xs')) ?>
 <? endforeach; ?>
 
-   <?= $this->Map->mapIfExists() ?>
-
-
 </div>
+
+<?= $this->Map->mapIfExists() ?>
+
+
