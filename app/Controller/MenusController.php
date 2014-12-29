@@ -149,7 +149,8 @@ class MenusController extends AppController {
       $this->Menu->create();
       if ($this->Menu->saveThread($this->request->data)) {
       	$this->_setFlash(__('The menu has been saved.'));
-      	return $this->redirect(array('action' => 'index'));
+	$id = $this->Menu->getLastInsertID();
+	return $this->redirect(array('action' => 'view', $id));
       } else {
       	$this->_setFlash(__('The menu could not be saved. Please, try again.'), TRUE);
       }

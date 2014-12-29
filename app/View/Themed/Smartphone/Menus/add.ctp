@@ -8,6 +8,7 @@ echo $this->Form->create('Menu', $formOption); ?>
             <div class="col-lg-6">
                <?= $this->Form->input('NoModel.image_file', array('type' => 'file', 'accept' => 'image/*',
 							    'capture' => 'camera', 'label'=>'写真','class'=>'btn btn-info')) ?>
+               <?= $this->Form->error('image_file') ?>
             </div>
          </div>
          <div class="form-group">

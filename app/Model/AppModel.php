@@ -39,8 +39,11 @@ class AppModel extends Model {
     // Exec only if $this->image_upload on the Model has been set to TRUE.
     if ($this->image_upload) {
       // $this->data[__CLASS__]['image_file']を優先する。['image']が入力されてても上書き更新する。
-      if($this->hasUploadedImage()) {
+      $uploadedImageCode = $this->uploadedImageCode();
+      if($this->hasUploadedImage($uploadedImageCode)) {
 	$this->data[$this->name]['image'] = $this->getImageFilePath(FALSE);
+      } elseif ($this->uploadedImageErrorManage($uploadedImageCode)) {
+	return false;
       }
     }
     return TRUE;
@@ -56,7 +59,7 @@ class AppModel extends Model {
       }
 
       // Take care of image
-      if($this->hasUploadedImage()) {
+      if($this->hasUploadedImage($this->uploadedImageCode())) {
 	if (!$this->saveUploadedImgs()) {
 	  return false;
 	}
@@ -126,7 +129,7 @@ class AppModel extends Model {
   public $image_width = 800;
   public $image_height = 800;
 
-  public function hasUploadedImage() {
+  public function uploadedImageCode() {
     /*
       UPLOAD_ERR_OK
       Value: 0; There is no error, the file uploaded with success.
@@ -152,7 +155,45 @@ class AppModel extends Model {
       UPLOAD_ERR_EXTENSION
       Value: 8; A PHP extension stopped the file upload. PHP does not provide a way to ascertain which extension caused the file upload to stop; examining the list of loaded extensions with phpinfo() may help. Introduced in PHP 5.2.0.
     */
-    return (isset($this->data['NoModel']['image_file']['error']) && ($this->data['NoModel']['image_file']['error'] == UPLOAD_ERR_OK) );
+    if (!isset($this->data['NoModel']['image_file']['error'])) return false;
+    return $this->data['NoModel']['image_file']['error'];
+  }
+
+  public function hasUploadedImage($uploadedImageCode) {
+    return ($uploadedImageCode === UPLOAD_ERR_OK);
+  }
+  public function uploadedImageErrorManage($uploadedImageCode) {
+    switch ($uploadedImageCode) {
+    case UPLOAD_ERR_OK:
+      return false;
+      break;
+    case UPLOAD_ERR_INI_SIZE:
+      $message = 'The uploaded file exceeds the upload_max_filesize directive in php.ini.';
+      break;
+    case UPLOAD_ERR_FORM_SIZE:
+      $message = 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.';
+      break;
+    case UPLOAD_ERR_PARTIAL:
+      $message = 'The uploaded file was only partially uploaded.';
+      break;
+    case UPLOAD_ERR_NO_FILE:
+      $message = '画像をアップロードしてください';
+      break;
+    case UPLOAD_ERR_NO_TMP_DIR:
+      $message = 'Missing a temporary folder.';
+      break;
+    case UPLOAD_ERR_CANT_WRITE:
+      $message = 'Failed to write file to disk.';
+      break;
+    case UPLOAD_ERR_EXTENSION:
+      $message = 'A PHP extension stopped the file upload.';
+      break;
+    default:
+      $message = '画像のアップロードに失敗しました。';
+      break;
+    }
+    $this->invalidate('image_file', $message);
+    return true;
   }
 
   public function saveUploadedImgs() {
