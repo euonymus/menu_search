@@ -168,10 +168,10 @@ class AppModel extends Model {
       return false;
       break;
     case UPLOAD_ERR_INI_SIZE:
-      $message = 'The uploaded file exceeds the upload_max_filesize directive in php.ini.';
+      $message = 'アップロードした画像が大き過ぎます。'; // php.iniの制限設定
       break;
     case UPLOAD_ERR_FORM_SIZE:
-      $message = 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.';
+      $message = 'アップロードした画像が大き過ぎます。16M未満の画像をアップロードしてください。'; // html formの制限設定
       break;
     case UPLOAD_ERR_PARTIAL:
       $message = 'The uploaded file was only partially uploaded.';
