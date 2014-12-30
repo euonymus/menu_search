@@ -16,6 +16,7 @@ echo $this->Form->create('User', $formOption); ?>
 <? endif; ?>
                  <?= $this->Form->input('NoModel.image_file', array('type' => 'file', 'accept' => 'image/*',
 							    'capture' => 'camera', 'label'=>'','class'=>'btn btn-info')) ?>
+                 <?= $this->Form->hidden('NoModel.thumb') ?>
                  <?= $this->Form->radio('NoModel.cropType', 
 			  array('1' => '中央寄せ寄せ', '0' => '0,0ポイントから'),
 			  array('label' => false, 'default' => '1', 'legend'=> false)) ?>

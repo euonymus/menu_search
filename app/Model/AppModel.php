@@ -96,6 +96,16 @@ class AppModel extends Model {
     return $retArr[1].'_thumb.'.$retArr[2];
   }
 
+  // Transform original path to thumbnail path
+  public static function toHorizontalImagePath($path) {
+    $reg="/(.*)(?:\.([^.]+$))/";
+    preg_match($reg,$path,$retArr);
+    //echo "$retArr[0]"."\n<br/>";// /hoge/hoge.jpg
+    //echo "$retArr[1]"."\n<br/>";// /hoge/hoge
+    //echo "$retArr[2]"."\n<br/>";// jpg
+    return $retArr[1].'_main.'.$retArr[2];
+  }
+
   public function addThumbField($data) {
     if (array_key_exists($this->name, $data)) {
       $withModel = true;
@@ -105,7 +115,10 @@ class AppModel extends Model {
       $work = $data;
     }
     $imgPath = $this->imageField($work);
-    if (!empty($imgPath)) $work['thumbnail'] = self::toThumbPath($imgPath);
+    if (!empty($imgPath)) {
+      $work['thumbnail'] = self::toThumbPath($imgPath);
+      $work['horizontal_image'] = self::toHorizontalImagePath($imgPath);
+    }
 
     if ($withModel) {
       $data[$this->name] = $work;
@@ -126,8 +139,11 @@ class AppModel extends Model {
   public static $image_path = '/uploaded/'; // It's a web path
   public static $image_filename = NULL;
 
-  public $image_width = 800;
-  public $image_height = 800;
+  public $image_thumb_width = 800;
+  public $image_thumb_height = 800;
+
+  public $image_horizontal_width = 1600;
+  public $image_horizontal_height = 900;
 
   public function uploadedImageCode() {
     /*
@@ -198,23 +214,22 @@ class AppModel extends Model {
 
   public function saveUploadedImgs() {
     // MEMO: Generate folder before move_uploaded_file(), if it doesn't exist.
-    $dir = dirname($this->getImageFilePath());
+    $imagePath = $this->getImageFilePath();
+    $dir = dirname($imagePath);
     App::uses('Folder', 'Utility');
     $folder = new Folder($dir, TRUE, 0777);
 
     App::uses('File', 'Utility');
     // TODO: 何故か権限が777にならないけど一旦無視
-    $file = new File($this->getImageFilePath(), TRUE, 0777);
-    if (!move_uploaded_file($this->data['NoModel']['image_file']['tmp_name'],$this->getImageFilePath())) return FALSE;
+    $file = new File($imagePath, TRUE, 0777);
+    if (!move_uploaded_file($this->data['NoModel']['image_file']['tmp_name'], $imagePath)) return FALSE;
 
-    if (isset($this->data['NoModel']['cropType'])) $fromCenter = !!($this->data['NoModel']['cropType']);
-    else $fromCenter = true;
-
-    // Memo: Build thumbnail
-    $thumb = self::toThumbPath($this->getImageFilePath());
-    copy($this->getImageFilePath(), $thumb);
+    // Compress Image
+    if (!$this->compress($imagePath)) return FALSE;
     // Generate thumbnail file
-    if (!$this->cropImage($thumb, $fromCenter, $this->image_width, $this->image_height)) return FALSE;
+    if (!$this->createThumb()) return FALSE;
+    // Generate Horizontal image file
+    if (!$this->createHorizontal()) return FALSE;
     return TRUE;
   }
 
@@ -242,6 +257,7 @@ class AppModel extends Model {
       $imgPath = $oldimage[$this->name]['image'];
       self::deleteImg($imgPath);
       self::deleteImg(self::toThumbPath($imgPath));
+      self::deleteImg(self::toHorizontalImagePath($imgPath));
     }
     return TRUE;
   }
@@ -310,7 +326,54 @@ class AppModel extends Model {
     return !!preg_match("/^" . $basepath . ".+?/", $url);
   }
 
-  function cropImage($imgPath, $fromCenter = true, $width, $height) {
+  public function compress($imgPath) {
+    // Use PhpThumbFactory to manage image file
+    App::import('Vendor', 'PhpThumbFactory', array('file'=>'phpthumb/ThumbLib.inc.php'));
+    try {
+      $thumb = PhpThumbFactory::create($imgPath);
+    } catch (Exception $e) {
+      LogTool::error('Failed to create PhpThumbFactory. imgPath:'. $imgPath);
+    }
+
+    try {
+      // MEMO: PhpThumbFactoryの仕様でresizeUp=trueとしておくと、resizeターゲットより小さくても拡大してサイズを合わせられる。
+      $thumb->setOptions(array('jpegQuality' => 55));
+      $ret = $thumb->save($imgPath);
+    } catch (Exception $e) {
+      LogTool::error('Failed to write thumbnail file. thumbPath:'. $thumbPath);
+      return false;
+    }
+    return TRUE;
+  }
+
+  public function createThumb() {
+    // Input Data に thumbがセットされていない場合作成しない
+    if (!isset($this->data['NoModel']['thumb'])) return true;
+
+    if (isset($this->data['NoModel']['cropType'])) $fromCenter = !!($this->data['NoModel']['cropType']);
+    else $fromCenter = true;
+
+    // Memo: Build thumbnail
+    $path = self::toThumbPath($this->getImageFilePath());
+    copy($this->getImageFilePath(), $path);
+
+    return $this->cropImage($path, $fromCenter, $this->image_thumb_width, $this->image_thumb_height);
+  }
+  public function createHorizontal() {
+    // Input Data に thumbがセットされていない場合作成しない
+    if (!isset($this->data['NoModel']['horizontal'])) return true;
+
+    if (isset($this->data['NoModel']['cropType'])) $fromCenter = !!($this->data['NoModel']['cropType']);
+    else $fromCenter = true;
+
+    // Memo: Build Horizontal Image
+    $path = self::toHorizontalImagePath($this->getImageFilePath());
+    copy($this->getImageFilePath(), $path);
+
+    return $this->cropImage($path, $fromCenter, $this->image_horizontal_width, $this->image_horizontal_height);
+  }
+
+  public function cropImage($imgPath, $fromCenter = true, $width, $height) {
     // Use PhpThumbFactory to manage image file
     App::import('Vendor', 'PhpThumbFactory', array('file'=>'phpthumb/ThumbLib.inc.php'));
     try {

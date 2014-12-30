@@ -9,6 +9,8 @@ echo $this->Form->create('Menu', $formOption); ?>
                <?= $this->Form->input('NoModel.image_file', array('type' => 'file', 'accept' => 'image/*',
 							    'capture' => 'camera', 'label'=>'写真','class'=>'btn btn-info')) ?>
                <?= $this->Form->error('image_file') ?>
+               <?= $this->Form->hidden('NoModel.thumb') ?>
+               <?= $this->Form->hidden('NoModel.horizontal') ?>
             </div>
          </div>
          <div class="form-group">

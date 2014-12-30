@@ -79,6 +79,8 @@ echo $this->Form->create('Menu', $formOption); ?>
                  <?= $this->Form->radio('NoModel.cropType', 
 			  array('1' => '中央寄せ寄せ', '0' => '0,0ポイントから'),
 			  array('label' => false, 'default' => '1', 'legend'=> false)) ?>
+                 <?= $this->Form->hidden('NoModel.thumb') ?>
+                 <?= $this->Form->hidden('NoModel.horizontal') ?>
                  <br><div class="alert alert-warning"><span class="glyphicon glyphicon-info-sign"></span>プロフィール画像は 400 x 400ピクセル に縮小されます</div>
            </div>
         </div>
