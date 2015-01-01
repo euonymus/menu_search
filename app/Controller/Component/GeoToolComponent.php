@@ -55,10 +55,10 @@ class GeoToolComponent extends Component {
     $newLongitude = $data['coords']['longitude'];
 
     // Defaultポイントから現在地の距離が3000m以上の場合書き換えない。周辺機能サポート対象外
-    $oldLatitude  = self::GEO_LATITUDE_DEFAULT;
-    $oldLongitude = self::GEO_LONGITUDE_DEFAULT;
-    $distance = self::distance($oldLatitude, $oldLongitude, $newLatitude, $newLongitude);
-    if ($distance['distance'] > 3000) return false;
+    //$oldLatitude  = self::GEO_LATITUDE_DEFAULT;
+    //$oldLongitude = self::GEO_LONGITUDE_DEFAULT;
+    //$distance = self::distance($oldLatitude, $oldLongitude, $newLatitude, $newLongitude);
+    //if ($distance['distance'] > 3000) return false;
 
     // 以前保存したセッション内の位置から現在地の距離が100m以内の場合書き換えない。
     $existing = $this->read(true);
