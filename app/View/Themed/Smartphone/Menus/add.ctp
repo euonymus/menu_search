@@ -19,15 +19,15 @@ echo $this->Form->create('Menu', $formOption); ?>
 				 'div' => array('class' => 'col-lg-3'),
 				 'label' => '料理の名前')); ?>
          </div>
+
+         <?= $this->Map->place() ?>
          <div class="form-group">
             <?= $this->Form->input('Restaurant.name',
 					   array('class' => 'form-control',
-						 'options' => $restaurantList,
+						 //'options' => $restaurantList,
 						 'div' => array('class' => 'col-lg-3'),
 						 'label' => 'レストラン')); ?>
          </div>
-
-         <?= $this->Map->place() ?>
 
          <div class="form-group">
             <?= $this->Form->input('price',

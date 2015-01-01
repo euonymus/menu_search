@@ -64,6 +64,15 @@ var gmap = {
   setLatLngInput: (function(event){
       document.getElementById("show_lat").setAttribute("value",event.latLng.lat());
       document.getElementById("show_lng").setAttribute("value",event.latLng.lng());
+
+
+      var latlng = new google.maps.LatLng(event.latLng.lat(),event.latLng.lng());
+      var marker = new google.maps.Marker({
+	position: latlng,
+	    map:parent.map,
+      });
+
+
   }),
   // 位置情報取得開始。data has to have successCallback and errorCallback functions.
   getLocation: (function(data){
