@@ -219,6 +219,21 @@ class RestaurantTest extends CakeTestCase {
     $after = $this->Restaurant->find('first', array('conditions' => Restaurant::conditionById($res)));
     $this->assertIdentical($after['Restaurant']['name'], $data['Restaurant']['name']);
     $this->assertIdentical($after['RestaurantGeo']['latitude'], $data['RestaurantGeo']['latitude']);
+
+    // NG: Geo is NULL
+    $data = array(
+      'Restaurant' => array(
+        'name' => 'new restaurant2',
+       ),
+      'RestaurantGeo' => array(
+        'latitude' => NULL,
+        'longitude' => NULL,
+      ),
+    );
+    $res = $this->Restaurant->saveIfNotExist($data);
+    $this->assertFalse($res);
+    $expected = array('RestaurantGeo'=>array('latitude' => array('0' => 'notEmpty'), 'longitude' => array('0' => 'notEmpty')));
+    $this->assertIdentical($this->Restaurant->validationErrors, $expected);
   }
 
   public function testNearList() {

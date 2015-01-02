@@ -55,6 +55,16 @@ class RestaurantGeo extends AppModel {
 			//'on' => 'create', // Limit validation to 'create' or 'update' operations
 		),
 	),
+	'latitude' => array(
+		'notEmpty' => array(
+			'rule' => array('notEmpty'),
+		),
+	),
+	'longitude' => array(
+		'notEmpty' => array(
+			'rule' => array('notEmpty'),
+		),
+	),
   );
 
   /****************************************************************************/

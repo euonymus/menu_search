@@ -293,6 +293,36 @@ class MenuTest extends CakeTestCase {
     );
     $res = $this->Menu->saveThread($data);
     $this->assertIdentical($res, '4');
+
+
+
+    // If geo is NULL
+    $data = array(
+      'Restaurant' => array(
+        'name' => 'new restaurant hoge3',
+       ),
+      'RestaurantGeo' => array(
+        'latitude' => NULL,
+        'longitude' => NULL,
+      ),
+      'Menu' => array(
+        'name' => 'new menu hoge2',
+	'description' => '日替り麺・日替り小丼・サラダ・漬物',
+	'remarks' => '改行のテスト
+正しくパースされるといいな',
+	'combo' => false,
+	'lunch' => true,
+	'dinner' => false,
+	'price' => '900',
+	'tags' => '日替り麺,日本食',
+	'image' => '',
+      )
+    );
+    $res = $this->Menu->saveThread($data);
+
+    $this->assertFalse($res);
+    $expected = array('geo'=> array('0' => 'レストランの場所を特定してください。'));
+    $this->assertIdentical($this->Menu->validationErrors, $expected);
   }
 
   public function testRoadFromCsv() {

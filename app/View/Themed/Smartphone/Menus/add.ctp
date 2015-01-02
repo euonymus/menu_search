@@ -21,6 +21,7 @@ echo $this->Form->create('Menu', $formOption); ?>
          </div>
 
          <?= $this->Map->place() ?>
+         <?= $this->Form->error('geo') ?>
          <div class="form-group">
             <?= $this->Form->input('Restaurant.name',
 					   array('class' => 'form-control',

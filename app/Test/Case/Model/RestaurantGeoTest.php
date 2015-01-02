@@ -86,6 +86,18 @@ class RestaurantGeoTest extends CakeTestCase {
     parent::tearDown();
   }
 
+  public function testSave() {
+    // NG: geo = NULL
+    $data = array(
+		  'id' => 9,
+		  'latitude' => NULL,
+		  'longitude' => NULL,
+    );
+    $res = $this->RestaurantGeo->save($data);
+    $expected = array('latitude' => array('0' => 'notEmpty'), 'longitude' => array('0' => 'notEmpty'));
+    $this->assertIdentical($this->RestaurantGeo->validationErrors, $expected);
+  }
+
   public function testSetFieldDistanceFrom() {
     $latitude = '33.229498';
     $longitude = '131.547546';

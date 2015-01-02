@@ -161,7 +161,10 @@ class Menu extends AppModel {
     // Get Restaurant Info.
     $this->loadModel('Restaurant');
     $restaurant_id = $this->Restaurant->saveIfNotExist($data);
-    if (!$restaurant_id) return false;
+    if (!$restaurant_id) {
+      $this->invalidate('geo', 'レストランの場所を特定してください。');
+      return false;
+    }
 
     // Save Menu
     $data[__CLASS__]['restaurant_id'] = $restaurant_id;
