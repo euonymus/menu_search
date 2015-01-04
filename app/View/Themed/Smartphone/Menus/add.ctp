@@ -16,9 +16,15 @@ echo $this->Form->create('Menu', $formOption); ?>
          <div class="form-group">
             <?= $this->Form->input('name',
 			   array('class' => 'form-control',
-				 'div' => array('class' => 'col-lg-3'),
+				 'div' => array('class' => 'col-xs-8'),
 				 'label' => '料理の名前')); ?>
+            <?= $this->Form->input('price',
+			   array('class' => 'form-control',
+				 'div' => array('class' => 'col-xs-4'),
+				 'min' => 0,
+				 'label' => '金額')); ?>
          </div>
+
 
          <?= $this->Map->place() ?>
          <?= $this->Form->error('geo') ?>
@@ -27,22 +33,18 @@ echo $this->Form->create('Menu', $formOption); ?>
 					   array('class' => 'form-control',
 						 //'options' => $restaurantList,
 						 'div' => array('class' => 'col-lg-3'),
-						 'label' => 'レストラン')); ?>
+						 'label' => 'レストラン名')); ?>
          </div>
-
-         <div class="form-group">
-            <?= $this->Form->input('price',
-			   array('class' => 'form-control',
-				 'div' => array('class' => 'col-lg-3'),
-				 'min' => 0,
-				 'label' => '金額')); ?>
-         </div>
-         <div class="form-group">
-            <?= $this->Form->input('tag_id',
-					   array('class' => 'form-control',
-						 'options' => $menuTagList,
-						 'div' => array('class' => 'col-lg-3'),
-						 'label' => 'タグ')); ?>
+         <div class="tag-buttons row">
+            <div class="tag-button col-xs-3">
+               <?= $this->Form->input('tag_id',
+                                      array('type' => 'radio',
+                                            'options' => $menuTagList,
+                                            'separator'=> '</div><div class="tag-button col-xs-3">',
+                                            'div' => false,
+                                            'label' => array('class'=>'text-center'),
+                                            'legend'=>false)); ?>
+            </div>
          </div>
 
          <div class="form-group">
