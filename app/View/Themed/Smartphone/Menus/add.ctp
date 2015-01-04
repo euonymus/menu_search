@@ -35,12 +35,12 @@ echo $this->Form->create('Menu', $formOption); ?>
 						 'div' => array('class' => 'col-lg-3'),
 						 'label' => 'レストラン名')); ?>
          </div>
-         <div class="tag-buttons row">
-            <div class="tag-button col-xs-3">
+         <div class="tag-radios row">
+            <div class="tag-radio col-xs-3">
                <?= $this->Form->input('tag_id',
                                       array('type' => 'radio',
                                             'options' => $menuTagList,
-                                            'separator'=> '</div><div class="tag-button col-xs-3">',
+                                            'separator'=> '</div><div class="tag-radio col-xs-3">',
                                             'div' => false,
                                             'label' => array('class'=>'text-center'),
                                             'legend'=>false)); ?>

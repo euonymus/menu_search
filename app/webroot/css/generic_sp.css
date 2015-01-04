@@ -142,14 +142,35 @@ div#map {
 .row-picture img{
   width: 100%;
 }
+/* menu tag category */
+div.tag-button {
+  display: block;
+  height: 60px;
+  border-bottom: 1px solid #000000;
+  border-right: 1px solid #000000;
+  border-left: 1px solid #ffffff;
+  background: #e8c7be;
+  background-size: cover;
+  margin-bottom:5px;
+}
+div.tag-button a{
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: #000;
+  font-weight: bold;
+}
 /* menu edit */
-.tag-button {
+.tag-radio {
   padding:0;
 }
-.tag-buttons input[type=radio] {
+.tag-radios input[type=radio] {
   display: none;
 }
-.tag-buttons input[type=radio] + label {
+.tag-radios input[type=radio] + label {
   display: block;
   height: 60px;
   border-bottom: 1px solid #000000;
@@ -159,7 +180,7 @@ div#map {
   background-size: cover;
   //text-indent:-9999px;
 }
-.tag-buttons input[type=radio]:checked + label {
+.tag-radios input[type=radio]:checked + label {
   background: #ea9984;
   border-left: 1px solid #000000;
   border-top: 1px solid #000000;
@@ -167,51 +188,51 @@ div#map {
   border-right: 0px;
 }
 /* background-image for menu_tag */
-input#MenuTagId1[type=radio] + label {
+div.tag-button.tag1, input#MenuTagId1[type=radio] + label {
   background-image: url("/img/tag_curry.gif");
 }
-input#MenuTagId4[type=radio] + label {
+div.tag-button.tag4, input#MenuTagId4[type=radio] + label {
   background-image: url("/img/tag_thai_curry.gif");
 }
-input#MenuTagId8[type=radio] + label {
+div.tag-button.tag8, input#MenuTagId8[type=radio] + label {
   background-image: url("/img/tag_indian_curry.gif");
 }
-input#MenuTagId30[type=radio] + label {
+div.tag-button.tag30, input#MenuTagId30[type=radio] + label {
   background-image: url("/img/tag_pasta.gif");
 }
-input#MenuTagId13[type=radio] + label {
+div.tag-button.tag13, input#MenuTagId13[type=radio] + label {
   background-image: url("/img/tag_ramen.gif");
 }
-input#MenuTagId14[type=radio] + label {
+div.tag-button.tag14, input#MenuTagId14[type=radio] + label {
   background-image: url("/img/tag_tsukemen.gif");
 }
-input#MenuTagId24[type=radio] + label {
+div.tag-button.tag24, input#MenuTagId24[type=radio] + label {
   background-image: url("/img/tag_tantanmen.gif");
 }
-input#MenuTagId42[type=radio] + label {
+div.tag-button.tag42, input#MenuTagId42[type=radio] + label {
   background-image: url("/img/tag_udon.gif");
 }
-input#MenuTagId55[type=radio] + label {
+div.tag-button.tag55, input#MenuTagId55[type=radio] + label {
   background-image: url("/img/tag_setmenu.gif");
 }
-input#MenuTagId56[type=radio] + label {
+div.tag-button.tag56, input#MenuTagId56[type=radio] + label {
   background-image: url("/img/tag_meat.gif");
 }
-input#MenuTagId57[type=radio] + label {
+div.tag-button.tag57, input#MenuTagId57[type=radio] + label {
   background-image: url("/img/tag_fish.gif");
 }
-input#MenuTagId94[type=radio] + label {
+div.tag-button.tag94, input#MenuTagId94[type=radio] + label {
   background-image: url("/img/tag_local.gif");
 }
-input#MenuTagId71[type=radio] + label {
+div.tag-button.tag71, input#MenuTagId71[type=radio] + label {
   background-image: url("/img/tag_western.gif");
 }
-input#MenuTagId104[type=radio] + label {
+div.tag-button.tag104, input#MenuTagId104[type=radio] + label {
   background-image: url("/img/tag_chinese.gif");
 }
-input#MenuTagId128[type=radio] + label {
+div.tag-button.tag128, input#MenuTagId128[type=radio] + label {
   background-image: url("/img/tag_thai.gif");
 }
-input#MenuTagId115[type=radio] + label {
+div.tag-button.tag115, input#MenuTagId115[type=radio] + label {
   background-image: url("/img/tag_korean.gif");
 }
