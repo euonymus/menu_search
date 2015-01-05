@@ -18,7 +18,13 @@ class GeoController extends AppController {
     }
   }
 
-  public function admin_latlng() {
+  public function admin_latlng($latitude = false, $longitude = false) {
+    // TODO: remove below
+    $latitude = '35.64418424015282';
+    $longitude = '139.69862937927246';
+
+    $showLatLngInput = true;
+    $this->set(compact('showLatLngInput', 'latitude', 'longitude'));
   }
 
   /******************************************************************/
