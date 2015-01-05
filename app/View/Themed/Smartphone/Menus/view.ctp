@@ -1,4 +1,4 @@
-<? if (!is_null($menu['Menu']['horizontal_image'])): ?>
+<? if (U::arrPrepared('horizontal_image', $menu['Menu']) && !is_null($menu['Menu']['horizontal_image'])): ?>
 <div class="row-picture">
     <?= $this->Html->image($menu['Menu']['horizontal_image']) ?>
 </div>

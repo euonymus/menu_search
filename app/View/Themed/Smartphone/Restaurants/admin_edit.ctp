@@ -17,10 +17,12 @@ echo $this->Form->create('Restaurant', $formOption); ?>
 				 'div' => array('class' => 'col-lg-3'),
 				 'label' => '説明文')); ?>
         </div>
+<? /*
         <div class="form-group">
              <?= $this->Form->input('Station', array('options'=>$stations,
 					  'multiple' => true, 'class'=>'form-control', 'div'=>array('class'=>'col-lg-3'))) ?>
         </div>
+*/ ?>
         <br>
         <?= $this->Map->map(true, 'RestaurantGeo') ?>
 

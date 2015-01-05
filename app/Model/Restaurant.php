@@ -57,6 +57,7 @@ class Restaurant extends AppModel {
     $this->unbindModel(array('hasOne' => array('RestaurantGeo')), $reset);
   }
 
+/*
   public function bindStation($reset = TRUE) {
        $hasAndBelongsToMany = array(
 		'Station' => array(
@@ -79,6 +80,7 @@ class Restaurant extends AppModel {
   public function unbindStation($reset = TRUE) {
     $this->unbindModel(array('hasAndBelongsToMany' => array('Station')), $reset);
   }
+*/
 
   function bindMenu($reset = TRUE) {
     $bind = array(

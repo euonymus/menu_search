@@ -32,7 +32,7 @@ class RestaurantsController extends AppController {
       throw new NotFoundException(__('Invalid restaurant'));
     }
     $options = array('conditions' => array('Restaurant.' . $this->Restaurant->primaryKey => $id));
-    $this->Restaurant->bindStation(false);
+    //$this->Restaurant->bindStation(false);
     $this->Restaurant->bindRestaurantGeo();
     $restaurant = $this->Restaurant->find('first', $options);
     $this->set(compact('restaurant'));
@@ -64,7 +64,7 @@ class RestaurantsController extends AppController {
     if (!$this->Restaurant->exists($id)) {
       throw new NotFoundException(__('Invalid restaurant'));
     }
-    $this->Restaurant->bindStation(false);
+    //$this->Restaurant->bindStation(false);
     if ($this->request->is(array('post', 'put'))) {
       if ($this->Restaurant->saveAll($this->request->data)) {
 	$this->_setFlash(__('The restaurant has been saved.'));
@@ -80,9 +80,9 @@ class RestaurantsController extends AppController {
       $this->GeoTool->initMap($this->request->data['RestaurantGeo']);
     }
     
-    $this->loadModel('Station');
-    $stations = $this->Station->find('list');
-    $this->set(compact('stations'));
+    //$this->loadModel('Station');
+    //$stations = $this->Station->find('list');
+    //$this->set(compact('stations'));
   }
 
   public function admin_delete($id = null) {
