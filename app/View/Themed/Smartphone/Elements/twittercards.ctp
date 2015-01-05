@@ -1,7 +1,7 @@
 <?
 $defaultTitle = h($title_for_layout);
 $defaultDesc  = isset($description_for_layout) ? h($description_for_layout) : '';
-$defaultImage = 'http://coozo.co/img/coozo_logo_200_200.png';
+$defaultImage = 'http://coozo.co/img/coozo_logo_social_default.png';
 $twittercards = array(
      'card'        => 'summary',
      'site'        => '@coozo_office',

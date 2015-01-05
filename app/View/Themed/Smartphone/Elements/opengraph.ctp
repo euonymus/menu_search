@@ -13,7 +13,7 @@
   }
   //og:type end
 
-  $defaultImage = 'http://coozo.co/img/coozo_logo_200_200.png';
+  $defaultImage = 'http://coozo.co/img/coozo_logo_social_default.png';
   $defaultUrl = Router::reverse($this->request);
   //$defaultUrl = isset($canonical) ? '/' . $canonical : false;
 
