@@ -5,7 +5,7 @@
 
    <div class="row">
       <div class="col-xs-2">
-   <?//= $this->Html->image($fbuser['Fbuser']['profile_image_url']) ?>
+         <?= $this->Html->image(UserHelper::fbImagePath($fbuser['Fbuser']['id'])) ?>
       </div>
       <div class="col-xs-10">
          <div>

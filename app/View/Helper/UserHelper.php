@@ -28,4 +28,7 @@ class UserHelper extends AppHelper {
   public function hasTwuser() {
     return !empty($this->_View->viewVars['twuser']);
   }
+  public static function fbImagePath($fbuser_id) {
+    return 'https://graph.facebook.com/'.$fbuser_id.'/picture?type=square';
+  }
 }
