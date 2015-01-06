@@ -48,12 +48,19 @@ class AppController extends Controller {
   const TITLE_SITE_NAME = 'Coozo';
   static $title_for_layout = self::TITLE_SITE_NAME;
   static $description_for_layout = 'Coozoはこれまでに無い次世代型ランチメニュー検索サービス。ここは大きなフードコート。食べたいメニューを選んでお店にGo！';
+  public $breadcrumb = false;
 
   public function beforeFilter() {
     $this->Auth->allow();  // Empty allows all actions
     if ($this->Auth->loggedIn()) {
-      $this->currentUser = AuthComponent::user();
-      $this->set(array('currentUser' => $this->currentUser,));
+      $currentUser = AuthComponent::user();
+      $this->currentUser = $currentUser;
+
+      $this->loadModel('Fbuser');
+      $this->loadModel('Twuser');
+      $fbuser = $this->Fbuser->findByUserId($this->currentUser['id']);
+      $twuser = $this->Twuser->findByUserId($this->currentUser['id']);
+      $this->set(compact('currentUser','fbuser','twuser'));
     }
 
     $this->isSmartphone = $this->_isSmartphone();
@@ -71,7 +78,8 @@ class AppController extends Controller {
     $site_name = self::TITLE_SITE_NAME;
     $title_for_layout = self::$title_for_layout . ' | ランチメニュー検索';
     $description_for_layout = self::$description_for_layout;
-    $this->set(compact('site_name', 'title_for_layout', 'description_for_layout'));
+    $breadcrumb = $this->breadcrumb;
+    $this->set(compact('site_name', 'title_for_layout', 'description_for_layout', 'breadcrumb'));
   }
 
   /**************************************************************************************/

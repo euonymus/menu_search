@@ -21,4 +21,11 @@ class UserHelper extends AppHelper {
     }
     return '';
   }
+
+  public function hasFbuser() {
+    return !empty($this->_View->viewVars['fbuser']);
+  }
+  public function hasTwuser() {
+    return !empty($this->_View->viewVars['twuser']);
+  }
 }
