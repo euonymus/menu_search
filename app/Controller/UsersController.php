@@ -78,8 +78,14 @@ class UsersController extends AppController {
     $this->_callbackPreparation();
 
     if ($this->Auth->loggedIn()) {
-      // If loggedin, it generates relation btw auth and opauth
-      $saved = $this->{$this->childModel}->createRelation($this->currentUser['username'], $this->request->data['auth']);
+      $currentRelation = $this->{$this->childModel}->findByUserId($this->currentUser['id']);
+      if (empty($currentRelation)) {
+	// If loggedin and childModel doesn't have a record for the user yet, it generates relation btw auth and opauth
+	$saved = $this->{$this->childModel}->createRelation($this->currentUser['username'], $this->request->data['auth']);
+      } else {
+	// If loggedin and chidlModel already has a record, check if the ids are same.
+	$saved = ($currentRelation[$this->childModel]['id'] == $this->request->data['auth']['raw']['id']);
+      }
     } else {
       // If not loggedin, it's a normal login or generating new account
       $saved = $this->{$this->childModel}->saveOpauth($this->request->data['auth']);
@@ -90,6 +96,9 @@ class UsersController extends AppController {
       $this->Session->delete(self::SESSION_LOGIN);
       $this->Session->delete(self::SESSION_CALLBACK_PATH);
       $this->redirect($this->callback_path);
+    } else {
+      $this->_setFlash('Something went wrong while you are creating a relationship btw social media', true);
+      $this->redirect('/');
     }
 
     if (isset($this->{$this->childModel}->validationErrors['opauth'])
