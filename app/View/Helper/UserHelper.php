@@ -14,9 +14,8 @@ class UserHelper extends AppHelper {
 
   public function mypageLink() {
     if ($user = $this->_View->Session->read('Auth.User')){
-      if (isset($user['thumbnail']) && !empty($user['thumbnail'])) $src = $user['thumbnail'];
-      else $src = $user['image'];
-
+      $src = $user['image'];
+      if (U::isLocalPath($src) && isset($user['thumbnail']) && !empty($user['thumbnail'])) $src = $user['thumbnail'];
       return $this->Html->link($this->Html->image($src, array('height'=>'50pt')),'/mypage',array('escape'=>false));
     }
     return '';

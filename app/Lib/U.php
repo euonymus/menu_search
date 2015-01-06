@@ -186,4 +186,9 @@ class U extends Object {
     if (empty($datetime)) return false;
     return date('Y-m-d', strtotime($datetime));
   }
+
+  public static function isLocalPath($path) {
+    if (!is_string($path) || empty($path)) return false;
+    return !!preg_match("/^\/.+?/", $path);
+  }
 }
