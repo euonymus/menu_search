@@ -139,7 +139,7 @@ div#map {
 }
 /* menu price */
 .price {
-  color:#ffaa88;
+  color:#884422;
   max-width:80px;
   font-weight:bolder;
   font-size:14pt;
@@ -148,8 +148,8 @@ div#map {
   -webkit-border-radius: 4px; /* Safari,Chrome */
   border-radius: 4px;         /* CSS3 */
 
-  border: 1px green solid;
-  background-color: #ccffcc;
+  //border: 1px green solid;
+  background-color: #cccccc;
   padding: 2px;
 }
 /* menu image */
