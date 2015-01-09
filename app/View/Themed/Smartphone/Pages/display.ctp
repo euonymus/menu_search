@@ -6,4 +6,13 @@
    <div>
    <?= $this->element('regions') ?>
    </div>
+
+        <div style="padding-top:70px;">
+            <div>
+               <?= $this->Html->link('利用規約', '/terms', array('target' => '_blank')) ?>
+            </div>
+            <div>
+               <?= $this->Html->link('プライバシーポリシー', '/privacy', array('target' => '_blank')) ?>
+            </div>
+        </div>
 </div>
