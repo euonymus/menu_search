@@ -76,8 +76,7 @@
 
 <h2>第９条（お問い合わせ窓口）</h2>
 <p>本ポリシーに関するお問い合わせは，下記の窓口までお願いいたします。</p>
-<p>住所：<br>
-プロダクション名：euonymus productions<br>
+<p>プロダクション名：euonymus productions<br>
 担当部署：ユーザサポート係<br>
 Eメールアドレス：coozo.office@gmail.com</p>
 
