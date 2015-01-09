@@ -141,6 +141,20 @@ div#map {
   border-bottom:1px solid #008800;
   background-color: #dddddd;
 }
+/* menu camera */
+.camera-open {
+  display:block;
+  width: 45px;
+  height: 45px;
+  background-color: #cccccc;
+  background-image: url("/img/icon-camera.png");
+
+  background-size: cover;
+  text-indent:-9999px;
+}
+.picture-taken {
+  background-image: url("/img/icon-camera-taken.png");
+}
 /* menu price */
 .price {
   color:#884422;

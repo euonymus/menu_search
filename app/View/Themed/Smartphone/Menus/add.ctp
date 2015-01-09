@@ -5,18 +5,17 @@ $formOption = array('class' => 'form-horizontal','enctype' => 'multipart/form-da
 echo $this->Form->create('Menu', $formOption); ?>
       <fieldset>
          <div class="form-group">
-            <div class="col-lg-6">
+            <div class="col-xs-2">
                <?= $this->Form->input('NoModel.image_file', array('type' => 'file', 'accept' => 'image/*',
-							    'capture' => 'camera', 'label'=>'写真','class'=>'btn btn-info')) ?>
+                                            'onchange'=>"$('#NoModelImageFile').addClass('picture-taken');",
+                                            'capture' => 'camera', 'label'=>false,'class'=>'camera-open')) ?>
                <?= $this->Form->error('image_file') ?>
                <?= $this->Form->hidden('NoModel.thumb') ?>
                <?= $this->Form->hidden('NoModel.horizontal') ?>
             </div>
-         </div>
-         <div class="form-group">
             <?= $this->Form->input('name',
 			   array('class' => 'form-control',
-				 'div' => array('class' => 'col-xs-8'),
+				 'div' => array('class' => 'col-xs-6'),
 				 'label' => '料理の名前')); ?>
             <?= $this->Form->input('price',
 			   array('class' => 'form-control',
