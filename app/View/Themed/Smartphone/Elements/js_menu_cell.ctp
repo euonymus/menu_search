@@ -1,17 +1,17 @@
-<a href="/menus/view/{{list.Menu.id}}" style="display:block;width:100%;height:100%">
+<a href="/menus/view/{{list.Menu.id}}" style="display:block;width:100%;height:100%;text-decoration:none;">
 <div class="list-group">
     <div class="list-group-item">
         <h2 class="list-group-item-heading">{{list.Menu.name}}
            <small><i class="mdi-maps-store-mall-directory" style="font-size: 20pt;"></i>{{list.Restaurant.name}}</small></h2>
 
         <div class="row">
-            <div class="col-xs-5" ng-if="list.Menu.image">
+            <div class="col-xs-5" ng-if="!!list.Menu.image">
                 <img src="{{list.Menu.thumbnail}}" alt="icon" style="width:100%;">
             </div>
 
-            <div class="col-xs-6">
+            <div ng-class="!!list.Menu.image ? 'col-xs-6' : 'col-xs-12'">
                 <p class="list-group-item-text">
-                    <span class="label label-info">&yen;{{list.Menu.price|number}}</span>
+                    <span class="price">&yen;{{list.Menu.price|number}}</span>
                     <i class="mdi-action-grade mdi-material-lime" style="font-size:16pt;"></i>
                     <i ng-if="list.Menu.point > 5" class="mdi-action-grade mdi-material-lime" style="font-size:16pt;"></i>
                     <i ng-if="list.Menu.point > 10" class="mdi-action-grade mdi-material-lime" style="font-size:16pt;"></i>

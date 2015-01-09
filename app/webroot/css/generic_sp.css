@@ -137,6 +137,21 @@ img.img-thumbnail {
 div#map {
  height:120pt;
 }
+/* menu price */
+.price {
+  color:#ffaa88;
+  max-width:80px;
+  font-weight:bolder;
+  font-size:14pt;
+
+  -moz-border-radius: 4px;    /* Firefox */
+  -webkit-border-radius: 4px; /* Safari,Chrome */
+  border-radius: 4px;         /* CSS3 */
+
+  border: 1px green solid;
+  background-color: #ccffcc;
+  padding: 2px;
+}
 /* menu image */
 .row-picture{
   height: 180pt;
