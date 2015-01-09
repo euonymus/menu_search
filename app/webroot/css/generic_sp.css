@@ -137,6 +137,10 @@ img.img-thumbnail {
 div#map {
  height:120pt;
 }
+.selected {
+  border-bottom:1px solid #008800;
+  background-color: #dddddd;
+}
 /* menu price */
 .price {
   color:#884422;

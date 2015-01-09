@@ -26,8 +26,6 @@ echo $this->Form->create('Menu', $formOption); ?>
          </div>
 
 
-         <?= $this->Map->place() ?>
-         <?= $this->Form->error('geo') ?>
          <div class="form-group">
             <?= $this->Form->input('Restaurant.name',
 					   array('class' => 'form-control',
@@ -35,6 +33,8 @@ echo $this->Form->create('Menu', $formOption); ?>
 						 'div' => array('class' => 'col-lg-3'),
 						 'label' => 'レストラン名')); ?>
          </div>
+         <?= $this->Map->place() ?>
+         <?= $this->Form->error('geo') ?>
          <div class="tag-radios row">
             <div class="tag-radio col-xs-3">
                <?= $this->Form->input('tag_id',

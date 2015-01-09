@@ -49,6 +49,8 @@
 		    input.setAttribute('value', marker_m.name);
 		    document.getElementById("show_lat").setAttribute("value",marker_m.getPosition().lat());
 		    document.getElementById("show_lng").setAttribute("value",marker_m.getPosition().lng());
+		    $("#RestaurantName").removeClass("selected");
+		    setTimeout("$('#RestaurantName').addClass('selected')", 200);
                 });
 	      }
 
@@ -62,7 +64,6 @@
 <? $this->Html->scriptEnd();?>
 
 <div class="form-group">
-  <label class="container">レストラン場所</label>
   <div id="map"></div>
   <?= $this->element('latlngInput', array('model' => 'RestaurantGeo')) ?>
 </div>
