@@ -23,6 +23,14 @@ echo $this->Form->create('User', $formOption); ?>
         ));
 */ ?>
         </div>
+        <div class="row">
+            <div class="col-xs-4">
+               <?= $this->Html->link('利用規約', '/terms', array('target' => '_blank')) ?>
+            </div>
+            <div class="col-xs-8">
+               <?= $this->Html->link('プライバシーポリシー', '/privacy', array('target' => '_blank')) ?>
+            </div>
+        </div>
         <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">
                 <?php echo $this->Form->submit('サインアップ', array('class'=>'btn btn-success', 'div' => false)); ?>
