@@ -3,6 +3,12 @@
 $(document).ready(function() {
 	$('#simple-menu').sidr();
 });
+
+<? /* TODO: remove it later, because this is only a mixpanel testing purpose */ ?>
+mixpanel.track_links("#sidr a", "click nav link", {
+  "referrer": document.referrer
+});
+
 <? $this->Html->scriptEnd();?>
 <div id="sidr">
     <div class="nav-title text-center">アカウント</div>
