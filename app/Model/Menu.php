@@ -145,6 +145,9 @@ class Menu extends AppModel {
   public function initMenuData() {
     $datas = self::roadFromCsv();
     foreach($datas as $data) {
+      if (!empty($data['Menu']['image'])) {
+	$data['Menu']['point'] = 1;
+      }
       $saved = $this->saveThread($data);
       if (!$saved) {
 	LogTool::error('Failed to save menu from csvfile. $data='.LogTool::formVal($data));

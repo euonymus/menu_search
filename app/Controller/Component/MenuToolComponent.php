@@ -23,7 +23,7 @@ class MenuToolComponent extends Component {
     $this->Controller->Menu->bindRestaurant();
     $options['order'] = array('Menu.point' => 'DESC');
     // If Menu.restaurant_id exists, order should be written
-    if (U::arrPrepared('Menu.restaurant_id', $options['conditions'])
+    if (U::arrPrepared('conditions', $options) && U::arrPrepared('Menu.restaurant_id', $options['conditions'])
 	&& !empty($options['conditions']['Menu.restaurant_id']) && is_array($options['conditions']['Menu.restaurant_id'])) {
       //    if (isset($options['conditions']['Menu.restaurant_id']) && is_array($options['conditions']['Menu.restaurant_id'])) {
       $options['order']
