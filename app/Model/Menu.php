@@ -101,6 +101,13 @@ class Menu extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
+		'tag_id' => array(
+			'notEmpty' => array(
+				'rule' => array('notEmpty'),
+				'message' => 'Tagを選択してください',
+				'required' => true,
+			),
+		),
 	);
 
   /****************************************************************************/

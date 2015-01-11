@@ -97,8 +97,11 @@ class MenusController extends AppController {
     $this->set('menu', $menu);
     $this->GeoTool->initMap($menu['Restaurant']['RestaurantGeo']);
 
+    // SEO
     self::$title_for_layout = $menu['Restaurant']['name'] .'の'. $menu['Menu']['name'] . ' - '.self::$title_for_layout;
     self::$description_for_layout = $menu['Restaurant']['name'] .'の'. $menu['Menu']['name'] . ' '.$menu['Menu']['description'] . ' '.$menu['Menu']['remarks'];
+    if (!empty($menu['Menu']['image'])) $socialImage = $menu['Menu']['image'];
+    $this->set(compact('socialImage'));
   }
 
   public function like($id = false) {

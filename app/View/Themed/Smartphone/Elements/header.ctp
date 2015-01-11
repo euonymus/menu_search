@@ -9,9 +9,9 @@
         <div class="text-right">
 
 <? if ($this->User->loggedIn()): ?>
-        <div style="float:right;margin:10px 10px 0px 10px;"><a href="/geo/init/?location=<?= urlencode('/menus/add/') ?>"><?= UHelper::pictCamera('23pt') ?></a></div>
+        <div style="float:right;margin:10px 10px 0px 10px;"><a href="/geo/init/?location=<?= urlencode('/menus/add/') ?>"><?= UHelper::pictAddBox('23pt') ?></a></div>
 <? else: ?>
-        <div style="float:right;margin:10px 10px 0px 10px;"><a href="/users/login/?location=<?= urlencode('/menus/add/') ?>"><?= UHelper::pictCamera('23pt') ?></a></div>
+        <div style="float:right;margin:10px 10px 0px 10px;"><a href="/users/login/?location=<?= urlencode('/menus/add/') ?>"><?= UHelper::pictAddBox('23pt') ?></a></div>
 <? endif; ?>
 
             <?= $this->User->mypageLink() ?>

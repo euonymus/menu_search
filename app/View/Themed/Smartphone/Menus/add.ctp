@@ -4,12 +4,12 @@
 $formOption = array('class' => 'form-horizontal','enctype' => 'multipart/form-data', 'action' => 'upload','type' => 'post', 'url' => $this->here);
 echo $this->Form->create('Menu', $formOption); ?>
       <fieldset>
+         <?= $this->Form->error('image_file') ?>
          <div class="form-group">
             <div class="col-xs-2">
                <?= $this->Form->input('NoModel.image_file', array('type' => 'file', 'accept' => 'image/*',
                                             'onchange'=>"$('#NoModelImageFile').addClass('picture-taken');",
                                             'capture' => 'camera', 'label'=>false,'class'=>'camera-open')) ?>
-               <?= $this->Form->error('image_file') ?>
                <?= $this->Form->hidden('NoModel.thumb') ?>
                <?= $this->Form->hidden('NoModel.horizontal') ?>
             </div>
@@ -23,7 +23,6 @@ echo $this->Form->create('Menu', $formOption); ?>
 				 'min' => 0,
 				 'label' => '金額')); ?>
          </div>
-
 
          <div class="form-group">
             <?= $this->Form->input('Restaurant.name',

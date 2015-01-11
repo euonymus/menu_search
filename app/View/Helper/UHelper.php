@@ -130,4 +130,7 @@ class UHelper extends AppHelper {
   public static function pictCamera($font_size = '20pt', $color = false) {
     return self::pictgram("mdi-image-camera-alt", $font_size, $color);
   }
+  public static function pictAddBox($font_size = '20pt', $color = false) {
+    return self::pictgram("mdi-content-add-box", $font_size, $color);
+  }
 }
