@@ -5,7 +5,8 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/"><?= $this->Html->image('/img/coozo_logo.png', array('height'=>'100%', 'alt'=>$site_name, 'title'=>$site_name)) ?></a>
+<? /* MEMO: height:120% はとりあえずで対応してるので後でちゃんとケアする */ ?>
+        <a class="navbar-brand" href="/"><?= $this->Html->image('/img/coozo_logo.png', array('height'=>'120%', 'alt'=>$site_name, 'title'=>$site_name)) ?></a>
         <div class="text-right">
 
 <? if ($this->User->loggedIn()): ?>
