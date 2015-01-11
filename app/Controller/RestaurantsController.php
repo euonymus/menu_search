@@ -14,6 +14,10 @@ class RestaurantsController extends AppController {
     $this->_loadComponent('MenuTool');
     $this->loadModel('Station');
     $this->set('stations', $this->Station->find('list'));
+
+    // SEO
+    self::$title_for_layout = '駅からレストラン検索 - '.self::$title_for_layout;
+    self::$description_for_layout = '駅を選んでレストランを比較！一番好みの食べたい料理を見つけてお店へGo！';
   }
 
   public function index() {
@@ -23,6 +27,18 @@ class RestaurantsController extends AppController {
     $this->_loadComponent('StationTool');
     $this->set('restaurants', $this->RestaurantTool->search(true));
     $this->StationTool->setStationName();
+
+    // html title
+    $station = $this->viewVars['station'];
+    $currentGeo = $this->viewVars['currentGeo'];
+    $title = '';
+    if ($station) $title .= $station.'駅周辺の';
+    elseif ($currentGeo) {
+      $title .= '周辺の';
+    }
+    $title .= 'レストラン検索結果';
+    self::$title_for_layout = $title . ' - '.self::$title_for_layout;
+    self::$description_for_layout = $title . 'を人気順に表示します！エリアや種類でランチメニューを選んで比較！一番好みの食べたい料理を見つけてお店へGo！';
   }
 
   public function view($id = null) {
@@ -41,6 +57,10 @@ class RestaurantsController extends AppController {
     // Menu list
     $this->_loadComponent('MenuTool');
     $this->set('menus', $this->MenuTool->listByRestaurant($id, true));
+
+    // SEO
+    self::$title_for_layout = $restaurant['Restaurant']['name'] . ' - '.self::$title_for_layout;
+    self::$description_for_layout = $restaurant['Restaurant']['name'] . ' '.$restaurant['Restaurant']['description'] . ' - ' . self::$description_for_layout;;
   }
 
   /******************************************************************/
