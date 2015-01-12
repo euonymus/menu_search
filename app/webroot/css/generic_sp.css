@@ -238,12 +238,13 @@ div#map {
 div.tag-button {
   display: block;
   height: 60px;
-  border-bottom: 1px solid #000000;
-  border-right: 1px solid #000000;
-  border-left: 1px solid #ffffff;
+  width:80px;
+  /* border-bottom: 1px solid #000000; */
+  /* border-right: 1px solid #000000; */
+  /* border-left: 1px solid #ffffff; */
   background: #e8c7be;
   background-size: cover;
-  margin-bottom:5px;
+  margin:3px;
 }
 div.tag-button a{
   display: block;
@@ -265,15 +266,17 @@ div.tag-button a{
 .tag-radios input[type=radio] + label {
   display: block;
   height: 60px;
-  border-bottom: 1px solid #000000;
-  border-right: 1px solid #000000;
-  border-left: 1px solid #ffffff;
-  background: #e8c7be;
+  /* border-bottom: 1px solid #000000; */
+  /* border-right: 1px solid #000000; */
+  /* border-left: 1px solid #ffffff; */
+  /* background: #e8c7be; */
+  background: #bbb;
   background-size: cover;
   //text-indent:-9999px;
+  margin:3px;
 }
 .tag-radios input[type=radio]:checked + label {
-  background: #ea9984;
+  background: #e89681;
   border-left: 1px solid #000000;
   border-top: 1px solid #000000;
   border-bottom: 0px;

@@ -33,6 +33,8 @@ echo $this->Form->create('Menu', $formOption); ?>
          </div>
          <?= $this->Map->place() ?>
          <?= $this->Form->error('geo') ?>
+
+         <div style="font-weight:bold;">タグを選択</div>
          <div class="tag-radios row">
             <div class="tag-radio col-xs-3">
                <?= $this->Form->input('tag_id',
