@@ -9,6 +9,9 @@
 
         <div style="padding-top:70px;">
             <div>
+               <?= $this->Html->link('Coozoとは', '/about', array('target' => '_blank')) ?>
+            </div>
+            <div>
                <?= $this->Html->link('利用規約', '/terms', array('target' => '_blank')) ?>
             </div>
             <div>
