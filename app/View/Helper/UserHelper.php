@@ -16,7 +16,7 @@ class UserHelper extends AppHelper {
     if ($user = $this->_View->Session->read('Auth.User')){
       $src = $user['image'];
       if (U::isLocalPath($src) && isset($user['thumbnail']) && !empty($user['thumbnail'])) $src = $user['thumbnail'];
-      return $this->Html->link($this->Html->image($src, array('height'=>'50pt')),'/mypage',array('escape'=>false));
+      return $this->Html->link($this->Html->image($src),'/mypage',array('escape'=>false));
     }
     return '';
   }

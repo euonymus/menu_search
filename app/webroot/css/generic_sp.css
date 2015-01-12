@@ -1,3 +1,60 @@
+/** header nav */
+div#dummy-header {
+  display: block;
+  width: 100%;
+  height: 50px;
+  background-color:#333;
+  margin:0px;
+}
+div#header {
+  display: block;
+  width: 100%;
+  height: 50px;
+  background-color:#e89681;
+  margin:0px;
+  position: fixed;
+  top: 0;
+  left:0px;
+  z-index:1;
+}
+.sidr-open div#header {
+  left:260px;
+}
+div#header .header-toggle {
+  display: block;
+  height: 50px;
+  width: 60px;
+  background-image: url("/img/icon-list.gif");
+  background-size: 44px auto;
+  background-repeat: no-repeat;
+  background-position: center;
+  float:left;
+}
+div#header .header-body {
+  display: block;
+  height: 50px;
+  float:left;
+}
+div#header .header-add {
+  display: block;
+  float:right;
+  margin: 10px 10px 0px 10px;
+}
+div#header .header-user {
+  display: block;
+  height: 50px;
+  width: 50px;
+  float:right;
+}
+div#header .header-user img {
+  height:50px;
+}
+div#header .clear {
+  clear:both;
+}
+div#header .site-logo {
+  height:100%;
+}
 /** To alway show burgers on navbar **/
 .navbar-header {
   float: none;
@@ -33,7 +90,6 @@ h2 {
 }
 body {
   position:relative !important;
-  top:45pt;
 }
 body > div.navbar {
   position:fixed;
