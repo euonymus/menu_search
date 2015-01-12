@@ -105,7 +105,7 @@ class Menu extends AppModel {
 			'notEmpty' => array(
 				'rule' => array('notEmpty'),
 				'message' => 'Tagを選択してください',
-				'required' => true,
+				/* 'required' => true, */
 			),
 		),
 	);
