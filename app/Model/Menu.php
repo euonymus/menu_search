@@ -146,6 +146,23 @@ class Menu extends AppModel {
     $this->unbindModel(array('hasMany' => array('MenuUser')), $reset);
   }
 
+  function bindMenuRegistrant($reset = TRUE) {
+    $bind = array(
+      'hasMany' => array(
+        'MenuRegistrant' => array(
+          'className'  => 'MenuRegistrant',
+          'foreignKey' => 'menu_id',
+          'order' => 'created desc',
+        )
+      )
+    );
+    $this->bindModel($bind, $reset);
+  }
+
+  function unbindMenuRegistrant($reset = TRUE) {
+    $this->unbindModel(array('hasMany' => array('MenuRegistrant')), $reset);
+  }
+
   /****************************************************************************/
   /* Menu Data Initializer                                                    */
   /****************************************************************************/

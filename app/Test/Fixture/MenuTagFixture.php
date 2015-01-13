@@ -4,37 +4,27 @@
  *
  */
 class MenuTagFixture extends CakeTestFixture {
+  public $import = 'MenuTag';
 
-/**
- * Fields
- *
- * @var array
- */
-	public $fields = array(
-		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => true, 'key' => 'primary'),
-		'menu' => array('type' => 'string', 'null' => false, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'accessories' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
-		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
-		'indexes' => array(
-			'PRIMARY' => array('column' => 'id', 'unique' => 1)
-		),
-		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
-	);
-
-/**
- * Records
- *
- * @var array
- */
-	public $records = array(
-		array(
-			'id' => 1,
-			'menu' => 'Lorem ipsum dolor sit amet',
-			'accessories' => 'Lorem ipsum dolor sit amet',
-			'created' => '2014-11-03 10:38:47',
-			'modified' => '2014-11-03 10:38:47'
-		),
-	);
+  public $records = array(
+	array(
+		'id' => 1,
+		'name' => 'カレー',
+		'accessories' => '',
+		'order' => 1,
+		'status' => 1,
+		'created' => '2014-11-03 10:38:47',
+		'modified' => '2014-11-03 10:38:47'
+	),
+	array(
+		'id' => 2,
+		'name' => 'カレーライス',
+		'accessories' => 'カレー,日本食',
+		'order' => 999999999,
+		'status' => 0,
+		'created' => '2014-11-03 10:38:47',
+		'modified' => '2014-11-03 10:38:47'
+	),
+  );
 
 }
