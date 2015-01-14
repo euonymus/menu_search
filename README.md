@@ -1,49 +1,41 @@
-# CakePHP
+# coozo
+coozo（食うぞ）は次世代型ランチメニュー検索サービスです。
+町を大きなフードコートに見立てて、レストランではなく食べたい料理から検索して比較検討する事ができます。
+例えばラーメンを食べたい場合にお店単位ではなく個々のメニューで人気順に各料理の写真を比較しながら選ぶ事ができます。
 
-[![Bake Status](https://secure.travis-ci.org/cakephp/cakephp.png?branch=master)](http://travis-ci.org/cakephp/cakephp)
-[![Latest Stable Version](https://poser.pugx.org/cakephp/cakephp/v/stable.svg)](https://packagist.org/packages/cakephp/cakephp)
-[![License](https://poser.pugx.org/cakephp/cakephp/license.svg)](https://packagist.org/packages/cakephp/cakephp)
+# Service URL
+http://coozo.co
 
-[![CakePHP](http://cakephp.org/img/cake-logo.png)](http://www.cakephp.org)
+# Requirement
 
-CakePHP is a rapid development framework for PHP which uses commonly known design patterns like Active Record, Association Data Mapping, Front Controller and MVC.
-Our primary goal is to provide a structured framework that enables PHP users at all levels to rapidly develop robust web applications, without any loss to flexibility.
+* Linux
+* Apache
+* MySQL
+* PHP
 
+# Prepare following files as git submodules
 
-## Some Handy Links
+    $ git submodule init
+    $ git submodule update
 
-[CakePHP](http://www.cakephp.org) - The rapid development PHP framework
+# Prepare the Phpunit source
 
-[CookBook](http://book.cakephp.org) - THE CakePHP user documentation; start learning here!
+    $ cd {menu_search_env}/app
+    $ Console/cake Phpunit.Phpunit install
 
-[API](http://api.cakephp.org) - A reference to CakePHP's classes
+（略）
+Installing PHPUnit 3.7 ...
+1. /app/Vendor/
+2. /vendors/
+Select VENDOR path to install into (q/1/2)
+[q] > 1
 
-[Plugins](http://plugins.cakephp.org/) - A repository of extensions to the framework
+* インストール場所を聞かれるので、「app/Vendor」を選択
 
-[The Bakery](http://bakery.cakephp.org) - Tips, tutorials and articles
+# Prepare Opauth source
 
-[Community Center](http://community.cakephp.org) - A source for everything community related
+    $ cd {menu_search_env}/app/Plugin/Opauth
+    $ git checkout master
+    $ git submodule init
+    $ git submodule update
 
-[Training](http://training.cakephp.org) - Join a live session and get skilled with the framework
-
-[CakeFest](http://cakefest.org) - Don't miss our annual CakePHP conference
-
-[Cake Software Foundation](http://cakefoundation.org) - Promoting development related to CakePHP
-
-
-## Get Support!
-
-[#cakephp](http://webchat.freenode.net/?channels=#cakephp) on irc.freenode.net - Come chat with us, we have cake
-
-[Google Group](https://groups.google.com/group/cake-php) - Community mailing list and forum
-
-[GitHub Issues](https://github.com/cakephp/cakephp/issues) - Got issues? Please tell us!
-
-[Roadmaps](https://github.com/cakephp/cakephp/wiki#roadmaps) - Want to contribute? Get involved!
-
-
-## Contributing
-
-[CONTRIBUTING.md](CONTRIBUTING.md) - Quick pointers for contributing to the CakePHP project
-
-[CookBook "Contributing" Section (2.x)](http://book.cakephp.org/2.0/en/contributing.html) [(3.0)](http://book.cakephp.org/3.0/en/contributing.html) - Version-specific details about contributing to the project
