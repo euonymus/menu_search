@@ -19,8 +19,6 @@ $('.toggle-optional-input').click(function(){
 
       $('.optional-input').slideUp('fast');
     }
-
-
 });
 <? $this->Html->scriptEnd();?>
 

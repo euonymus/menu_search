@@ -155,12 +155,12 @@ class MenusController extends AppController {
   }
   public function add($restaurant_id = false) {
     $this->loadModel('Restaurant');
-    $this->Restaurant->bindMenu();
     $restaurant = $this->Restaurant->findById($restaurant_id);
     if (empty($restaurant)) {
       throw new NotFoundException(__('Invalid restaurant'));
     }
-    $this->set('restaurant', $restaurant);
+    $menuList = $this->Menu->listByRestaurant($restaurant_id);
+    $this->set(compact('restaurant', 'menuList'));
 
     $this->loadModel('MenuTag');
     $this->set('menuTagList', $this->MenuTag->getList());
@@ -169,7 +169,7 @@ class MenusController extends AppController {
       $this->Menu->create();
       if ($id = $this->Menu->saveForm($this->request->data)) {
       	$this->_setFlash(__('The menu has been saved.'));
-	return $this->redirect(array('action' => 'view', $id));
+      	return $this->redirect(array('action' => 'view', $id));
       } else {
       	$this->_setFlash(__('The menu could not be saved. Please, try again.'), TRUE);
       }

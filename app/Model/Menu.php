@@ -5,18 +5,10 @@ App::uses('AppModel', 'Model');
  *
  */
 class Menu extends AppModel {
-
+  public $displayField = 'name';
   public $actsAs = array('Taggable');
 
-
   public $image_upload = TRUE;
-
-/**
- * Display field
- *
- * @var string
- */
-	public $displayField = 'name';
 
   public function beforeSave($options = array()) {
     if (!parent::beforeSave($options)) return FALSE;
@@ -41,72 +33,46 @@ class Menu extends AppModel {
  * @var array
  */
 	public $validate = array(
-		'name' => array(
+		'id' => array(
 			'notEmpty' => array(
 				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
+		),
+		'name' => array(
+			/* 'notEmpty' => array( */
+			/* 	'rule' => array('notEmpty'), */
+			/* ), */
 		),
 		'restaurant_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
 		'price' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
+			/* 'notEmpty' => array( */
+			/* 	'rule' => array('notEmpty'), */
+			/* ), */
 		),
 		'combo' => array(
 			'boolean' => array(
 				'rule' => array('boolean'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
 		'lunch' => array(
 			'boolean' => array(
 				'rule' => array('boolean'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
 		'dinner' => array(
 			'boolean' => array(
 				'rule' => array('boolean'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
 		'tag_id' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				'message' => 'Tagを選択してください',
-				/* 'required' => true, */
-			),
+			/* 'notEmpty' => array( */
+			/* 	'rule' => array('notEmpty'), */
+			/* 	'message' => 'Tagを選択してください', */
+			/* ), */
 		),
 	);
 
@@ -201,10 +167,29 @@ class Menu extends AppModel {
 
   // return id or false
   public function saveForm($data) {
+    $form_type = self::checkFormType($data);
+    if (!$form_type){
+      return false;
+    } elseif ($form_type == self::FORM_TYPE_IMAGE){
+// TODO: menusには既に存在するので、menu_imagesに画像のみ保存。
+      return $data[__CLASS__]['id'];
+    }
     // has to have Restaurant data
     if (!U::arrPrepared(__CLASS__, $data) || !is_array($data[__CLASS__]) ) return false;
+    // formで選択されているとめんどくさいのでidは消しておく。
+    unset($data[__CLASS__]['id']);
     $this->image_upload = true;
     return $this->saveIfNotExist($data);
+  }
+
+  const FORM_TYPE_IMAGE = 'upload_image';
+  const FORM_TYPE_SAVE  = 'new_menu';
+  public static function checkFormType($data) {
+    if (U::arrPrepared(__CLASS__, $data)) $data = $data[__CLASS__];
+    // nameの有無でsaveかを決めた後にidの有無でimageかを決める。
+    if (U::arrPrepared('name', $data) && !empty($data['name'])) return self::FORM_TYPE_SAVE;
+    if (U::arrPrepared('id', $data) && !empty($data['id'])) return self::FORM_TYPE_IMAGE;
+    return false;
   }
 
   // return id or false
@@ -272,6 +257,12 @@ class Menu extends AppModel {
       $ret[] = self::csvParser($csv);
     }
     return $ret;
+  }
+  public function listByRestaurant($restaurant_id) {
+    $options = array('conditions' => self::conditionByRestaurantId($restaurant_id));
+    $options['fields'] = array('name');
+    $options['order'] = array('name' => 'ASC');
+    return $this->find('list', $options);
   }
 
   /****************************************************************************/
