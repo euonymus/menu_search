@@ -2,9 +2,12 @@
 <? $this->Html->scriptStart(array('inline' => false)); ?>
     var getPlace = {
         successCallback: (function(position){
+	    <? /* positionに外部からアクセスできる様にgmapにセットしておく */ ?>
+	    gmap.position = position;
             position.coords.hasInput = true;
             //position.coords.hasMarker = true;
-	    gmap.render(position.coords);
+	    // ここでrenderしても display:noneのスタイルを充てる事でmapの位置がずれてしまうのでslideDown時にrenderする
+	    //gmap.render(position.coords);
 
             var pyrmont = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
             var request = {

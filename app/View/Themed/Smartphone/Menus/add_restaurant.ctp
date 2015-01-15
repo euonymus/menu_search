@@ -8,6 +8,8 @@ $('.open-optional-input').click(function(){
     if ($('.optional-input').css('display') == 'none') {
       $('.optional-input').slideDown('fast');
       $('#RestaurantName').attr('required',false);
+      // mapがズレずに表示されるためにここでrenderする。
+      gmap.render(gmap.position.coords);
     } else {
       $('.optional-input').slideUp('fast');
     }
