@@ -37,14 +37,15 @@ echo $this->Form->create('Restaurant', $formOption); ?>
 
 
          <div class="optional-input">
-         <div class="form-group">
-            <?= $this->Form->input('name_nolist',
+            <div class="form-group">
+               <?= $this->Form->input('name_nolist',
 					   array('class' => 'form-control',
 						 'div' => array('class' => 'col-lg-3'),
 						 'label' => 'レストラン名追加')); ?>
+            </div>
+            <?= $this->element('js_add_restaurants') ?>
          </div>
-         <?= $this->element('js_add_restaurants') ?>
-         </div>
+         <?= $this->Form->error('RestaurantGeo.latitude') ?>
 
          <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">

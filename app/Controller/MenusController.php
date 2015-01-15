@@ -16,7 +16,7 @@ class MenusController extends AppController {
   public function beforeFilter() {
     parent::beforeFilter();
     //ログインが必要なアクション
-    $this->Auth->deny('like', 'likes', 'add');
+    $this->Auth->deny('like', 'likes', 'add', 'add_restaurant');
   }
 
   public function index() {
@@ -150,7 +150,7 @@ class MenusController extends AppController {
       if ($saved) {
 	return $this->redirect(array('action' => 'add', $saved));
       }
-      $this->_setFlash(__('The restaurant could not be saved.'));
+      $this->_setFlash(__('The restaurant could not be saved.'), true);
     }
   }
   public function add($restaurant_id = false) {

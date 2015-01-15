@@ -57,12 +57,22 @@ class RestaurantGeo extends AppModel {
 	),
 	'latitude' => array(
 		'notEmpty' => array(
-			'rule' => array('notEmpty'),
+		  'rule' => array('notEmpty'),
+		  'message' => 'レストランの場所を指定してください',
+		),
+		'number' => array(
+                  'rule' => array('range', -90, 90),
+		  'message' => 'レストランの場所を正しく指定してください',
 		),
 	),
 	'longitude' => array(
 		'notEmpty' => array(
-			'rule' => array('notEmpty'),
+                  'rule' => array('notEmpty'),
+		  'message' => 'レストランの場所を指定してください',
+		),
+		'number' => array(
+                  'rule' => array('range', -180, 180),
+		  'message' => 'レストランの場所を正しく指定してください',
 		),
 	),
   );

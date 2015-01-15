@@ -11,6 +11,9 @@ class Restaurant extends AppModel {
   public function beforeValidate($options = array()) {
     if (!parent::beforeValidate($options)) return FALSE;
 
+    if (U::arrPrepared('name_nolist', $this->data['Restaurant'])) {
+      $this->data['Restaurant']['name'] = $this->data['Restaurant']['name_nolist'];
+    }
     if (U::arrPrepared('RestaurantGeo', $this->data)
 	&& U::arrPrepared('latitude', $this->data['RestaurantGeo'])
 	&& U::arrPrepared('longitude', $this->data['RestaurantGeo'])) {
@@ -123,7 +126,7 @@ class Restaurant extends AppModel {
 	'name' => array(
 		'notEmpty' => array(
 			'rule' => array('notEmpty'),
-			//'message' => 'Your custom message here',
+			'message' => 'レストラン名を入力してください',
 			//'allowEmpty' => false,
 			//'required' => false,
 			//'last' => false, // Stop validation after this rule

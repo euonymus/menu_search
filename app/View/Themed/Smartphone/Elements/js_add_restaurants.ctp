@@ -47,5 +47,5 @@
 
 <div class="form-group">
   <div id="map"></div>
-  <?= $this->element('latlngInput', array('model' => 'RestaurantGeo', 'showLatLngInput' => true)) ?>
+  <?= $this->element('latlngInput', array('model' => 'RestaurantGeo')) ?>
 </div>
