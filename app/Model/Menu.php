@@ -200,6 +200,14 @@ class Menu extends AppModel {
   }
 
   // return id or false
+  public function saveForm($data) {
+    // has to have Restaurant data
+    if (!U::arrPrepared(__CLASS__, $data) || !is_array($data[__CLASS__]) ) return false;
+    $this->image_upload = true;
+    return $this->saveIfNotExist($data);
+  }
+
+  // return id or false
   public function saveIfNotExist($obj) {
     $data = $this->getLikelihood($obj);
     if ($data === false) return false;

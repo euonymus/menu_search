@@ -11,7 +11,7 @@ class Restaurant extends AppModel {
   public function beforeValidate($options = array()) {
     if (!parent::beforeValidate($options)) return FALSE;
 
-    if (U::arrPrepared('name_nolist', $this->data['Restaurant'])) {
+    if (U::arrPrepared('name_nolist', $this->data['Restaurant']) && !empty($this->data['Restaurant']['name_nolist'])) {
       $this->data['Restaurant']['name'] = $this->data['Restaurant']['name_nolist'];
     }
     if (U::arrPrepared('RestaurantGeo', $this->data)

@@ -154,26 +154,20 @@ class MenusController extends AppController {
     }
   }
   public function add($restaurant_id = false) {
-    // TODO: treat $restaurant_id
-
-
-    $this->Menu->bindRestaurant(false);
-    $geo = $this->geo;
-    if (empty($geo)) {
-      $restaurantList = array();
-    } else {
-      $latitude  = $geo['coords']['latitude'];
-      $longitude = $geo['coords']['longitude'];
-      $restaurantList = $this->Menu->Restaurant->nearList($latitude, $longitude);
+    $this->loadModel('Restaurant');
+    $this->Restaurant->bindMenu();
+    $restaurant = $this->Restaurant->findById($restaurant_id);
+    if (empty($restaurant)) {
+      throw new NotFoundException(__('Invalid restaurant'));
     }
-    $this->set('restaurantList', $restaurantList);
+    $this->set('restaurant', $restaurant);
 
     $this->loadModel('MenuTag');
     $this->set('menuTagList', $this->MenuTag->getList());
 
     if ($this->request->is('post')) {
       $this->Menu->create();
-      if ($id = $this->Menu->saveThread($this->request->data)) {
+      if ($id = $this->Menu->saveForm($this->request->data)) {
       	$this->_setFlash(__('The menu has been saved.'));
 	return $this->redirect(array('action' => 'view', $id));
       } else {

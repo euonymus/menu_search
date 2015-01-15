@@ -12,6 +12,7 @@ echo $this->Form->create('Menu', $formOption); ?>
                                             'capture' => 'camera', 'label'=>false,'class'=>'camera-open')) ?>
                <?= $this->Form->hidden('NoModel.thumb') ?>
                <?= $this->Form->hidden('NoModel.horizontal') ?>
+               <?= $this->Form->hidden('restaurant_id', array('value' => $restaurant['Restaurant']['id'])) ?>
             </div>
             <?= $this->Form->input('name',
 			   array('class' => 'form-control',
@@ -23,7 +24,7 @@ echo $this->Form->create('Menu', $formOption); ?>
 				 'min' => 0,
 				 'label' => '金額')); ?>
          </div>
-
+<? /*
          <div class="form-group">
             <?= $this->Form->input('Restaurant.name',
 					   array('class' => 'form-control',
@@ -33,7 +34,7 @@ echo $this->Form->create('Menu', $formOption); ?>
          </div>
          <?= $this->Map->place() ?>
          <?= $this->Form->error('geo') ?>
-
+*/ ?>
          <div style="font-weight:bold;">タグを選択</div>
          <div class="tag-radios row">
             <div class="tag-radio col-xs-3">
