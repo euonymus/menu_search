@@ -133,4 +133,10 @@ class UHelper extends AppHelper {
   public static function pictAddBox($font_size = '20pt', $color = false) {
     return self::pictgram("mdi-content-add-box", $font_size, $color);
   }
+  public static function pictAddCircle($font_size = '20pt', $color = false) {
+    return self::pictgram("mdi-content-add-circle", $font_size, $color);
+  }
+  public static function pictRemoveCircle($font_size = '20pt', $color = false) {
+    return self::pictgram("mdi-content-remove-circle", $font_size, $color);
+  }
 }

@@ -1,5 +1,5 @@
 <div class="container">
-   <h1>ランチメニュー登録</h1>
+   <h1>ランチメニュー登録<br><small><?= $restaurant['Restaurant']['name'] ?></small></h1>
 <?
 $formOption = array('class' => 'form-horizontal','enctype' => 'multipart/form-data', 'action' => 'upload','type' => 'post', 'url' => $this->here);
 echo $this->Form->create('Menu', $formOption); ?>
