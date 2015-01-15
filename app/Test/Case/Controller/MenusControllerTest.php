@@ -15,6 +15,91 @@ class MenusControllerTest extends ControllerTestCase {
     'app.menu_registrant'
   );
 
+  public function setUp() {
+    parent::setUp();
+     $this->RestaurantGeo = ClassRegistry::init('RestaurantGeo');
+
+    // Because PhpUnit does not support GEOMETRY MySQL Type, this mannually alter the table and prepare
+    $alter = 'ALTER TABLE `restaurant_geos` CHANGE `geo` `geo` GEOMETRY  NOT NULL';
+    $this->RestaurantGeo->query($alter);
+    // Prepare Data. Do not write in Fixture. Because PhpUnit doesn't support geometry data.
+    $data = array(
+        array(
+		  'id' => 1,
+		  'latitude' => '33.229498',
+		  'longitude' => '131.547546',
+        ),
+	array(
+		  'id' => 2,
+		  'latitude' => '33.229499',
+		  'longitude' => '131.547547',
+        ),
+	array(
+		  'id' => 3,
+		  'latitude' => '33.229508',
+		  'longitude' => '131.547556',
+        ),
+	array(
+		  'id' => 4,
+		  'latitude' => '33.229598',
+		  'longitude' => '131.547646',
+        ),
+	array(
+		  'id' => 5,
+		  'latitude' => '33.230498',
+		  'longitude' => '131.548546',
+        ),
+	array(
+		  'id' => 6,
+		  'latitude' => '33.239498',
+		  'longitude' => '131.557546',
+        ),
+	array(
+		  'id' => 7,
+		  'latitude' => '33.329498',
+		  'longitude' => '131.647546',
+        ),
+	array(
+		  'id' => 8,
+		  'latitude' => '34.229498',
+		  'longitude' => '132.547546',
+        ),
+    );
+    foreach($data as $val) {
+      $this->RestaurantGeo->save($val);
+    }
+  }
+
+  public function testAdd_restaurant() {
+    $action = '/menus/add_restaurant';
+    $now = time() * 1000;
+    $Menus = $this->generate('Menus', array('components' => array('Session')));
+    $Menus->Session->expects($this->any())->method('read')->will($this->returnValueMap([['current_location',
+      array(
+	    'timestamp' => $now,
+	    'coords' => array(
+			      'speed' => NULL,
+			      'heading' => NULL,
+			      'altitudeAccuracy' => NULL,
+			      'accuracy' => 20,
+			      'altitude' => NULL,
+			      'longitude' => 131.557546,
+			      'latitude' => 33.239498,
+			      ),
+    )]]));
+
+    // GET test ====================================================================
+    // No inputs
+    $result = $this->testAction($action, array('method'=>'get','return'=>'contents'));
+    //pr($result);
+    debug($this->view);
+    //debug($this->contents);
+    //pr($this->vars);
+    $this->assertTrue(is_array($this->vars['restaurantList']));
+
+    // POST test ====================================================================
+  }
+
   public function testAdd() {
     $action = '/menus/add';
 
