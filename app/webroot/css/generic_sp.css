@@ -244,6 +244,9 @@ div#map {
 .row-picture img{
   width: 100%;
 }
+.menu-image-s {
+  width: 70px;
+}
 /* menu tag category */
 div.tag-button {
   display: block;

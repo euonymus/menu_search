@@ -3,6 +3,9 @@
     <?= $this->Html->image($menu['Menu']['horizontal_image']) ?>
 </div>
 <? endif; ?>
+<? foreach($menu['MenuImage'] as $image):?>
+<?= $this->Html->image($image['thumbnail'], array('class'=>'menu-image-s')) ?>
+<? endforeach; ?>
 
 <div class="container">
    <?= $this->element('social_buttons') ?>

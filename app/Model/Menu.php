@@ -27,12 +27,7 @@ class Menu extends AppModel {
   /****************************************************************************/
   /* Validation                                                               */
   /****************************************************************************/
-/**
- * Validation rules
- *
- * @var array
- */
-	public $validate = array(
+  public $validate = array(
 		'id' => array(
 			'notEmpty' => array(
 				'rule' => array('notEmpty'),
@@ -74,7 +69,7 @@ class Menu extends AppModel {
 			/* 	'message' => 'Tagを選択してください', */
 			/* ), */
 		),
-	);
+  );
 
   /****************************************************************************/
   /* Model bind settings                                                      */
@@ -127,6 +122,23 @@ class Menu extends AppModel {
 
   function unbindMenuRegistrant($reset = TRUE) {
     $this->unbindModel(array('hasMany' => array('MenuRegistrant')), $reset);
+  }
+
+  function bindMenuImage($reset = TRUE) {
+    $bind = array(
+      'hasMany' => array(
+        'MenuImage' => array(
+          'className'  => 'MenuImage',
+          'foreignKey' => 'menu_id',
+          'order' => 'created desc',
+        )
+      )
+    );
+    $this->bindModel($bind, $reset);
+  }
+
+  function unbindMenuImage($reset = TRUE) {
+    $this->unbindModel(array('hasMany' => array('MenuImage')), $reset);
   }
 
   /****************************************************************************/

@@ -81,20 +81,21 @@ class MenusController extends AppController {
     if (!$this->Menu->exists($id)) {
       throw new NotFoundException(__('Invalid menu'));
     }
-
+    // like check
     $this->loadModel('MenuUser');
     $menuUser = $this->MenuUser->find('first', array('conditions' => MenuUser::conditionUnique($id, $this->currentUser['id'])));
     if (empty($menuUser)) $liked = false;
     else $liked = true;
     $this->set('liked', $liked);
-
+    // get menu data
     $options = array('conditions' => array('Menu.' . $this->Menu->primaryKey => $id));
     $this->Menu->bindRestaurant(false);
+    $this->Menu->bindMenuImage(false);
     $this->Menu->recursive = 2;
     $this->Menu->Restaurant->bindRestaurantGeo();
-
     $menu = $this->Menu->find('first', $options);
     $this->set('menu', $menu);
+    // init map
     $this->GeoTool->initMap($menu['Restaurant']['RestaurantGeo']);
     // Tag検索のためにセッション内のstation_idを取得しておく。
     $this->_loadComponent('MenuTool');
