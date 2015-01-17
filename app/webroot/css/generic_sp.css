@@ -124,7 +124,8 @@ body.home {
 }
 body.home div.lead {
   color:white;
-  font: 250% cursive;
+  //font: 250% cursive;
+  font: 250% cursive, "ＭＳ 明朝",serif;
   margin: 30pt 5pt 5pt 5pt;
 }
 body.home p.description {
@@ -134,7 +135,8 @@ body.home p.description {
 }
 body.home h1 {
   color:white;
-  font: 300% cursive;
+  //font: 300% cursive;
+  font: 300% cursive, "ＭＳ 明朝",serif;
   margin: 30pt 5pt 5pt 5pt;
 }
 /* footer */
