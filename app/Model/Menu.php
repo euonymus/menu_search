@@ -183,7 +183,6 @@ class Menu extends AppModel {
     if (!$form_type){
       return false;
     } elseif ($form_type == self::FORM_TYPE_IMAGE){
-// TODO: menusには既に存在するので、menu_imagesに画像のみ保存。
       return $data[__CLASS__]['id'];
     }
     // has to have Restaurant data
