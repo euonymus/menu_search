@@ -6,6 +6,7 @@
 
    <div class="eaten">
      <h2>食べたランチ</h2>
+     <p><?= nl2br($user['User']['description']) ?></p>
    </div>
 </div>
 <?= $this->element('js_menu_list') ?>
