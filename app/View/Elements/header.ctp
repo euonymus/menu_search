@@ -7,9 +7,9 @@
    </div>
    <div class="header-add center">
 <? if ($this->User->loggedIn()): ?>
-        <a href="/geo/init/?location=<?= urlencode('/menus/add_restaurant/') ?>"><?= UHelper::pictAddBox('23pt') ?></a>
+     <a href="/geo/init/?location=<?= urlencode('/menus/add_restaurant/') ?>"><?= $this->Html->image('/img/menu_plus.gif', array('class'=>'menu-plus')) ?><?//= UHelper::pictAddBox('23pt') ?></a>
 <? else: ?>
-        <a href="/users/login/?location=<?= urlencode('/menus/add_restaurant/') ?>"><?= UHelper::pictAddBox('23pt') ?></a>
+     <a href="/users/login/?location=<?= urlencode('/menus/add_restaurant/') ?>"><?= $this->Html->image('/img/menu_plus.gif', array('class'=>'menu-plus')) ?><?//= UHelper::pictAddBox('23pt') ?></a>
 <? endif; ?>
    </div>
    <div class="header-user">

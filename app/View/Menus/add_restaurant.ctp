@@ -24,7 +24,7 @@ $('.toggle-optional-input').click(function(){
 
 
 <div class="container">
-   <h1>ランチメニュー登録<br><small>レストラン選択</small></h1>
+   <h1>食べたランチを登録<br><small>レストラン選択</small></h1>
    
 <?
 $formOption = array('class' => 'form-horizontal','type' => 'post', 'url' => $this->here);
