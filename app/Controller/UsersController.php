@@ -13,12 +13,20 @@ class UsersController extends AppController {
     $this->Auth->deny('index', 'edit', 'password', 'icon', 'unregist');
   }
 
+  public function view($id) {
+    $this->User->bindMenuRegistrant();
+    $this->User->recursive = 2;
+    $user = $this->User->findById($id);
+    $this->set(compact('user'));
+  }
+
   public function facebook() {
     $this->breadcrumb = array('Home' => '/', 'マイページ' => '/mypage/', 'Facebook情報' => false);
   }
   public function twitter() {
     $this->breadcrumb = array('Home' => '/', 'マイページ' => '/mypage/', 'Twitter情報' => false);
   }
+
   /*
   public function index() {
     $this->User->recursive = 0;

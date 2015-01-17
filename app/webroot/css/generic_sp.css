@@ -137,7 +137,7 @@ body.home h1 {
   color:white;
   //font: 300% cursive;
   font: 300% cursive, "ＭＳ 明朝",serif;
-  margin: 30pt 5pt 5pt 5pt;
+  margin: 20pt 5pt 5pt 5pt;
 }
 /* footer */
 body.home .footer {
@@ -165,7 +165,10 @@ p.copyright {
 }
 /* main content */
 #mainContent {
-  margin-top:-10px;
+  //margin-top:10pt;
+}
+.social-buttons {
+  margin-top:10pt;
 }
 /* parts */
 .menu-large-category {
@@ -233,7 +236,6 @@ div#map {
 }
 /* menu image */
 .row-picture{
-  height: 180pt;
   overflow: hidden;
 }
 .row-picture img{

@@ -82,7 +82,38 @@ class User extends AppModel {
 	  );
     $this->bindModel($bind, $reset);
   }
-
+  // likes
+  function bindMenuUser($reset = TRUE) {
+    $bind = array(
+      'hasMany' => array(
+        'MenuUser' => array(
+          'className'  => 'MenuUser',
+          'foreignKey' => 'user_id',
+          'order' => 'created desc',
+        )
+      )
+    );
+    $this->bindModel($bind, $reset);
+  }
+  function unbindMenuUser($reset = TRUE) {
+    $this->unbindModel(array('hasMany' => array('MenuUser')), $reset);
+  }
+  // ユーザーが登録したメニュー
+  function bindMenuRegistrant($reset = TRUE) {
+    $bind = array(
+      'hasMany' => array(
+        'MenuRegistrant' => array(
+          'className'  => 'MenuRegistrant',
+          'foreignKey' => 'user_id',
+          'order' => 'created desc',
+        )
+      )
+    );
+    $this->bindModel($bind, $reset);
+  }
+  function unbindMenuRegistrant($reset = TRUE) {
+    $this->unbindModel(array('hasMany' => array('MenuRegistrant')), $reset);
+  }
   /****************************************************************************/
   /* Save / Delete data                                                       */
   /****************************************************************************/

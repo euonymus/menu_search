@@ -12,8 +12,8 @@ echo $this->Form->create('User', $formOption); ?>
 
 	<?= $this->Form->input('id') ?>
         <div class="form-group">
-            <label for="UserNickname" class="col-xs-4 control-label">ニックネーム</label>
-                <?= $this->Form->input('nickname',
+            <label for="Username" class="col-xs-4 control-label">表示名</label>
+                <?= $this->Form->input('name',
 			       array('class' => 'form-control',
 				     'div' => array('class' => 'col-xs-8'),
 				     'label' => false)); ?>

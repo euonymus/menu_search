@@ -30,4 +30,17 @@ class UserHelper extends AppHelper {
   public static function fbImagePath($fbuser_id) {
     return 'https://graph.facebook.com/'.$fbuser_id.'/picture?type=square';
   }
+
+  public static function showName($data) {
+    if (!U::arrPrepared('first_name', $data) || empty($data['first_name'])
+	|| !U::arrPrepared('last_name', $data) || empty($data['last_name'])
+	) {
+      if (U::arrPrepared('name', $data) || !empty($data['name'])) {
+	return $data['name'];
+      }
+      return '';
+    }
+    return $data['first_name'] . ' ' . $data['last_name'];
+  }
+
 }

@@ -72,8 +72,10 @@ class AppModel extends Model {
     // Exec only if $this->image_upload on the Model has been set to TRUE.
     if ($this->image_upload) {
       // Add thumbnail field if image field exists.
-      if (array_key_exists($this->name, $results)) {
-	$results = $this->addThumbField($result);
+      // MEMO: 雑対応: Model無しsingle data とmultiple dataに対応
+      if (array_key_exists($this->name, $results)
+	  || (U::arrPrepared('image', $results) && !U::arrPrepared(0, $results))) {
+	$results = $this->addThumbField($results);
       } else {
 	foreach($results as $key => $result) {
 	  $results[$key] = $this->addThumbField($result);
