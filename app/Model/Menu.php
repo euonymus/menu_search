@@ -272,7 +272,6 @@ class Menu extends AppModel {
     return array(__CLASS__.'.id' => $id);
   }
   public static function conditionByName($name) {
-    // TODO: need to put index on Menu.name field
     return array(__CLASS__.'.name' => $name);
   }
   public static function conditionByRestaurantId($restaurant_id) {
