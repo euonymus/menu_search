@@ -1,17 +1,7 @@
-<? if (U::arrPrepared('horizontal_image', $menu['Menu']) && !is_null($menu['Menu']['horizontal_image'])): ?>
-<div class="row-picture">
-    <?= $this->Html->image($menu['Menu']['horizontal_image']) ?>
-</div>
-<? endif; ?>
-<? foreach($menu['MenuImage'] as $image):?>
-<?= $this->Html->image($image['thumbnail'], array('class'=>'menu-image-s')) ?>
-<? endforeach; ?>
+<?= $this->element('menu_image') ?>
 
 <div class="container">
    <?= $this->element('social_buttons') ?>
-</div>
-
-<div class="container">
    <h1><?= h($menu['Menu']['name']); ?><br>
       <small><?= UHelper::pictRestaurant() ?><?= $this->Html->link($menu['Restaurant']['name'], '/restaurants/view/'.$menu['Restaurant']['id']) ?></small></h1>
 
@@ -69,3 +59,4 @@ else $station_query = '';
 <?= $this->Map->mapIfExists() ?>
 
 
+<?= $this->element('user_thumbnails') ?>

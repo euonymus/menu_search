@@ -130,7 +130,7 @@ class Menu extends AppModel {
         'MenuImage' => array(
           'className'  => 'MenuImage',
           'foreignKey' => 'menu_id',
-          'order' => 'created desc',
+          'order' => 'is_main desc', // is_main is boolean, and it has only a true record in the same menu.
         )
       )
     );

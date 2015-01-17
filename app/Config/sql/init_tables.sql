@@ -7,7 +7,7 @@
 #
 # ホスト: 127.0.0.1 (MySQL 5.5.28)
 # データベース: restaurant_menu
-# 作成時刻: 2015-01-17 12:30:31 +0000
+# 作成時刻: 2015-01-17 15:27:50 +0000
 # ************************************************************
 
 
@@ -61,6 +61,8 @@ CREATE TABLE `menu_images` (
   `menu_id` int(11) unsigned NOT NULL,
   `user_id` varchar(36) NOT NULL DEFAULT '',
   `image` varchar(255) NOT NULL DEFAULT '',
+  `is_main` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `vote` int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'The number of how many people think this is proper image for the menu.',
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),

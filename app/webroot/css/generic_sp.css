@@ -55,6 +55,9 @@ div#header .header-user img {
 .user-icon {
   width:100px;
 }
+.user-icon-s {
+  width: 50px;
+}
 div#header .clear {
   clear:both;
 }
@@ -238,11 +241,15 @@ div#map {
   padding: 2px 8px 2px 8px;
 }
 /* menu image */
-.row-picture{
+.menu-image-box {
   overflow: hidden;
 }
-.row-picture img{
+.menu-image-box img{
   width: 100%;
+}
+.menu-thumbnail-box {
+  width: 100%;
+  background: #e8c7be;
 }
 .menu-image-s {
   width: 70px;
