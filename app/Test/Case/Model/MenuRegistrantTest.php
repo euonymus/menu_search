@@ -46,9 +46,16 @@ class MenuRegistrantTest extends CakeTestCase {
   }
 
   public function testSaveRelation() {
+    // OK: save new record
     $menu_id = 2;
     $user_id = '547c505c-62f4-4f24-9b30-4595cf13b2c9';
     $res = $this->MenuRegistrant->saveRelation($menu_id, $user_id);
     $this->assertTrue(!!$res);
+    // OK: try saving existing relation, not going to be saved, but get the result.
+    $menu_id = 1;
+    $user_id = '54abe567-e898-4afe-815b-5a68cf13b2c9';
+    $res = $this->MenuRegistrant->saveRelation($menu_id, $user_id);
+    $this->assertTrue(!!$res);
+    $this->assertIdentical($res['MenuRegistrant']['id'], '1');
   }
 }

@@ -1,37 +1,27 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * MenuRegistrant Model
+ * MenuImage Model
  *
  * @property Menu $Menu
- * @property User $User
  */
-class MenuRegistrant extends AppModel {
+class MenuImage extends AppModel {
+  public $image_upload = TRUE;
 
   /****************************************************************************/
   /* Validation                                                               */
   /****************************************************************************/
   public $validate = array(
-		'menu_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
+	'menu_id' => array(
+		'numeric' => array(
+			'rule' => array('numeric'),
 		),
-		'user_id' => array(
-			'uuid' => array(
-				'rule' => array('uuid'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
+	),
+	'image' => array(
+		'notEmpty' => array(
+			'rule' => array('notEmpty'),
 		),
+	),
   );
 
   /****************************************************************************/
@@ -44,37 +34,26 @@ class MenuRegistrant extends AppModel {
 		'conditions' => '',
 		'fields' => '',
 		'order' => ''
-	),
-	'User' => array(
-		'className' => 'User',
-		'foreignKey' => 'user_id',
-		'conditions' => '',
-		'fields' => '',
-		'order' => ''
 	)
   );
 
   /****************************************************************************/
   /* Save & Edit                                                              */
   /****************************************************************************/
-  public function saveRelation($menu_id, $user_id) {
-    $current = $this->getRelation($menu_id, $user_id);
-    if (!empty($current)) return $current;
-
-    $data = array(__CLASS__ => array(
-      'menu_id' => $menu_id,
-      'user_id' => $user_id,
-    ));
+  public function saveRelation($imageData, $menu_id, $user_id) {
+    $data = array(
+      __CLASS__ => array(
+          'menu_id' => $menu_id,
+          'user_id' => $user_id,
+      ),
+      'NoModel' => $imageData,
+    );
     return $this->save($data);
   }
 
   /****************************************************************************/
   /* Get                                                                      */
   /****************************************************************************/
-  public function getRelation($menu_id, $user_id) {
-    return $this->find('first', array('conditions' => self::conditionRelation($menu_id, $user_id)));
-  }
-
   /****************************************************************************/
   /* conditions                                                               */
   /****************************************************************************/

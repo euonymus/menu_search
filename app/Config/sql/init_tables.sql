@@ -7,7 +7,7 @@
 #
 # ホスト: 127.0.0.1 (MySQL 5.5.28)
 # データベース: restaurant_menu
-# 作成時刻: 2015-01-17 05:14:53 +0000
+# 作成時刻: 2015-01-17 09:41:07 +0000
 # ************************************************************
 
 
@@ -47,6 +47,25 @@ CREATE TABLE `fbusers` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ menu_images
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `menu_images`;
+
+CREATE TABLE `menu_images` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `menu_id` int(11) unsigned NOT NULL,
+  `user_id` varchar(36) NOT NULL DEFAULT '',
+  `image` varchar(255) NOT NULL DEFAULT '',
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `menu_id` (`menu_id`),
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

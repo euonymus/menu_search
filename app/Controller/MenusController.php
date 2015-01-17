@@ -192,7 +192,16 @@ class MenusController extends AppController {
     if ($this->request->is('post')) {
       $this->Menu->create();
       if ($id = $this->Menu->saveForm($this->request->data)) {
-      	$this->_setFlash(__('The menu has been saved.'));
+	// userが食べたランチを登録
+        $this->loadModel('MenuRegistrant');
+	if ($this->MenuRegistrant->saveRelation($id, $this->currentUser['id'])) {
+	  $this->_setFlash(__('The menu has been saved.'));
+	}
+	// ランチの写真を登録
+        $this->loadModel('MenuImage');
+	if ($this->MenuImage->saveRelation($this->request->data['NoModel'], $id, $this->currentUser['id'])) {
+	  //$this->_setFlash(__('The menu has been saved.'));
+	}
       	return $this->redirect(array('action' => 'view', $id));
       } else {
       	$this->_setFlash(__('The menu could not be saved. Please, try again.'), TRUE);

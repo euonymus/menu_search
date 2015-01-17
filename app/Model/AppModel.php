@@ -90,6 +90,7 @@ class AppModel extends Model {
   public static function toThumbPath($path) {
     $reg="/(.*)(?:\.([^.]+$))/";
     preg_match($reg,$path,$retArr);
+    if (!U::arrPrepared(1,$retArr) || !U::arrPrepared(2,$retArr)) return false;
     //echo "$retArr[0]"."\n<br/>";// /hoge/hoge.jpg
     //echo "$retArr[1]"."\n<br/>";// /hoge/hoge
     //echo "$retArr[2]"."\n<br/>";// jpg
@@ -100,6 +101,7 @@ class AppModel extends Model {
   public static function toHorizontalImagePath($path) {
     $reg="/(.*)(?:\.([^.]+$))/";
     preg_match($reg,$path,$retArr);
+    if (!U::arrPrepared(1,$retArr) || !U::arrPrepared(2,$retArr)) return false;
     //echo "$retArr[0]"."\n<br/>";// /hoge/hoge.jpg
     //echo "$retArr[1]"."\n<br/>";// /hoge/hoge
     //echo "$retArr[2]"."\n<br/>";// jpg
