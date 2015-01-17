@@ -55,8 +55,10 @@
 <?
    $tags = explode(',',$menu['Menu']['tags']);
 foreach($tags as $tag):
+if (isset($station_id) && !empty($station_id)) $station_query = '&station_id='.$station_id;
+else $station_query = '';
 ?>
-  <?= $this->Html->link($tag,'/menus/?tags='.$tag, array('class'=> 'btn btn-primary btn-xs')) ?>
+  <?= $this->Html->link($tag,'/menus/?tags='.$tag.$station_query, array('class'=> 'btn btn-primary btn-xs')) ?>
 <? endforeach; ?>
 
 </div>

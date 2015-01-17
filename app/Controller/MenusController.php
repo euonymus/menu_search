@@ -96,6 +96,10 @@ class MenusController extends AppController {
     $menu = $this->Menu->find('first', $options);
     $this->set('menu', $menu);
     $this->GeoTool->initMap($menu['Restaurant']['RestaurantGeo']);
+    // Tag検索のためにセッション内のstation_idを取得しておく。
+    $this->_loadComponent('MenuTool');
+    $station_id = $this->Session->read(MenuToolComponent::SESSION_STATION);
+    $this->set(compact('station_id'));
 
     // SEO
     self::$title_for_layout = $menu['Restaurant']['name'] .'の'. $menu['Menu']['name'] . ' - '.self::$title_for_layout;
