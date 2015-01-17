@@ -160,16 +160,23 @@ class Restaurant extends AppModel {
     if (!U::arrPrepared('name', $restaurant)) return false;
     $conditions = self::conditionByName($restaurant['name']);
 
-    if (array_key_exists('RestaurantGeo', $data)
-	&& U::arrPrepared('latitude', $data['RestaurantGeo']) && U::arrPrepared('longitude', $data['RestaurantGeo'])
-	&& !empty($data['RestaurantGeo']['latitude']) && !empty($data['RestaurantGeo']['longitude'])
+    if (!U::arrPrepared('RestaurantGeo', $data)
+	|| !U::arrPrepared('latitude', $data['RestaurantGeo']) || !U::arrPrepared('longitude', $data['RestaurantGeo'])
+	|| empty($data['RestaurantGeo']['latitude']) || empty($data['RestaurantGeo']['longitude'])
     ) {
-      $geoCondition = self::conditionInRange($data['RestaurantGeo']['latitude'], $data['RestaurantGeo']['longitude'], 30);
-      $conditions = am($conditions, $geoCondition);
+      $this->invalidate('geo', 'レストランの場所を指定してください');
+      return false;
     }
 
+    $geoCondition = self::conditionInRange($data['RestaurantGeo']['latitude'], $data['RestaurantGeo']['longitude'], 30);
+    $conditions = am($conditions, $geoCondition);
     $options = array('conditions' => $conditions);
     return $this->find('first', $options);
+  }
+
+  public function near($latitude, $longitude) {
+    $options = array('conditions' => self::conditionInRange($latitude, $longitude, 30));
+    return $this->find('all', $options);
   }
 
   public function nearList($latitude, $longitude) {

@@ -139,24 +139,44 @@ class MenusController extends AppController {
 
   public function add_restaurant() {
     $this->loadModel('Restaurant');
+
     $geo = $this->geo;
     if (empty($geo)) {
       $restaurantList = array();
     } else {
       $latitude  = $geo['coords']['latitude'];
       $longitude = $geo['coords']['longitude'];
-      $restaurantList = $this->Restaurant->nearList($latitude, $longitude);
+      // 選択された文字列(postデータ)の緯度経度を設定するため
+      //$restaurantList = $this->Restaurant->nearList($latitude, $longitude);
+      //$restaurantList = $this->Restaurant->nearList($latitude, $longitude);
+      $this->Restaurant->bindRestaurantGeo(false);
+      $restaurant = $this->Restaurant->near($latitude, $longitude);
+      $restaurantList = array();
+      foreach($restaurant as $val) {
+	$restaurantList[$val['Restaurant']['name']] = $val['Restaurant']['name'];
+      }
     }
     $this->set('restaurantList', $restaurantList);
 
     if ($this->request->is('post')) {
+      // restaurant tableから選択された場合はテーブル内のgeo情報を設定する。
+      if (empty($this->request->data['RestaurantGeo']['latitude']) || empty($this->request->data['RestaurantGeo']['longitude'])){
+	foreach($restaurant as $key => $val) {
+	  if ($this->request->data['Restaurant']['name'] == $val['Restaurant']['name']) {
+	    $this->request->data['RestaurantGeo']['latitude'] = $val['RestaurantGeo']['latitude'];
+	    $this->request->data['RestaurantGeo']['longitude'] = $val['RestaurantGeo']['longitude'];
+	  }
+	}
+      }
       $saved = $this->Restaurant->saveIfNotExist($this->request->data);
       if ($saved) {
 	return $this->redirect(array('action' => 'add', $saved));
+      } else {
+	$this->_setFlash(__('The restaurant could not be saved.'), true);
       }
-      $this->_setFlash(__('The restaurant could not be saved.'), true);
     }
   }
+
   public function add($restaurant_id = false) {
     $this->loadModel('Restaurant');
     $restaurant = $this->Restaurant->findById($restaurant_id);

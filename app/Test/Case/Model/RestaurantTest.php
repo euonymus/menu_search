@@ -102,7 +102,7 @@ class RestaurantTest extends CakeTestCase {
     $res = $this->Restaurant->getLikelihood($data);
     $this->assertIdentical($res, false);
 
-    // OK: RestaurantGeo is not an array, but treated just without geo info
+    // NG: RestaurantGeo is not an array
     $data = array(
       'Restaurant' => array(
         'name' => 'restaurant4'
@@ -110,7 +110,8 @@ class RestaurantTest extends CakeTestCase {
       'RestaurantGeo' => false
     );
     $res = $this->Restaurant->getLikelihood($data);
-    $this->assertIdentical($res['Restaurant']['name'], $data['Restaurant']['name']);
+    //$this->assertIdentical($res['Restaurant']['name'], $data['Restaurant']['name']);
+    $this->assertIdentical($res, false);
 
     // OK: without RestaurantGeo
     $data = array(
@@ -119,7 +120,8 @@ class RestaurantTest extends CakeTestCase {
       ),
     );
     $res = $this->Restaurant->getLikelihood($data);
-    $this->assertIdentical($res['Restaurant']['name'], $data['Restaurant']['name']);
+    //$this->assertIdentical($res['Restaurant']['name'], $data['Restaurant']['name']);
+    $this->assertIdentical($res, false);
 
     // OK: 名前,場所完全一致。
     $data = array(
@@ -176,7 +178,23 @@ class RestaurantTest extends CakeTestCase {
   }
 
   public function testSaveIfNotExist() {
-    // OK: Data without RestaurantGeo
+    // NG: Geo is NULL
+    $data = array(
+      'Restaurant' => array(
+        'name' => 'restaurant6',
+       ),
+      'RestaurantGeo' => array(
+        'latitude' => NULL,
+        'longitude' => NULL,
+      ),
+    );
+    $res = $this->Restaurant->saveIfNotExist($data);
+    $this->assertFalse($res);
+    $expected = array('geo'=>array('レストランの場所を指定してください'));
+    $this->assertIdentical($this->Restaurant->validationErrors, $expected);
+    $this->Restaurant->create(); // 以降のtestで $this->Restaurant->invalidate() をリフレッシュするため
+
+    // NG: Data RestaurantGeo is empty
     $data = array(
       'Restaurant' => array(
         'name' => 'restaurant6',
@@ -187,7 +205,23 @@ class RestaurantTest extends CakeTestCase {
       ),
     );
     $res = $this->Restaurant->saveIfNotExist($data);
-    $this->assertIdentical($res, '6');
+    //$this->assertIdentical($res, '6');
+    $this->assertFalse($res);
+    $expected = array('geo'=>array('レストランの場所を指定してください'));
+    $this->assertIdentical($this->Restaurant->validationErrors, $expected);
+    $this->Restaurant->create(); // 以降のtestで $this->Restaurant->invalidate() をリフレッシュするため
+
+    // NG: Data without RestaurantGeo
+    $data = array(
+      'Restaurant' => array(
+        'name' => 'restaurant6',
+       ),
+    );
+    $res = $this->Restaurant->saveIfNotExist($data);
+    //$this->assertIdentical($res, '6');
+    $expected = array('geo'=>array('レストランの場所を指定してください'));
+    $this->assertIdentical($this->Restaurant->validationErrors, $expected);
+    $this->Restaurant->create(); // 以降のtestで $this->Restaurant->invalidate() をリフレッシュするため
 
     // OK: Data exists and receive the id of it
     $data = array(
@@ -220,20 +254,6 @@ class RestaurantTest extends CakeTestCase {
     $this->assertIdentical($after['Restaurant']['name'], $data['Restaurant']['name']);
     $this->assertIdentical($after['RestaurantGeo']['latitude'], $data['RestaurantGeo']['latitude']);
 
-    // NG: Geo is NULL
-    $data = array(
-      'Restaurant' => array(
-        'name' => 'new restaurant2',
-       ),
-      'RestaurantGeo' => array(
-        'latitude' => NULL,
-        'longitude' => NULL,
-      ),
-    );
-    $res = $this->Restaurant->saveIfNotExist($data);
-    $this->assertFalse($res);
-    $expected = array('RestaurantGeo'=>array('latitude' => array('0' => 'notEmpty'), 'longitude' => array('0' => 'notEmpty')));
-    $this->assertIdentical($this->Restaurant->validationErrors, $expected);
   }
 
   public function testNearList() {
