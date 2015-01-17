@@ -4,54 +4,47 @@
  *
  */
 class UserFixture extends CakeTestFixture {
-
-/**
- * Fields
- *
- * @var array
- */
-	public $fields = array(
-		'id' => array('type' => 'string', 'null' => false, 'length' => 36, 'key' => 'primary', 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'username' => array('type' => 'string', 'null' => false, 'key' => 'unique', 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'password' => array('type' => 'string', 'null' => false, 'length' => 50, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'name' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'nickname' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'first_name' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'last_name' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'image' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'description' => array('type' => 'text', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'status' => array('type' => 'integer', 'null' => false, 'default' => '1', 'length' => 3, 'unsigned' => true),
-		'spam' => array('type' => 'integer', 'null' => false, 'default' => '0', 'length' => 3, 'unsigned' => true, 'comment' => '0:normal,1:candidate,2:spam'),
-		'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
-		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
-		'indexes' => array(
-			'PRIMARY' => array('column' => 'id', 'unique' => 1),
-			'username' => array('column' => 'username', 'unique' => 1)
-		),
-		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
-	);
+  public $import = 'User';
 
 /**
  * Records
  *
  * @var array
  */
-	public $records = array(
-		array(
-			'id' => '547c505c-62f4-4f24-9b30-4595cf13b2c9',
-			'username' => 'Lorem ipsum dolor sit amet',
-			'password' => 'Lorem ipsum dolor sit amet',
-			'name' => 'Lorem ipsum dolor sit amet',
-			'nickname' => 'Lorem ipsum dolor sit amet',
-			'first_name' => 'Lorem ipsum dolor sit amet',
-			'last_name' => 'Lorem ipsum dolor sit amet',
-			'image' => 'Lorem ipsum dolor sit amet',
-			'description' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
-			'status' => 1,
-			'spam' => 1,
-			'created' => '2014-12-01 20:26:20',
-			'modified' => '2014-12-01 20:26:20'
-		),
-	);
+  public $records = array(
+    array(
+	'id' => '54abe567-e898-4afe-815b-5a68cf13b2c9',
+	'username' => 'coozo.office@gmail.com',
+	'password' => '47cd98feb883cd1e9cc2ac3fdd39022f050190df',
+	'name' => 'euonymus',
+	'nickname' => NULL,
+	'first_name' => '',
+	'last_name' => '',
+	'image' => 'http://coozo.co/apple-touch-icon-precomposed.png',
+	'description' => NULL,
+	'role' => 'admin',
+	'status' => 1,
+	'spam' => 0,
+	'created' => '2014-12-01 20:26:20',
+	'modified' => '2014-12-01 20:26:20'
+    ),
+    array(
+	'id' => '547c505c-62f4-4f24-9b30-4595cf13b2c9',
+	'username' => 'Lorem ipsum dolor sit amet',
+	'password' => 'Lorem ipsum dolor sit amet',
+	'name' => 'Lorem ipsum dolor sit amet',
+	'nickname' => 'Lorem ipsum dolor sit amet',
+	'first_name' => 'Lorem ipsum dolor sit amet',
+	'last_name' => 'Lorem ipsum dolor sit amet',
+	'image' => 'Lorem ipsum dolor sit amet',
+
+	'description' => NULL,
+	'role' => 'author',
+	'status' => 1,
+	'spam' => 0,
+	'created' => '2014-12-01 20:26:20',
+	'modified' => '2014-12-01 20:26:20'
+    ),
+  );
 
 }

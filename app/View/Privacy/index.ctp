@@ -78,7 +78,7 @@
 <p>本ポリシーに関するお問い合わせは，下記の窓口までお願いいたします。</p>
 <p>プロダクション名：euonymus productions<br>
 担当部署：ユーザサポート係<br>
-Eメールアドレス：coozo.office@gmail.com</p>
+Eメールアドレス：support@coozo.co</p>
 
 <p class="tR">以上</p>
 
