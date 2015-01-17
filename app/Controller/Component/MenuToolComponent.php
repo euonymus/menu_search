@@ -59,6 +59,15 @@ class MenuToolComponent extends Component {
     return $this->getList($options, $isPaging);
   }
 
+  public function registrants($user_id, $isPaging = false) {
+    // データ取得
+    $this->Controller->loadModel('MenuRegistrant');
+    $menuRegistrants = $this->Controller->MenuRegistrant->findAllByUserId($user_id, array('menu_id'));
+    $conditions = array('Menu.id' => Set::extract('{n}/MenuRegistrant/menu_id', $menuRegistrants));
+    $options = array('conditions' => $conditions);
+    return $this->getList($options, $isPaging);
+  }
+
   public function listByRestaurant($restaurant_id, $isPaging = false) {
     $this->Controller->loadModel('Menu');
     $options = array('conditions' => Menu::conditionByRestaurantId($restaurant_id));

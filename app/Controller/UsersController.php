@@ -14,10 +14,11 @@ class UsersController extends AppController {
   }
 
   public function view($id) {
-    $this->User->bindMenuRegistrant();
-    $this->User->recursive = 2;
     $user = $this->User->findById($id);
     $this->set(compact('user'));
+
+    $this->_loadComponent('MenuTool');
+    $this->set('menus', $this->MenuTool->registrants($id, true));
   }
 
   public function facebook() {

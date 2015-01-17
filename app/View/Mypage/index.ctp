@@ -6,8 +6,8 @@
   <button class="btn btn-default btn-raised btn-link"><?= $this->Html->link('パスワード変更', '/users/password') ?></button>
   <button class="btn btn-default btn-raised btn-link"><?= $this->Html->link('アカウント設定', '/users/edit') ?></button>
   <button class="btn btn-default btn-raised btn-link"><?= $this->Html->link('画像設定', '/users/icon') ?></button>
+  <button class="btn btn-default btn-raised btn-link"><?= $this->Html->link('プロフィール', '/users/view/'.$currentUser['id']) ?></button>
 </div>
-
 
 
     <div class="social login">

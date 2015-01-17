@@ -52,6 +52,9 @@ div#header .header-user {
 div#header .header-user img {
   height:50px;
 }
+.user-icon {
+  width:100px;
+}
 div#header .clear {
   clear:both;
 }
