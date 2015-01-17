@@ -1,48 +1,66 @@
-<div class="bs-docs-section">
-<div class="well bs-component">
-
-   <h2><?php echo h($menu['Menu']['name']); ?>&nbsp;@&nbsp;<?php
-echo $this->Html->link($menu['Restaurant']['name'], '/restaurants/view/'.$menu['Restaurant']['id']);
-?></h2>
-<h4>
-<span class="label label-info"><?= UHelper::currency($menu['Menu']['price'], '\\') ?></span>
-<? if ($menu['Menu']['combo']) echo '<span class="label label-success">セットメニュー</span>&nbsp;';?>
-<? if ($menu['Menu']['lunch']) echo '<span class="label label-warning">ランチ</span>&nbsp;';?>
-<? if ($menu['Menu']['dinner']) echo '<span class="label label-default">ディナー</span>';?>
-</h4>
-
-
-
-        <div class="row-picture">
-      <? if (!is_null($menu['Menu']['image'])) echo $this->Html->image($menu['Menu']['image'], array('alt'=>'icon','class'=>'img-thumbnail', 'style'=>'width:180px;height:180px;')); ?>
-        </div>
-
-
-
-   <p><?php echo h($menu['Menu']['description']); ?></p>
-
-<? if (U::notEmpty('remarks',$menu['Menu'])): ?>
-   <p>備考：<?php echo h($menu['Menu']['remarks']); ?></p>
+<? if (U::arrPrepared('horizontal_image', $menu['Menu']) && !is_null($menu['Menu']['horizontal_image'])): ?>
+<div class="row-picture">
+    <?= $this->Html->image($menu['Menu']['horizontal_image']) ?>
+</div>
 <? endif; ?>
 
-<h4>
+<div class="container">
+   <?= $this->element('social_buttons') ?>
+</div>
+
+<div class="container">
+   <h1><?= h($menu['Menu']['name']); ?><br>
+      <small><?= UHelper::pictRestaurant() ?><?= $this->Html->link($menu['Restaurant']['name'], '/restaurants/view/'.$menu['Restaurant']['id']) ?></small></h1>
+
+   <span class="label label-info"><?= UHelper::currency($menu['Menu']['price'], '\\') ?></span>
+   <? if ($menu['Menu']['combo']) echo '<span class="label label-success">セットメニュー</span>&nbsp;';?>
+   <?= MenuHelper::stars($menu['Menu']['point']) ?>
+
+<? /* 今のところランチのみをターゲットとしているためわざわざ表示しない。
+<? if ($menu['Menu']['lunch']) echo '<span class="label label-warning">ランチ</span>&nbsp;';?>
+<? if ($menu['Menu']['dinner']) echo '<span class="label label-default">ディナー</span>';?>
+*/ ?>
+
+   <div>
+
+<? if ($this->User->loggedIn()): ?>
+    <? if ($liked) {
+        $undo = 'undo:1/';
+        $likeBtnMessage = UHelper::pictClear('13pt', 'pink').'お気に入り解除';
+        echo UHelper::pictHeart('20pt', 'pink');
+    } else {
+        $undo = '';
+        $likeBtnMessage = UHelper::pictHeart('13pt', 'pink').'お気に入りに登録！';
+    } ?>
+    <? $linkUri = '/menus/like/'.$undo.$menu['Menu']['id']; ?>
+<? else: ?>
+
+    <?
+    $likeBtnMessage = UHelper::pictHeart('13pt', 'pink').'お気に入りに登録！';
+    $linkUri = '/users/login/?location=' . urlencode('/menus/like/'.$menu['Menu']['id']);
+    ?>
+
+<? endif; ?>
+      <? $linkOption = array('escape'=>false,'class'=>'btn btn-default btn-raised'); ?>
+      <?= $this->Html->link($likeBtnMessage, $linkUri, $linkOption) ?> 
+
+   </div>
+
+   <p><?= h($menu['Menu']['description']) ?></p>
+
+<? if (U::notEmpty('remarks',$menu['Menu'])): ?>
+   <p>備考：<?= h($menu['Menu']['remarks']) ?></p>
+<? endif; ?>
+
 <?
    $tags = explode(',',$menu['Menu']['tags']);
 foreach($tags as $tag):
 ?>
-  <?= $this->Html->link($tag,'/menus/search/?tags='.$tag, array('class'=> 'btn btn-primary btn-xs')) ?>
+  <?= $this->Html->link($tag,'/menus/?tags='.$tag, array('class'=> 'btn btn-primary btn-xs')) ?>
 <? endforeach; ?>
-</h4>
 
 </div>
-</div>
 
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Menu'), array('action' => 'edit', $menu['Menu']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Menu'), array('action' => 'delete', $menu['Menu']['id']), array(), __('Are you sure you want to delete # %s?', $menu['Menu']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Menus'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Menu'), array('action' => 'add')); ?> </li>
-	</ul>
-</div>
+<?= $this->Map->mapIfExists() ?>
+
+

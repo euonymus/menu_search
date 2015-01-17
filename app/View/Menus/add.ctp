@@ -1,104 +1,149 @@
-<div class="container">
-<div class="bs-docs-section">
-<div class="well bs-component">
+<? if (!U::arrPrepared('Menu', $this->data) || !U::arrPrepared('name', $this->data['Menu']) || empty($this->data['Menu'])):?>
+<style>
+.optional-input, #close-option {
+  display:none;
+}
+</style>
+<? else: ?>
+<style>
+#open-option {
+  display:none;
+}
+</style>
+<? endif; ?>
+<? $this->Html->scriptStart(array('inline' => false)); ?>
+$('.toggle-optional-input').click(function(){
+    if ($('.optional-input').css('display') == 'none') {
+      $('#open-option').css('display','none');
+      $('#close-option').css('display','inline');
 
-<?php 
+      $('.optional-input').slideDown('fast');
+
+      $('#MenuId').attr('required',false);
+      $('#MenuName').attr('required',true);
+      $('#MenuPrice').attr('required',true);
+      $('#MenuTagId1').attr('required',true);
+      $('#MenuTagId4').attr('required',true);
+      $('#MenuTagId8').attr('required',true);
+      $('#MenuTagId30').attr('required',true);
+      $('#MenuTagId13').attr('required',true);
+      $('#MenuTagId14').attr('required',true);
+      $('#MenuTagId24').attr('required',true);
+      $('#MenuTagId42').attr('required',true);
+      $('#MenuTagId55').attr('required',true);
+      $('#MenuTagId56').attr('required',true);
+      $('#MenuTagId57').attr('required',true);
+      $('#MenuTagId94').attr('required',true);
+      $('#MenuTagId71').attr('required',true);
+      $('#MenuTagId104').attr('required',true);
+      $('#MenuTagId128').attr('required',true);
+      $('#MenuTagId115').attr('required',true);
+    } else {
+      $('#open-option').css('display','inline');
+      $('#close-option').css('display','none');
+
+      $('.optional-input').slideUp('fast');
+
+      $('#MenuId').attr('required',true);
+      $('#MenuName').attr('required',false);
+      $('#MenuPrice').attr('required',false);
+      $('#MenuTagId1').attr('required',false);
+      $('#MenuTagId4').attr('required',false);
+      $('#MenuTagId8').attr('required',false);
+      $('#MenuTagId30').attr('required',false);
+      $('#MenuTagId13').attr('required',false);
+      $('#MenuTagId14').attr('required',false);
+      $('#MenuTagId24').attr('required',false);
+      $('#MenuTagId42').attr('required',false);
+      $('#MenuTagId55').attr('required',false);
+      $('#MenuTagId56').attr('required',false);
+      $('#MenuTagId57').attr('required',false);
+      $('#MenuTagId94').attr('required',false);
+      $('#MenuTagId71').attr('required',false);
+      $('#MenuTagId104').attr('required',false);
+      $('#MenuTagId128').attr('required',false);
+      $('#MenuTagId115').attr('required',false);
+
+
+      $('#MenuName').attr('value',null);
+    }
+});
+<? $this->Html->scriptEnd();?>
+
+<div class="container">
+   <h1>ランチメニュー登録<br><small><?= $restaurant['Restaurant']['name'] ?></small></h1>
+<?
 $formOption = array('class' => 'form-horizontal','enctype' => 'multipart/form-data', 'action' => 'upload','type' => 'post', 'url' => $this->here);
 echo $this->Form->create('Menu', $formOption); ?>
-	<fieldset>
-		<legend>料理を登録する</legend>
-
-        <div class="form-group">
-  <div><?= $this->Html->link('レストランを新しく登録', '/restaurants/add') ?></div>
-             <? echo $this->Form->input('restaurant_id',
+      <fieldset>
+         <?= $this->Form->error('image_file') ?>
+         <div class="form-group">
+            <div class="col-xs-2">
+               <?= $this->Form->input('NoModel.image_file', array('type' => 'file', 'accept' => 'image/*',
+                                            'onchange'=>"$('#NoModelImageFile').addClass('picture-taken');",
+                                            'capture' => 'camera', 'label'=>false,'class'=>'camera-open')) ?>
+               <?= $this->Form->hidden('NoModel.thumb') ?>
+               <?= $this->Form->hidden('NoModel.horizontal') ?>
+               <?= $this->Form->hidden('restaurant_id', array('value' => $restaurant['Restaurant']['id'])) ?>
+            </div>
+            <?= $this->Form->input('id',
 					   array('class' => 'form-control',
-						 'options' => $restaurantList,
-						 'div' => array('class' => 'col-lg-3'),
-						 'label' => 'レストラン')); ?>
-             <? echo $this->Form->input('name',
+						 'options' => $menuList,
+						 'empty' => '選択してください',
+						 'div' => array('class' => 'col-xs-10'),
+						 'label' => 'ランチメニュー')); ?>
+         </div>
+
+
+	 <div id="open-option" class="toggle-optional-input"><?= UHelper::pictAddCircle() ?>ランチを新しく登録</div>
+	 <div id="close-option" class="toggle-optional-input"><?= UHelper::pictRemoveCircle() ?>ランチを新しく登録</div>
+
+
+         <div class="optional-input">
+            <div class="form-group">
+            <?= $this->Form->input('name',
 			   array('class' => 'form-control',
-				 'div' => array('class' => 'col-lg-3'),
+				 'div' => array('class' => 'col-xs-8'),
 				 'label' => '料理の名前')); ?>
-        </div>
-        <div class="form-group">
-             <? echo $this->Form->input('price',
+            <?= $this->Form->input('price',
 			   array('class' => 'form-control',
-				 'div' => array('class' => 'col-lg-3'),
+				 'div' => array('class' => 'col-xs-4'),
+				 'min' => 0,
 				 'label' => '金額')); ?>
-        </div>
-<br>
-<br>
-<br>
-        <div class="form-group">
-             <? echo $this->Form->input('description',
-			   array('class' => 'form-control',
-				 'div' => array('class' => 'col-lg-3'),
-				 'label' => '料理の説明')); ?>
-        </div>
-        <div class="form-group">
-             <? echo $this->Form->input('remarks',
-			   array('class' => 'form-control',
-				 'div' => array('class' => 'col-lg-3'),
-				 'label' => '備考')); ?>
-        </div>
-        <div class="form-group">
-            <div class="col-lg-3 checkbox">
-                <label>
-                <? echo $this->Form->input('combo',
-					   array('div' => false,
-						 'label' => false)); ?> セットメニュー
-                </label>
             </div>
-            <div class="col-lg-3 checkbox">
-                <label>
-                <? echo $this->Form->input('lunch',
-					   array('div' => false,
-						 'label' => false)); ?> ランチ
-                </label>
+
+         <div style="font-weight:bold;">タグを選択</div>
+         <div class="tag-radios row">
+            <div class="tag-radio col-xs-3">
+               <?= $this->Form->input('tag_id',
+                                      array('type' => 'radio',
+                                            'options' => $menuTagList,
+                                            'separator'=> '</div><div class="tag-radio col-xs-3">',
+                                            'div' => false,
+                                            'label' => array('class'=>'text-center'),
+                                            'legend'=>false)); ?>
             </div>
-            <div class="col-lg-3 checkbox">
-                <label>
-                <? echo $this->Form->input('dinner',
-					   array('div' => false,
-						 'label' => false)); ?> ディナー
-                </label>
-            </div>
-        </div>
-        <div class="form-group">
-                <? echo $this->Form->input('tag_id',
+         </div>
+         </div>
+
+<? /*
+         <div class="form-group">
+            <?= $this->Form->input('Restaurant.name',
 					   array('class' => 'form-control',
-						 'options' => $menuTagList,
+						 //'options' => $restaurantList,
 						 'div' => array('class' => 'col-lg-3'),
-						 'label' => 'タグ')); ?>
-        </div>
-        <div class="form-group">
-           <div class="col-lg-6">
-<? if(isset($this->data['Menu']['image'])): ?>
-             <img src="<?= $this->data['Menu']['image'] ?>" class="img-thumbnail"/>
-<? endif; ?>
-                 <?= $this->Form->input('NoModel.image_file', array('type' => 'file', 'label'=>'','class'=>'btn btn-info')) ?>
-                 <?= $this->Form->radio('NoModel.cropType', 
-			  array('1' => '中央寄せ寄せ', '0' => '0,0ポイントから'),
-			  array('label' => false, 'default' => '1', 'legend'=> false)) ?>
-                 <br><div class="alert alert-warning"><span class="glyphicon glyphicon-info-sign"></span>プロフィール画像は 400 x 400ピクセル に縮小されます</div>
-           </div>
-        </div>
+						 'label' => 'レストラン名')); ?>
+         </div>
+         <?= $this->Map->place() ?>
+         <?= $this->Form->error('geo') ?>
+*/ ?>
 
-        <div class="form-group">
+         <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">
-                <?php echo $this->Form->submit('登録する', array('class'=>'btn btn-primary', 'div' => false)); ?>
+               <?= $this->Form->submit('登録する', array('class'=>'btn btn-primary', 'div' => false)); ?>
             </div>
-        </div>
-    </fieldset>
-<?php echo $this->Form->end(); ?>
-</div>
-</div>
+         </div>
+      </fieldset>
+   <?= $this->Form->end(); ?>
 </div>
 
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-
-		<li><?php echo $this->Html->link(__('List Menus'), array('action' => 'index')); ?></li>
-	</ul>
-</div>

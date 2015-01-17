@@ -1,11 +1,11 @@
 <div id="sidebar">
 <div class="btn-group-vertical">
    <?= $this->Html->link(
-			 '<i class="mdi-action-search" style="font-size: 20pt;"></i>ランチメニュー検索',
+			 '<i class="mdi-action-search" style="font-size: 20pt;"></i>メニュー検索',
 			 '/menus',
 			 array('class' => 'btn btn-default', 'escape' => false)) ?>
    <?= $this->Html->link(
-			 '<i class="mdi-maps-local-restaurant" style="font-size: 20pt;"></i>ランチメニュー',
+			 '<i class="mdi-maps-local-restaurant" style="font-size: 20pt;"></i>メニュー',
 			 '/menus/list',
 			 array('class' => 'btn btn-default', 'escape' => false)) ?>
    <?= $this->Html->link(

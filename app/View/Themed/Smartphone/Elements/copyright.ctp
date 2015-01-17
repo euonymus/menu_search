@@ -1,1 +1,0 @@
-<p class="copyright">&copy; 2014 euonymus productions</p>
