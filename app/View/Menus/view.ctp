@@ -15,7 +15,7 @@
    <h1><?= h($menu['Menu']['name']); ?><br>
       <small><?= UHelper::pictRestaurant() ?><?= $this->Html->link($menu['Restaurant']['name'], '/restaurants/view/'.$menu['Restaurant']['id']) ?></small></h1>
 
-   <span class="label label-info"><?= UHelper::currency($menu['Menu']['price'], '\\') ?></span>
+   <span class="price"><?= UHelper::currency($menu['Menu']['price'], '\\') ?></span>
    <? if ($menu['Menu']['combo']) echo '<span class="label label-success">セットメニュー</span>&nbsp;';?>
    <?= MenuHelper::stars($menu['Menu']['point']) ?>
 

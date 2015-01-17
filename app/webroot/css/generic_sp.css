@@ -235,7 +235,7 @@ div#map {
 
   //border: 1px green solid;
   background-color: #cccccc;
-  padding: 2px;
+  padding: 2px 8px 2px 8px;
 }
 /* menu image */
 .row-picture{
