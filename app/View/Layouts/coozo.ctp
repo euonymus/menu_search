@@ -29,7 +29,13 @@
         echo $this->Html->css('jquery.sidr.light');
         //echo $this->Html->css('ripples.min');
         echo $this->Html->css('material-wfont.min');
-        echo $this->Html->css('generic_sp');
+
+        echo $this->Html->css('generic');
+        if ($isSmartphone) {
+          echo $this->Html->css('generic_sp');
+	} else {
+          echo $this->Html->css('generic_pc');
+	}
 
 	echo $this->fetch('meta');
 	echo $this->fetch('css');

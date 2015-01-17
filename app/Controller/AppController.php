@@ -64,9 +64,8 @@ class AppController extends Controller {
 
     $this->isSmartphone = $this->_isSmartphone();
     if ($this->isSmartphone) $this->theme = 'Smartphone';
+    $this->set('isSmartphone', $this->isSmartphone);
 
-    // TODO: スマホファーストで作っているので、今はPCで壊れない様にいつもSmartphoneテーマを使っておく。後で下は消す事。
-    $this->theme = 'Smartphone';
     // Geo Info
     $this->_loadComponent('GeoTool');
     $this->GeoTool->read();
