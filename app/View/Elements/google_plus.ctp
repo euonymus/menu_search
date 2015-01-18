@@ -1,7 +1,7 @@
 <!-- +1 ボタン を表示したい位置に次のタグを貼り付けてください。 -->
 <div class="g-plusone" data-size="medium" data-href="http://coozo.co/"></div>
 
-<? /* MEMO: ホントは複数このelementをレンダーされた場合を考慮すべきだが今のところめんどいのでここに書く */ ?>f
+<? /* MEMO: ホントは複数このelementをレンダーされた場合を考慮すべきだが今のところめんどいのでここに書く */ ?>
 <!-- 最後の +1 ボタン タグの後に次のタグを貼り付けてください。 -->
 <script type="text/javascript">
   window.___gcfg = {lang: 'ja'};
