@@ -130,7 +130,8 @@ class Menu extends AppModel {
         'MenuImage' => array(
           'className'  => 'MenuImage',
           'foreignKey' => 'menu_id',
-          'order' => 'is_main desc', // is_main is boolean, and it has only a true record in the same menu.
+	  // is_main is boolean, and it has only a true record in the same menu.
+          'order' => array('is_main' => 'desc', 'vote' => 'desc'),
         )
       )
     );
@@ -139,6 +140,24 @@ class Menu extends AppModel {
 
   function unbindMenuImage($reset = TRUE) {
     $this->unbindModel(array('hasMany' => array('MenuImage')), $reset);
+  }
+
+  function bindAMenuImage($reset = TRUE) {
+    $bind = array(
+      'hasOne' => array(
+        'MenuImage' => array(
+          'className'  => 'MenuImage',
+          'foreignKey' => 'menu_id',
+	  // is_main is boolean, and it has only a true record in the same menu.
+          'order' => array('is_main' => 'desc', 'vote' => 'desc'),
+        )
+      )
+    );
+    $this->bindModel($bind, $reset);
+  }
+
+  function unbindAMenuImage($reset = TRUE) {
+    $this->unbindModel(array('hasOne' => array('MenuImage')), $reset);
   }
 
   /****************************************************************************/

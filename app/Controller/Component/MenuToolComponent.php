@@ -21,6 +21,7 @@ class MenuToolComponent extends Component {
   public function getList($options = array(), $isPaging = false) {
     $this->Controller->loadModel('Menu');
     $this->Controller->Menu->bindRestaurant();
+    $this->Controller->Menu->bindAMenuImage();
     $options['order'] = array('Menu.point' => 'DESC');
     // If Menu.restaurant_id exists, order should be written
     if (U::arrPrepared('conditions', $options) && U::arrPrepared('Menu.restaurant_id', $options['conditions'])

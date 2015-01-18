@@ -5,8 +5,13 @@
            <small><i class="mdi-maps-store-mall-directory" style="font-size: 20pt;"></i>{{list.Restaurant.name}}</small></h2>
 
         <div class="row">
+            <? /* MEMO: あれば Menu.image を表示 */ ?>
             <div class="col-xs-5" ng-if="!!list.Menu.image">
                 <img src="{{list.Menu.thumbnail}}" alt="icon" style="width:100%;">
+            </div>
+            <? /* MEMO: Menu.image が無く、MenuImage.image があればそっちを表示 */ ?>
+            <div class="col-xs-5" ng-if="!list.Menu.image && !!list.MenuImage.thumbnail">
+                <img src="{{list.MenuImage.thumbnail}}" alt="icon" style="width:100%;">
             </div>
 
             <div ng-class="!!list.Menu.image ? 'col-xs-6' : 'col-xs-12'">
