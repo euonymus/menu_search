@@ -12,10 +12,13 @@ myApp.controller('listCtrl', function($scope, API) {
 // API constructor function to encapsulate HTTP and pagination logic
 myApp.factory('API', function($http) {
   var API = function() {
+<? /*
     this.lists = <?= json_encode(array('menus'=>$menus)) ?>.menus;
+*/ ?>
+    this.lists = [];
     this.available = true; <? /* $http の制御 */ ?>
     this.busy = false;     <? /* loading.gifの制御 */ ?>
-    this.page = 2; <? /* 次のページのスタンバイ */ ?>
+    this.page = 1; <? /* 次のページのスタンバイ */ ?>
   };
 
   API.prototype.loadMore = function() {
