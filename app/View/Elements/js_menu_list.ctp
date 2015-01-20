@@ -13,12 +13,14 @@ myApp.controller('listCtrl', function($scope, API) {
 myApp.factory('API', function($http) {
   var API = function() {
     this.lists = <?= json_encode(array('menus'=>$menus)) ?>.menus;
-    this.busy = false;
+    this.available = true; <? /* $http の制御 */ ?>
+    this.busy = false;     <? /* loading.gifの制御 */ ?>
     this.page = 2; <? /* 次のページのスタンバイ */ ?>
   };
 
   API.prototype.loadMore = function() {
-    if (this.busy) return;
+    if (!this.available) return;
+    this.available = false;
     this.busy = true;
 
     var url = "http://<?= $_SERVER["HTTP_HOST"] ?>/api/menus/search/page:" + this.page + ".json?<?= http_build_query($this->request->query) ?>&callback=JSON_CALLBACK";
@@ -28,6 +30,10 @@ myApp.factory('API', function($http) {
         this.lists.push(lists[i]);
       }
       this.page++;
+      this.available = true;
+      this.busy = false;
+    }.bind(this)).
+    error(function(data, status, headers, config) {
       this.busy = false;
     }.bind(this));
   };
