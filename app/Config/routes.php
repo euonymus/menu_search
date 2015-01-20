@@ -28,6 +28,10 @@
 /**
  * ...and connect the rest of 'Pages' controller's URLs.
  */
+	Router::connect('/恵比寿', array('controller' => 'pages', 'action' => 'ebisu'));
+	Router::connect('/中目黒', array('controller' => 'pages', 'action' => 'nakameguro'));
+	Router::connect('/代官山', array('controller' => 'pages', 'action' => 'daikanyama'));
+	Router::connect('/池尻大橋', array('controller' => 'pages', 'action' => 'ikejiriohashi'));
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
         Router::connect('/img/*', array('controller' => 'img', 'action' => 'fetch'));
         Router::connect('/:controller/list/*', array('action' => 'listview'));

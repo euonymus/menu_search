@@ -55,4 +55,30 @@ class PagesController extends AppController {
     $this->loadModel('Station');
     $this->set('stations', $this->Station->find('list'));
   }
+
+  public function ebisu() {
+    $this->_station(1, '恵比寿');
+  }
+  public function nakameguro() {
+    $this->_station(2, '中目黒');
+  }
+  public function daikanyama() {
+    $this->_station(3, '代官山');
+  }
+  public function ikejiriohashi() {
+    $this->_station(4, '池尻大橋');
+  }
+  public function _station($station_id, $station) {
+    $this->_loadComponent('MenuTool');
+    // ややこしいセッションは全部消しておく。
+    $this->MenuTool->sessionInit();
+    // 駅情報をsessionにセットしておく。
+    $this->Session->write(MenuToolComponent::SESSION_STATION, $station_id);
+    // SEO
+    self::$title_for_layout = $station.'のランチ検索 - '.self::$title_for_layout;
+    self::$description_for_layout = $station.'エリアに特化したランチ検索サービス。ランチメニューを種類毎に比較！一番好みの食べたい料理を見つけてお店へGo！';
+    $this->set(compact('station'));
+    $this->render('station');
+  }
+
 }
