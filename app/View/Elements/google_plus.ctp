@@ -1,5 +1,5 @@
 <!-- +1 ボタン を表示したい位置に次のタグを貼り付けてください。 -->
-<div class="g-plusone" data-size="medium" data-href="http://coozo.co/"></div>
+<div class="g-plusone" data-size="medium" data-href="<?= Router::reverse($this->request, true) ?>"></div>
 
 <? /* MEMO: ホントは複数このelementをレンダーされた場合を考慮すべきだが今のところめんどいのでここに書く */ ?>
 <!-- 最後の +1 ボタン タグの後に次のタグを貼り付けてください。 -->
