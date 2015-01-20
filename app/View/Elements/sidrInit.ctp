@@ -40,9 +40,9 @@ mixpanel.track_links("#sidr a", "click nav link", {
         <li><a href="/menus/region/refresh:1/"><?= UHelper::pictTrain() ?>駅からランチを探す</a></li>
         <li><a href="/geo/init/?location=<?= urlencode('/menus/categories/refresh:1/') ?>"><?= UHelper::pictCafe() ?>食べたい物から探す</a></li>
 <? if ($user): ?>
-        <li><a href="/geo/init/?location=<?= urlencode('/menus/add/') ?>"><?= UHelper::pictCamera() ?>ランチメニューを登録</a></li>
+        <li><a href="/geo/init/?location=<?= urlencode('/menus/add_restaurant/') ?>"><?= UHelper::pictCamera() ?>ランチメニューを登録</a></li>
 <? else: ?>
-        <li><a href="/users/login/?location=<?= urlencode('/menus/add/') ?>"><?= UHelper::pictCamera() ?>ランチメニューを登録</a></li>
+        <li><a href="/users/login/?location=<?= urlencode('/menus/add_restaurant/') ?>"><?= UHelper::pictCamera() ?>ランチメニューを登録</a></li>
 <? endif; ?>
     </ul>
     <div class="nav-title text-center">レストラン</div>
