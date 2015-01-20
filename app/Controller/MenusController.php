@@ -216,8 +216,12 @@ class MenusController extends AppController {
   /******************************************************************/
   public function api_search() {
     $this->_loadComponent('MenuTool');
-    $this->set('menus', $this->MenuTool->search(true));
-    $this->set('_serialize', array('menus'));
+    $menus = $this->MenuTool->search(true);
+    $this->set(array(
+		     'menus' => $menus,
+		     '_serialize' => array('menus'),
+		     '_jsonp' => true
+    ));
   }
 
   /******************************************************************/
