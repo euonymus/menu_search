@@ -1,3 +1,17 @@
+<?
+$query_arr = $this->request->query;
+$query_arr['callback'] = 'JSON_CALLBACK';
+$query_string = '?' . http_build_query($query_arr);
+if (($this->params['controller'] == 'menus') && ($this->params['action'] == 'index')) {
+  $action = 'search';
+} elseif (($this->params['controller'] == 'menus') && ($this->params['action'] == 'likes')) {
+  $action = 'likes';
+} elseif (($this->params['controller'] == 'restaurants') && ($this->params['action'] == 'view')) {
+  $action = 'restaurant/'.$this->request->params['pass'][0];
+} elseif (($this->params['controller'] == 'users') && ($this->params['action'] == 'view')) {
+  $action = 'registrants/'.$this->request->params['pass'][0];
+}
+?>
 <?= $this->Html->script('//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js', array('inline' => false)) ?>
 <?= $this->Html->script('ng-infinite-scroll.min', array('inline' => false)) ?>
 <? $this->Html->scriptStart(array('inline'=>false)); ?>
@@ -26,7 +40,7 @@ myApp.factory('API', function($http) {
     this.available = false;
     this.busy = true;
 
-    var url = "http://<?= $_SERVER["HTTP_HOST"] ?>/api/menus/search/page:" + this.page + ".json?<?= http_build_query($this->request->query) ?>&callback=JSON_CALLBACK";
+    var url = "http://<?= $_SERVER["HTTP_HOST"] ?>/api/menus/<?= $action ?>/page:" + this.page + ".json<?= $query_string ?>";
     $http.jsonp(url).success(function(data) {
       var lists = data.menus;
       for (var i = 0; i < lists.length; i++) {

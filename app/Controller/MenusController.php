@@ -224,6 +224,40 @@ class MenusController extends AppController {
     ));
   }
 
+  public function api_restaurant($restaurant_id = null) {
+    $this->loadModel('Restaurant');
+    if (!$this->Restaurant->exists($restaurant_id)) {
+      throw new NotFoundException(__('Invalid restaurant'));
+    }
+    $this->_loadComponent('MenuTool');
+    $menus = $this->MenuTool->listByRestaurant($restaurant_id, true);
+    $this->set(array(
+		     'menus' => $menus,
+		     '_serialize' => array('menus'),
+		     '_jsonp' => true
+    ));
+  }
+
+  public function api_likes() {
+    $this->_loadComponent('MenuTool');
+    $menus = $this->MenuTool->likes(true);
+    $this->set(array(
+		     'menus' => $menus,
+		     '_serialize' => array('menus'),
+		     '_jsonp' => true
+    ));
+  }
+
+  public function api_registrants($user_id) {
+    $this->_loadComponent('MenuTool');
+    $menus = $this->MenuTool->registrants($user_id, true);
+    $this->set(array(
+		     'menus' => $menus,
+		     '_serialize' => array('menus'),
+		     '_jsonp' => true
+    ));
+  }
+
   /******************************************************************/
   /* Admin                                                          */
   /******************************************************************/
