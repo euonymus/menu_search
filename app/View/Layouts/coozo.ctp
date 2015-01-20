@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ja-JP" ng-app>
+<html lang="ja-JP">
 <head>
     <?//= $this->Html->charset(); ?>
     <meta charset="utf-8">
@@ -70,7 +70,6 @@
     <?//= $this->Html->script('bootstrapSlideInMenu-1.0.0.min') ?>
     <?//= $this->Html->script('ripples.min') ?>
     <?//= $this->Html->script('material.min') ?>
-    <?= $this->Html->script('//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js') ?>
     <?= $this->Js->writeBuffer();?>
     <?= $this->fetch('script') ?>
 
