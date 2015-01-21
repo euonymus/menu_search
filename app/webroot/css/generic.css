@@ -212,6 +212,24 @@ div#map {
   background-color: #dddddd;
 }
 /* menu */
+.menu-search-methods > a {
+  display:block;
+  float:left;
+
+  -moz-border-radius: 4px;    /* Firefox */
+  -webkit-border-radius: 4px; /* Safari,Chrome */
+  border-radius: 4px;         /* CSS3 */
+
+  padding: 2px 8px 2px 8px;
+  margin: 0px 8px 10px 0px;
+
+  //border: 1px green solid;
+
+  font-size:12pt;
+
+  color:#13a651;
+  background-color:#e89681;
+}
 h2.list-group-item-heading {
   font-size: 1.2em !important;
   font-weight:bold;

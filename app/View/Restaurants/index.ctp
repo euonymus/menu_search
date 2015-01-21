@@ -1,11 +1,12 @@
 <div class="container">
    <h1><?= $this->Restaurant->searchTitle() ?></h1>
-   <div class="well">
-      <small>
-         <?= $this->Html->link(UHelper::pictTrain('16pt').'駅から', '/restaurants/region/',
-                  array('escape' => false, 'class' => 'btn')); ?>
-      </small>
-   </div>
+    <div class="menu-search-methods">
+
+         <?= $this->Html->link(UHelper::pictTrain('14pt').'駅から', '/restaurants/region/',
+                  array('escape' => false, 'class' => 'search-method')); ?>
+            <div class="clear"></div>
+
+    </div>
 </div>
 
 <table class="table table-striped table-hover">
