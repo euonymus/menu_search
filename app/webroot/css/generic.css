@@ -211,6 +211,36 @@ div#map {
   border-bottom:1px solid #008800;
   background-color: #dddddd;
 }
+/* menu */
+h2.list-group-item-heading {
+  font-size: 1.2em !important;
+  font-weight:bold;
+}
+.menu-table>thead>tr>th,
+.menu-table>tbody>tr>th,
+.menu-table>tfoot>tr>th,
+.menu-table>thead>tr>td,
+.menu-table>tbody>tr>td,
+.menu-table>tfoot>tr>td
+{
+  padding:0px;
+}
+
+
+.menu-list-image {
+  padding:0px;
+}
+.list-group-item-text {
+  padding-bottom: 12px;
+}
+.list-group-item-desc {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+.menu-group {
+ margin-bottom:0px;
+}
+
 /* menu camera */
 .camera-open {
   display:block;
@@ -230,7 +260,7 @@ div#map {
   color:#884422;
   max-width:80px;
   font-weight:bolder;
-  font-size:14pt;
+  font-size:12pt;
 
   -moz-border-radius: 4px;    /* Firefox */
   -webkit-border-radius: 4px; /* Safari,Chrome */

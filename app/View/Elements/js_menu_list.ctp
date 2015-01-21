@@ -60,7 +60,7 @@ myApp.factory('API', function($http) {
 
 <? $this->Html->scriptEnd(); ?>
 <div ng-app="myApp" ng-controller="listCtrl">
-    <table class="table table-striped table-hover">
+    <table class="menu-table table table-striped table-hover">
         <tbody infinite-scroll="api.loadMore()" infinite-scroll-disabled="api.busy" infinite-scroll-distance="1">
             <tr ng-repeat="list in api.lists">
                 <td>
